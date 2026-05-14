@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>MARSAL TECHNOLOGIES | Domotique de Prestige — Cotonou</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="Solutions domotiques intelligentes pour résidences de luxe. Sécurité, confort et économies d'énergie. Basé à Cotonou, Bénin.">
+  <meta name="keywords" content="domotique, maison intelligente, sécurité, luxe, Cotonou, Bénin, Marsal Technologies">
+  <meta name="author" content="MARSAL TECHNOLOGIES">
+  
+  <!-- Google Fonts : Exo 2 (Titres) + Share Tech Mono (Tech) -->
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- Three.js pour le Shader Interactif de la Section 4 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Spline Viewer Component -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.54/build/spline-viewer.js"></script>
+
+  <!-- Tailwind CSS CDN + Configuration personnalisée -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Configuration Tailwind personnalisée pour surcharger les couleurs -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'obsidian': '#0a0a0a',
+            'cyan-marsal': '#00e5ff',
+            'magenta-marsal': '#d400ff',
+            'silver-marsal': '#c0c0d0',
+          },
+          fontFamily: {
+            'exo': ['Exo 2', 'sans-serif'],
+            'mono-tech': ['Share Tech Mono', 'monospace'],
+          },
+          backdropBlur: {
+            'glass': '20px',
+          },
+          animation: {
+            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            'marquee': 'marquee 25s linear infinite',
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'slide-up': 'slideUp 0.6s ease-out forwards',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 5px rgba(0,229,255,0.3)' },
+              '50%': { boxShadow: '0 0 20px rgba(0,229,255,0.6)' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  
+  <style>
+    /* Styles complémentaires non couverts par Tailwind */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #0a0a0a;
+      overflow-x: hidden;
+    }
+    
+    /* Glassmorphism de luxe */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(0, 229, 255, 0.4);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+      transform: translateY(-5px);
+    }
+    
+    /* Bordure dégradée fine pour éléments premium */
+    .gradient-border {
+      position: relative;
+      background: rgba(10, 10, 10, 0.6);
+      border-radius: 24px;
+    }
+    
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(115deg, rgba(0, 229, 255, 0.5), rgba(212, 0, 255, 0.2), transparent);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+    }
+    
+    /* Effet de glow au focus / hover */
+    .glow-effect {
+      transition: all 0.3s ease;
+    }
+    
+    .glow-effect:hover {
+      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.5));
+    }
+    
+    /* Scrollbar personnalisée */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #00e5ff;
+      border-radius: 3px;
+    }
+    
+    /* Animation de chargement sections */
+    .section-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.6s ease;
+    }
+    
+    .section-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Marquee horizontal */
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 30s linear infinite;
+    }
+    
+    .marquee-content:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    /* Carousel styles */
+    .carousel-slide {
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    
+    /* Responsive ajustements */
+    @media (max-width: 768px) {
+      .glass-card {
+        backdrop-filter: blur(12px);
+      }
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-white font-exo">
+
+  <!-- ==================== HEADER STICKY ==================== -->
+  <!-- ID: header -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 bg-obsidian/80 backdrop-blur-md border-b border-cyan-marsal/20 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full border border-cyan-marsal/40 flex items-center justify-center glow-effect">
+          <span class="text-cyan-marsal font-bold text-xl">M</span>
+        </div>
+        <div>
+          <div class="font-exo font-bold text-lg tracking-wider">MARSAL <span class="text-cyan-marsal">TECH</span></div>
+          <div class="font-mono-tech text-[9px] text-silver-marsal/60 tracking-wider">INTELLIGENCE INVISIBLE</div>
+        </div>
+      </div>
+      
+      <!-- Navigation par ancres -->
+      <nav class="hidden md:flex gap-8">
+        <a href="#hero" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">ACCUEIL</a>
+        <a href="#about" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">SERVICES</a>
+        <a href="#catalogue" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">GALERIE</a>
+        <a href="#why-us" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">AVANTAGES</a>
+        <a href="#showcase" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">PRODUITS</a>
+        <a href="#contact" class="font-mono-tech text-sm text-silver-marsal/70 hover:text-cyan-marsal transition-colors duration-300">CONTACT</a>
+      </nav>
+      
+      <!-- Contrôles : Langue + Dark/Light Toggle -->
+      <div class="flex items-center gap-4">
+        <!-- Sélecteur de langue FR/EN -->
+        <div class="flex gap-2">
+          <button class="lang-btn font-mono-tech text-xs px-2 py-1 rounded border border-cyan-marsal/30 text-cyan-marsal hover:bg-cyan-marsal/10 transition" data-lang="fr">FR</button>
+          <button class="lang-btn font-mono-tech text-xs px-2 py-1 rounded border border-white/20 text-white/60 hover:border-cyan-marsal/30 transition" data-lang="en">EN</button>
+        </div>
+        
+        <!-- Dark/Light Mode Toggle -->
+        <button id="themeToggle" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-cyan-marsal/40 transition">
+          <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+      </div>
+      
+    </div>
+  </header>
+
+  <!-- ==================== SECTION 1 : HERO ==================== -->
+  <!-- ID: hero -->
+  <section id="hero" class="min-h-screen flex items-center relative overflow-hidden pt-20 bg-obsidian">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[45%_55%] gap-8 items-center relative z-10 w-full">
+      
+      <!-- Colonne Gauche : Contenu Texte -->
+      <div class="section-fade text-left flex flex-col justify-center">
+        <span class="font-mono-tech text-cyan-marsal text-sm tracking-[2px] inline-block mb-4 uppercase">SYSTÈME D'EXCELLENCE</span>
+        <h1 class="font-exo text-5xl md:text-7xl lg:text-8xl font-light leading-[1.1]">
+          L' <span class="text-cyan-marsal font-bold">intelligence</span><br />
+          à l'état <span class="text-magenta-marsal font-bold">pur</span>
+        </h1>
+        <p class="text-silver-marsal/60 text-lg md:text-xl max-w-lg mt-8 font-light leading-relaxed">
+          Domotique de prestige · Sécurité absolue · Économies intelligentes. <br class="hidden md:block" />
+          Basé à Cotonou, Bénin.
+        </p>
+        
+        <div class="flex flex-wrap gap-5 mt-10">
+          <button class="px-8 py-4 bg-transparent border border-cyan-marsal/40 rounded-full font-exo tracking-wider text-cyan-marsal hover:bg-cyan-marsal/10 transition-all hover:shadow-[0_0_25px_rgba(0,229,255,0.4)]">
+            Découvrir la collection
+          </button>
+          <button class="px-8 py-4 bg-transparent border border-white/20 rounded-full font-exo tracking-wider text-white/80 hover:border-magenta-marsal/40 transition-all hover:shadow-[0_0_25px_rgba(212,0,255,0.3)]">
+            Demander un devis
+          </button>
+        </div>
+      </div>
+
+      <!-- Colonne Droite : Robot Spline (Injecté depuis temp.html / 21st.dev) -->
+      <div class="h-[450px] lg:h-[750px] w-full relative flex items-center justify-center">
+        <spline-viewer 
+          url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" 
+          class="w-full h-full"
+          loading-anim-type="spinner">
+        </spline-viewer>
+      </div>
+
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div class="w-6 h-10 border-2 border-cyan-marsal/40 rounded-full flex justify-center">
+        <div class="w-1 h-2 bg-cyan-marsal rounded-full mt-2 animate-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 2 : ABOUT (Services) ==================== -->
+  <!-- ID: about -->
+  <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-16 section-fade">
+      <span class="font-mono-tech text-cyan-marsal text-sm tracking-wider">EXPERTISE DOMOTIQUE</span>
+      <h2 class="font-exo text-4xl md:text-5xl font-light mt-4">Une intelligence <span class="text-magenta-marsal">invisible</span></h2>
+      <div class="w-20 h-px bg-gradient-to-r from-transparent via-cyan-marsal to-transparent mx-auto mt-6"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Carte service 1 -->
+      <div class="glass-card p-8 section-fade" style="transition-delay: 0.1s">
+        <div class="w-14 h-14 rounded-full bg-cyan-marsal/10 border border-cyan-marsal/30 flex items-center justify-center mb-6">
+          <svg class="w-7 h-7 text-cyan-marsal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 0 0-10 10c0 4.4 2.9 8.1 6.9 9.3.5.1.7-.2.7-.5v-2.2c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1.1 1.5 1.1.9 1.5 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 3 1.1a10 10 0 0 1 5.4 0c2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.6 1.1 2.8 0 4-2.4 4.9-4.7 5.2.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5 4-1.2 6.9-4.9 6.9-9.3A10 10 0 0 0 12 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-exo text-xl font-semibold mb-3">Sécurité absolue</h3>
+        <p class="text-silver-marsal/60 text-sm leading-relaxed">Systèmes de surveillance 4K, détection faciale IA, alarmes connectées et accès biométrique.</p>
+      </div>
+      
+      <!-- Carte service 2 -->
+      <div class="glass-card p-8 section-fade" style="transition-delay: 0.2s">
+        <div class="w-14 h-14 rounded-full bg-magenta-marsal/10 border border-magenta-marsal/30 flex items-center justify-center mb-6">
+          <svg class="w-7 h-7 text-magenta-marsal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="font-exo text-xl font-semibold mb-3">Énergie intelligente</h3>
+        <p class="text-silver-marsal/60 text-sm leading-relaxed">Gestion prédictive de la consommation, réduction jusqu'à 32% grâce à notre IA propriétaire.</p>
+      </div>
+      
+      <!-- Carte service 3 -->
+      <div class="glass-card p-8 section-fade" style="transition-delay: 0.3s">
+        <div class="w-14 h-14 rounded-full bg-cyan-marsal/10 border border-cyan-marsal/30 flex items-center justify-center mb-6">
+          <svg class="w-7 h-7 text-cyan-marsal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="font-exo text-xl font-semibold mb-3">Confort total</h3>
+        <p class="text-silver-marsal/60 text-sm leading-relaxed">Éclairage d'ambiance, climatisation intelligente, volets motorisés, scénarios personnalisés.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 3 : CATALOGUE CAROUSEL ==================== -->
+  <!-- ID: catalogue -->
+  <section id="catalogue" class="py-16 relative overflow-hidden">
+    <div class="text-center mb-12 section-fade">
+      <span class="font-mono-tech text-cyan-marsal text-sm tracking-wider">GALERIE IMMERSIVE</span>
+      <h2 class="font-exo text-4xl md:text-5xl font-light mt-4">L'esthétique de <span class="text-magenta-marsal">l'innovation</span></h2>
+    </div>
+    
+    <!-- INJECTION_ZONE_CAROUSEL_HERE -->
+    <div class="relative w-full overflow-hidden">
+      <div class="carousel-container flex transition-transform duration-500 ease-out" id="carousel">
+        <!-- Slides générés dynamiquement -->
+      </div>
+      
+      <!-- Controls -->
+      <button id="carouselPrev" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-cyan-marsal/30 flex items-center justify-center hover:bg-cyan-marsal/20 transition">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="carouselNext" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-cyan-marsal/30 flex items-center justify-center hover:bg-cyan-marsal/20 transition">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 4 : WHY US ==================== -->
+  <!-- ID: why-us -->
+  <section id="why-us" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="section-fade">
+        <span class="font-mono-tech text-cyan-marsal text-sm tracking-[2px] uppercase">POURQUOI MARSAL ?</span>
+        <h2 class="font-exo text-4xl md:text-5xl font-light mt-4 leading-tight">
+          La technologie au service de l' <span class="text-magenta-marsal font-bold">excellence</span>
+        </h2>
+        <div class="space-y-10 mt-12">
+          <div class="flex gap-4">
+            <div class="w-1 h-full bg-gradient-to-b from-cyan-marsal to-magenta-marsal rounded-full"></div>
+            <div>
+              <h3 class="font-exo text-4xl font-black leading-none tracking-tighter"><span class="text-cyan-marsal">+500</span> installations</h3>
+              <p class="text-silver-marsal/60 text-sm mt-2">Une confiance établie auprès des plus grandes résidences de Cotonou et d'Abidjan.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-1 h-full bg-gradient-to-b from-cyan-marsal to-magenta-marsal rounded-full"></div>
+            <div>
+              <h3 class="font-exo text-4xl font-black leading-none tracking-tighter">Support <span class="text-cyan-marsal">24/7</span> premium</h3>
+              <p class="text-silver-marsal/60 text-sm mt-2">Une assistance réactive et personnalisée, 7 jours sur 7.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-1 h-full bg-gradient-to-b from-cyan-marsal to-magenta-marsal rounded-full"></div>
+            <div>
+              <h3 class="font-exo text-4xl font-black leading-none tracking-tighter">Garantie <span class="text-cyan-marsal">10 ans</span></h3>
+              <p class="text-silver-marsal/60 text-sm mt-2">Notre engagement sur la durabilité et la qualité de nos solutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bloc Visuel : Shader Interactif Premium -->
+      <div class="relative group section-fade" style="transition-delay: 0.2s">
+        <div class="aspect-square relative overflow-hidden rounded-[14px] border-[0.5px] border-cyan-marsal/12 bg-obsidian shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+          <canvas id="whyUsShader" class="w-full h-full cursor-none transition-opacity duration-1000"></canvas>
+          <!-- Overlay pour profondeur -->
+          <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-60"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 5 : PRODUCT SHOWCASE (Marquee) ==================== -->
+  <!-- ID: showcase -->
+  <section id="showcase" class="py-16 overflow-hidden">
+    <div class="text-center mb-12 section-fade">
+      <span class="font-mono-tech text-cyan-marsal text-sm tracking-wider">COLLECTION SIGNATURE</span>
+      <h2 class="font-exo text-4xl md:text-5xl font-light mt-4">Les <span class="text-magenta-marsal">incontournables</span></h2>
+    </div>
+    
+    <!-- INJECTION_ZONE_MARQUEE_PRODUCTS_HERE -->
+    <div class="marquee-container">
+      <div class="marquee-content flex gap-8" id="marqueeProducts">
+        <!-- Les cartes produits seront injectées dynamiquement -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 6 : CONTACT CALL-TO-ACTION ==================== -->
+  <!-- ID: contact -->
+  <section id="contact" class="py-24 px-6 max-w-4xl mx-auto">
+    <div class="glass-card p-8 md:p-12 text-center section-fade">
+      <span class="font-mono-tech text-cyan-marsal text-sm tracking-wider">PRÊT À TRANSFORMER VOTRE ESPACE ?</span>
+      <h2 class="font-exo text-3xl md:text-4xl font-light mt-4">Contactez notre équipe</h2>
+      <p class="text-silver-marsal/60 mt-4 max-w-md mx-auto">Échangeons sur votre projet. Réponse sous 24h.</p>
+      
+      <!-- INJECTION_ZONE_SOCIAL_BUTTONS_HERE -->
+      <div class="flex flex-wrap gap-4 justify-center mt-8">
+        <a href="https://wa.me/22990000000" target="_blank" class="px-6 py-3 bg-white/5 border border-cyan-marsal/30 rounded-full flex items-center gap-2 hover:bg-cyan-marsal/10 transition group">
+          <svg class="w-5 h-5 text-cyan-marsal" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.25.73 4.33 1.97 6.02L2 22l4.13-1.03C7.08 21.66 9.18 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a href="mailto:contact@marsaltech.com" class="px-6 py-3 bg-white/5 border border-white/20 rounded-full flex items-center gap-2 hover:border-magenta-marsal/40 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M22 6L12 13 2 6m20 0v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6"/></svg>
+          <span>Email</span>
+        </a>
+        <a href="#" class="px-6 py-3 bg-white/5 border border-white/20 rounded-full flex items-center gap-2 hover:border-cyan-marsal/30 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a href="#" class="px-6 py-3 bg-white/5 border border-white/20 rounded-full flex items-center gap-2 hover:border-magenta-marsal/30 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.36-.21-1.94-.53v.05c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+          <span>X</span>
+        </a>
+        <a href="#" class="px-6 py-3 bg-white/5 border border-white/20 rounded-full flex items-center gap-2 hover:border-cyan-marsal/30 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 7 : FOOTER ==================== -->
+  <!-- ID: footer -->
+  <footer id="footer" class="border-t border-cyan-marsal/10 py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Colonne gauche : Réseaux Sociaux -->
+        <div>
+          <div class="font-exo text-xl tracking-widest mb-4">MARSAL <span class="text-cyan-marsal">TECHNOLOGIES</span></div>
+          <div class="font-mono-tech text-xs text-silver-marsal/50 mb-4">Intelligence Invisible · Cotonou, Bénin</div>
+          <div class="flex gap-4">
+            <a href="#" class="text-silver-marsal/50 hover:text-cyan-marsal transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+            <a href="#" class="text-silver-marsal/50 hover:text-cyan-marsal transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="#" class="text-silver-marsal/50 hover:text-cyan-marsal transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.36-.21-1.94-.53v.05c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a>
+            <a href="#" class="text-silver-marsal/50 hover:text-cyan-marsal transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
+        </div>
+        
+        <!-- Colonne droite : Liens Légaux & Politiques -->
+        <div>
+          <div class="font-mono-tech text-xs text-silver-marsal/70 mb-4 tracking-wider">LIENS RAPIDES</div>
+          <div class="grid grid-cols-2 gap-4">
+            <a href="#" class="font-mono-tech text-xs text-silver-marsal/50 hover:text-cyan-marsal transition">Mentions légales</a>
+            <a href="#" class="font-mono-tech text-xs text-silver-marsal/50 hover:text-cyan-marsal transition">Politique de confidentialité</a>
+            <a href="#" class="font-mono-tech text-xs text-silver-marsal/50 hover:text-cyan-marsal transition">CGV</a>
+            <a href="#" class="font-mono-tech text-xs text-silver-marsal/50 hover:text-cyan-marsal transition">Plan du site</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12 pt-8 border-t border-white/5">
+        <div class="font-mono-tech text-[10px] text-silver-marsal/30 tracking-wider">
+          © 2026 MARSAL TECHNOLOGIES — Intelligence Invisible · Domotique Prestige · Cotonou, Bénin
+        </div>
+        <div class="font-mono-tech text-[9px] text-silver-marsal/20 mt-2">Design by KEDYS AGENCY</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript : Smooth scroll, Intersection Observer, Carousel, Marquee, Theme Toggle -->
+  <script>
+    (function() {
+      // ========== SMOOTH SCROLL ==========
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // ========== INTERSECTION OBSERVER (Apparition sections) ==========
+      const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
+
+      // ========== CAROUSEL ==========
+      const carouselContainer = document.getElementById('carousel');
+      if (carouselContainer) {
+        // Données d'exemple pour le carrousel
+        const slides = [
+          { bg: 'linear-gradient(135deg, #00e5ff20, #0a0a0a)', text: 'Living Room Connecté' },
+          { bg: 'linear-gradient(135deg, #d400ff20, #0a0a0a)', text: 'Sécurité 4K IA' },
+          { bg: 'linear-gradient(135deg, #00e5ff20, #d400ff20)', text: 'Énergie Prédictive' },
+        ];
+        let currentSlide = 0;
+        
+        slides.forEach((slide, idx) => {
+          const div = document.createElement('div');
+          div.className = 'carousel-slide min-w-full h-[60vh] md:h-[70vh] flex items-center justify-center text-center';
+          div.style.background = slide.bg;
+          div.innerHTML = `<div><span class="font-mono-tech text-cyan-marsal">AMBANCE ${idx+1}</span><h3 class="font-exo text-3xl md:text-5xl font-light mt-4">${slide.text}</h3></div>`;
+          carouselContainer.appendChild(div);
+        });
+        
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        
+        const updateCarousel = () => {
+          carouselContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        };
+        
+        prevBtn?.addEventListener('click', () => {
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          updateCarousel();
+        });
+        nextBtn?.addEventListener('click', () => {
+          currentSlide = (currentSlide + 1) % slides.length;
+          updateCarousel();
+        });
+        
+        // Auto défilement
+        setInterval(() => {
+          currentSlide = (currentSlide + 1) % slides.length;
+          updateCarousel();
+        }, 5000);
+      }
+
+      // ========== MARQUEE PRODUCTS ==========
+      const marqueeContainer = document.getElementById('marqueeProducts');
+      if (marqueeContainer) {
+        const products = [
+          { name: 'NEXUS MX-8', price: '285 000 FCFA', icon: '🧠' },
+          { name: 'KRYPTON SL-7', price: '189 000 FCFA', icon: '🔐' },
+          { name: 'SENTINEL AI', price: '145 000 FCFA', icon: '📷' },
+          { name: 'PULSE', price: '45 000 FCFA', icon: '⚡' },
+          { name: 'LUMINA PRO', price: '78 000 FCFA', icon: '💡' },
+          { name: 'CLIMA AI', price: '125 000 FCFA', icon: '🌡️' },
+        ];
+        
+        // Double la liste pour l'effet infini
+        const allProducts = [...products, ...products];
+        allProducts.forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'glass-card p-6 w-72 inline-block mx-4 text-center';
+          card.innerHTML = `
+            <div class="text-4xl mb-3">${product.icon}</div>
+            <div class="font-exo text-lg font-semibold">${product.name}</div>
+            <div class="text-cyan-marsal font-mono-tech text-sm mt-2">${product.price}</div>
+            <button class="mt-4 px-4 py-2 border border-cyan-marsal/30 rounded-full text-xs font-mono-tech hover:bg-cyan-marsal/10 transition w-full whatsapp-btn" data-product="${product.name}">
+              Commander via WhatsApp →
+            </button>
+          `;
+          marqueeContainer.appendChild(card);
+        });
+        
+        // Gestion des boutons WhatsApp
+        document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const productName = btn.getAttribute('data-product');
+            window.open(`https://wa.me/22990000000?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20produit%20${encodeURIComponent(productName)}%20de%20MARSAL%20TECHNOLOGIES.`, '_blank');
+          });
+        });
+      }
+
+      // ========== THEME TOGGLE (Dark/Light) ==========
+      const themeToggle = document.getElementById('themeToggle');
+      let isLight = false;
+      themeToggle?.addEventListener('click', () => {
+        isLight = !isLight;
+        if (isLight) {
+          document.body.style.backgroundColor = '#f5f5f5';
+          document.body.style.color = '#0a0a0a';
+          document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.background = 'rgba(255,255,255,0.6)';
+          });
+        } else {
+          document.body.style.backgroundColor = '#0a0a0a';
+          document.body.style.color = '#f8f8ff';
+          document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.background = 'rgba(255,255,255,0.03)';
+          });
+        }
+      });
+
+      // ========== LANGUE SIMULÉE ==========
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          langBtns.forEach(b => b.classList.remove('text-cyan-marsal', 'border-cyan-marsal/30'));
+          langBtns.forEach(b => b.classList.add('text-white/60', 'border-white/20'));
+          btn.classList.remove('text-white/60', 'border-white/20');
+          btn.classList.add('text-cyan-marsal', 'border-cyan-marsal/30');
+          const lang = btn.getAttribute('data-lang');
+          console.log(`Langue changée : ${lang}`);
+          // Ici injection pour traductions futures
+        });
+      });
+
+      // ========== SHADER INTERACTIF (POURQUOI MARSAL) ==========
+      (function initWhyUsShader() {
+        const canvas = document.getElementById('whyUsShader');
+        if (!canvas) return;
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const geometry = new THREE.PlaneGeometry(2, 2);
+
+        const uniforms = {
+          u_time: { value: 0 },
+          u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+          u_cyan: { value: new THREE.Color('#00e5ff') },
+          u_magenta: { value: new THREE.Color('#d400ff') },
+          u_resolution: { value: new THREE.Vector2() }
+        };
+
+        const material = new THREE.ShaderMaterial({
+          uniforms,
+          vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = vec4(position, 1.0); }`,
+          fragmentShader: `
+            uniform float u_time; uniform vec2 u_mouse; uniform vec3 u_cyan; uniform vec3 u_magenta; uniform vec2 u_resolution;
+            varying vec2 vUv;
+            
+            void main() {
+              vec2 p = vUv * 2.0 - 1.0;
+              vec2 m = u_mouse * 2.0 - 1.0;
+              
+              // Algorithme de déformation fluide (Noise-like)
+              for(float n = 1.0; n < 6.0; n++) {
+                p.x += 0.3 / n * sin(n * p.y + u_time * 0.3 + m.x * 2.0);
+                p.y += 0.3 / n * cos(n * p.x + u_time * 0.3 + m.y * 2.0);
+              }
+              
+              float colorFactor = 0.5 + 0.5 * sin(p.x + p.y + u_time);
+              vec3 baseColor = mix(u_cyan, u_magenta, colorFactor);
+              float luminosity = 0.15 / length(p * 0.8);
+              gl_FragColor = vec4(baseColor * luminosity, 0.9);
+            }
+          `,
+          transparent: true
+        });
+
+        scene.add(new THREE.Mesh(geometry, material));
+        let curX = 0.5, curY = 0.5, tarX = 0.5, tarY = 0.5, autoProgress = 0, isHovered = false;
+
+        canvas.addEventListener('mousemove', (e) => {
+          const r = canvas.getBoundingClientRect();
+          tarX = (e.clientX - r.left) / r.width;
+          tarY = 1.0 - (e.clientY - r.top) / r.height;
+          isHovered = true;
+        });
+        canvas.addEventListener('mouseleave', () => { isHovered = false; });
+        
+        const resize = () => {
+          renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+          uniforms.u_resolution.value.set(canvas.clientWidth, canvas.clientHeight);
+        };
+        window.addEventListener('resize', resize);
+        resize();
+
+        function animate(t) {
+          autoProgress += 0.005; // Défilement horizontal lent
+          
+          if (!isHovered) {
+            tarX = 0.5 + Math.sin(autoProgress * 0.5) * 0.2;
+            tarY = 0.5 + Math.cos(autoProgress * 0.3) * 0.2;
+          }
+          
+          // LERP : Transition invisible entre auto et manuel
+          curX += (tarX - curX) * 0.04;
+          curY += (tarY - curY) * 0.04;
+          
+          uniforms.u_time.value = t * 0.001; uniforms.u_mouse.value.set(curX, curY);
+          renderer.render(scene, camera); requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      })();
+
+    })();
+  </script>
+</body>
+</html>
+```
