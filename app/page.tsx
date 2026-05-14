@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import FlipGallery from '@/components/ui/flip-gallery';
-import { CurtainThemeToggle } from '@/components/ui/curtain-theme-toggle';
+import FlipGallery from '../components/ui/flip-gallery';
+import { CurtainThemeToggle } from '../components/ui/curtain-theme-toggle';
+import GalleryAnimation from '../components/ui/gallery-animation';
 import { 
   Shield, 
   Zap, 
   Monitor, 
-  ChevronLeft, 
-  ChevronRight, 
   MessageCircle, 
   Mail, 
   Facebook, 
@@ -21,7 +20,6 @@ import {
  * La directive "use client" est placée en ligne 1 pour autoriser useState et useEffect.
  */
 export default function Page() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -132,6 +130,11 @@ export default function Page() {
    <FlipGallery />
 </div>
         </div>
+      </section>
+
+      {/* --- GALLERY ANIMATION (Section 5) --- */}
+      <section id="produits">
+        <GalleryAnimation />
       </section>
 
       {/* --- FOOTER --- */}
