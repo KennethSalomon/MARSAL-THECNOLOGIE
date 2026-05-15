@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { type ThemeProviderProps } from "next-themes/dist/types";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+// Avoid importing internal types from next-themes package which may not be present
+export function ThemeProvider({ children, ...props }: any) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
