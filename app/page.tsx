@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import FlipGallery from '../components/ui/flip-gallery';
 import GalleryAnimation, { GalleryProduct } from '../components/ui/gallery-animation';
+import { CurtainThemeToggle } from '../components/ui/curtain-theme-toggle';
 import {
   Shield,
   Zap,
@@ -46,8 +47,6 @@ const productCards: GalleryProduct[] = [
 ];
 
 export default function Page() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -61,9 +60,9 @@ export default function Page() {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <main className={`${isDarkMode ? 'bg-obsidian text-white' : 'bg-white text-obsidian'} min-h-screen font-exo overflow-x-hidden selection:bg-cyan-marsal selection:text-obsidian scroll-smooth transition-colors duration-500`}>
-      <header className={`fixed top-0 left-0 w-full z-50 ${isDarkMode ? 'bg-obsidian/80' : 'bg-white/80'} backdrop-blur-md border-b border-cyan-marsal/20 transition-colors`}>
+    return (
+    <main className={`bg-white dark:bg-obsidian text-obsidian dark:text-white min-h-screen font-exo overflow-x-hidden selection:bg-cyan-marsal selection:text-obsidian scroll-smooth transition-colors duration-500`}>
+      <header className={`fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-cyan-marsal/20 transition-colors`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4 relative">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full border border-cyan-marsal/40 flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.2)]">
@@ -88,9 +87,7 @@ export default function Page() {
               <button className="font-mono-tech text-[10px] px-2 py-1 rounded border border-cyan-marsal/30 text-cyan-marsal hover:bg-cyan-marsal/10 transition">FR</button>
               <button className="font-mono-tech text-[10px] px-2 py-1 rounded border border-silver-marsal/20 text-silver-marsal/60 hover:border-cyan-marsal/30 transition">EN</button>
             </div>
-            <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-cyan-marsal/40 transition-all">
-              {isDarkMode ? <Sun size={16} className="text-white/70" /> : <Moon size={16} className="text-obsidian/70" />}
-            </button>
+            <CurtainThemeToggle />
           </div>
         </div>
       </header>
