@@ -35,17 +35,15 @@ let allPassed = true;
 // Test 1: app/page.tsx
 allPassed &= validateFile('app/page.tsx', [
   { check: '"use client"', label: 'use client directive' },
-  { check: "import FlipGallery from '../components/ui/flip-gallery'", label: 'FlipGallery relative import' },
-  { check: "import { CurtainThemeToggle } from '../components/ui/curtain-theme-toggle'", label: 'CurtainThemeToggle relative import' },
-  { check: "import GalleryAnimation from '../components/ui/gallery-animation'", label: 'GalleryAnimation import' },
+  { check: "import WhyUsShader from '../components/ui/why-us-shader'", label: 'WhyUsShader relative import' },
+  { check: "import { useTheme } from 'next-themes'", label: 'Theme hook import' },
   { check: 'export default function Page()', label: 'export default Page()' },
-  { check: '<GalleryAnimation />', label: 'GalleryAnimation component rendered' }
 ]);
 
 // Test 2: app/layout.tsx
 allPassed &= validateFile('app/layout.tsx', [
   { check: 'import "./globals.css"', label: 'globals.css import' },
-  { check: "import { ThemeProvider } from '../components/ui/theme-provider'", label: 'ThemeProvider relative import' },
+  { check: 'import { ThemeProvider } from "../components/ui/theme-provider"', label: 'ThemeProvider relative import' },
   { check: 'Marsal Tech', label: 'Marsal Tech metadata' }
 ]);
 
@@ -67,8 +65,8 @@ allPassed &= validateFile('components/ui/gallery-animation.tsx', [
   { check: 'Caméra IA SENTINEL', label: 'Product 2: Caméra' },
   { check: 'Thermostat Smart KRYPTON', label: 'Product 3: Thermostat' },
   { check: 'Éclairage Ambiant LUMIÈRE', label: 'Product 4: Éclairage' },
-  { check: '#00e5ff', label: 'Cyan color' },
-  { check: '#d400ff', label: 'Magenta color' }
+  { check: 'text-cyan-marsal', label: 'Cyan color' },
+  { check: 'text-magenta-marsal', label: 'Magenta color' }
 ]);
 
 // Test 5: package.json
