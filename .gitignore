@@ -1,2 +1,15 @@
-node_modules
-node_modules
+
+# Next.js build and cache
+.next/
+out/
+build/
+
+# Production dependencies
+node_modules/
+
+# Local env files
+.env*.local
+
+# Design & backup files
+.design
+temp.html

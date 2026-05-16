@@ -45,9 +45,9 @@ const PreFooterSection = () => {
   };
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
+    <section className="py-12 px-6 max-w-5xl mx-auto overflow-hidden">
       <motion.div
-        className="relative rounded-[32px] overflow-hidden border border-cyan-marsal/20 bg-obsidian/40 backdrop-blur-xl group"
+        className="relative rounded-2xl overflow-hidden border border-cyan-marsal/20 bg-obsidian/40 backdrop-blur-xl group"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -58,25 +58,25 @@ const PreFooterSection = () => {
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-cyan-marsal/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-magenta-marsal/10 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="relative z-10 grid h-full grid-cols-1 items-center gap-12 p-8 md:p-16 lg:grid-cols-2">
+        <div className="relative z-10 grid h-full grid-cols-1 items-center gap-6 p-6 md:p-10 lg:grid-cols-2">
           <div>
             <motion.div 
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-marsal/30 bg-cyan-marsal/5 text-cyan-marsal text-[10px] font-mono-tech tracking-widest uppercase mb-6"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-cyan-marsal/30 bg-cyan-marsal/5 text-cyan-marsal text-[9px] font-mono-tech tracking-widest uppercase mb-3"
             >
               <Sparkles size={12} />
               Accès Privilégié
             </motion.div>
             
             <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight text-white"
+              className="text-2xl md:text-3xl font-light leading-tight tracking-tight text-white"
               variants={itemVariants}
             >
               Restez à la pointe de l'<span className="text-cyan-marsal font-bold">innovation</span>
             </motion.h2>
             
             <motion.p
-              className="mt-6 max-w-xl text-lg text-silver-marsal/60 font-light leading-relaxed"
+              className="mt-3 max-w-xl text-sm text-silver-marsal/60 font-light leading-relaxed"
               variants={itemVariants}
             >
               Inscrivez-vous à notre lettre d'information exclusive pour recevoir les dernières tendances en domotique de luxe et sécurité intelligente.
@@ -96,13 +96,13 @@ const PreFooterSection = () => {
                 placeholder="Votre adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-14 flex-grow border-none bg-transparent text-white placeholder:text-silver-marsal/30 focus-visible:ring-0 focus-visible:ring-offset-0 px-4"
+                className="h-10 flex-grow border-none bg-transparent text-sm text-white placeholder:text-silver-marsal/30 focus-visible:ring-0 focus-visible:ring-offset-0 px-3"
                 required
               />
               <Button
                 type="submit"
-                size="lg"
-                className="h-14 px-8 rounded-xl bg-cyan-marsal text-obsidian font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+                size="sm"
+                className="h-10 px-5 rounded-lg bg-cyan-marsal text-obsidian text-xs font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
               >
                 S'inscrire
                 <ArrowRight className="ml-2 h-4 w-4" />

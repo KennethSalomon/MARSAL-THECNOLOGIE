@@ -20,6 +20,9 @@ import PreFooterSection from '../components/PreFooterSection';
 import StoreSection from '../components/StoreSection';
 import AvantagesGaranties from '../components/AvantagesGaranties';
 import DashboardShowcase from '../components/DashboardShowcase';
+import TestimonialsSection from '../components/TestimonialsSection';
+import PartnersMarquee from '../components/PartnersMarquee';
+import EditorialScrollSection from '../components/EditorialScrollSection';
 
 declare global {
   namespace JSX {
@@ -205,12 +208,18 @@ export default function Page() {
         </div>
       </section>
 
+      <EditorialScrollSection />
+
+
       <DashboardShowcase />
 
 
 
       {/* --- STORE SECTION --- */}
       <StoreSection />
+
+      {/* --- TESTIMONIALS --- */}
+      <TestimonialsSection />
 
 
       
@@ -248,6 +257,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <PartnersMarquee />
 
       {/* --- FOOTER --- */}
       <footer className="border-t border-cyan-marsal/10 py-12 px-6">

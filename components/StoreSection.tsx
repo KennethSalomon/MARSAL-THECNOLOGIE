@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShoppingCart, 
   Plus, 
   Minus, 
   ChevronRight, 
-  ExternalLink,
   MessageCircle,
-  Tag,
   Cpu,
   Wifi,
   Layers
@@ -74,11 +72,14 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
       {/* Product Image */}
       <div className="relative h-48 mb-6 rounded-xl overflow-hidden bg-black/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
         <img 
-          src={product.image || "/images/placeholder.png"} 
+          src={product.image} 
           alt={product.name}
           width={200}
           height={200}
           className="object-contain w-full h-full p-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
         />
       </div>
 
@@ -138,15 +139,15 @@ const StoreSection = () => {
   ];
 
   const bonsPlans: Product[] = [
-    { id: 'b1', name: 'AirPods Pro 2', price: 125000, description: 'Excellent état, boîte complète. Réduction active.', image: '/images/airpods-pro2.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
-    { id: 'b2', name: 'JBL Pulse 5', price: 95000, description: 'Légères marques d\'usure, son parfait.', image: '/images/jbl-pulse5.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
+    { id: 'b1', name: 'AirPods Pro 2', price: 125000, description: "Excellent état, boîte complète. Réduction active.", image: '/images/airpods-pro2.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
+    { id: 'b2', name: 'JBL Pulse 5', price: 95000, description: "Légères marques d'usure, son parfait.", image: '/images/jbl-pulse5.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
   ];
 
   const catalogue = [
-    { title: 'Zigbee', items: ['Capteurs de mouvement', 'Ampoules RGBW', 'Prises connectées', 'Détecteurs d\'eau'], icon: Cpu },
-    { title: 'WiFi', items: ['Caméras 4K', 'Interrupteurs tactiles', 'Moteurs de rideaux', 'Sonnettes vidéo'], icon: Wifi },
-    { title: 'Z-Wave', items: ['Thermostats pro', 'Sirènes alarmes', 'Vannes connectées', 'Répéteurs signal'], icon: Layers },
-    { title: 'Protocoles', items: ['Passerelles multi-mode', 'Ponts Hue', 'Hubs KNX', 'Contrôleurs Matter'], icon: ChevronRight },
+    { title: 'Zigbee', items: ["Capteurs de mouvement", "Ampoules RGBW", "Prises connectées", "Détecteurs d'eau"], icon: Cpu },
+    { title: 'WiFi', items: ["Caméras 4K", "Interrupteurs tactiles", "Moteurs de rideaux", "Sonnettes vidéo"], icon: Wifi },
+    { title: 'Z-Wave', items: ["Thermostats pro", "Sirènes alarmes", "Vannes connectées", "Répéteurs signal"], icon: Layers },
+    { title: 'Protocoles', items: ["Passerelles multi-mode", "Ponts Hue", "Hubs KNX", "Contrôleurs Matter"], icon: ChevronRight },
   ];
 
   const addToCart = (product: Product, quantity: number) => {
@@ -168,9 +169,10 @@ const StoreSection = () => {
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleWhatsApp = () => {
-    const list = cart.map(item => `- ${item.name} x${item.quantity}`).join('%0A');
-    const message = `Bonjour Marsal Technologie, je souhaite commander les articles suivants :%0A${list}%0A%0ATotal estimé : ${cartTotal.toLocaleString()} FCFA.%0AMerci de me confirmer la disponibilité.`;
-    window.open(`https://wa.me/22990000000?text=${message}`, '_blank');
+    const list = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
+    const message = `Bonjour Marsal Technologie, je souhaite commander les articles suivants :\n${list}\n\nTotal estimé : ${cartTotal.toLocaleString()} FCFA.\nMerci de me confirmer la disponibilité.`;
+    // encodeURIComponent ensures spaces become %20 and all chars are safely encoded on all mobile browsers
+    window.open(`https://wa.me/22990000000?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
