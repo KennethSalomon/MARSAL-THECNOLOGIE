@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
-import WhyUsShader from '../components/ui/why-us-shader';
 import { 
   Shield, 
   Zap, 
@@ -17,6 +16,10 @@ import {
   Moon
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import PreFooterSection from '../components/PreFooterSection';
+import StoreSection from '../components/StoreSection';
+import AvantagesGaranties from '../components/AvantagesGaranties';
+import DashboardShowcase from '../components/DashboardShowcase';
 
 declare global {
   namespace JSX {
@@ -38,14 +41,7 @@ export default function Page() {
     { bg: 'linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(212, 0, 255, 0.1))', text: 'Énergie Prédictive', label: 'AMBIANCE 3' },
   ];
 
-  const marqueeProducts = [
-    { name: 'NEXUS MX-8', price: '285 000 FCFA', icon: '🧠' },
-    { name: 'KRYPTON SL-7', price: '189 000 FCFA', icon: '🔐' },
-    { name: 'SENTINEL AI', price: '145 000 FCFA', icon: '📹' },
-    { name: 'PULSE', price: '45 000 FCFA', icon: '⚡' },
-    { name: 'LUMINA PRO', price: '78 000 FCFA', icon: '💡' },
-    { name: 'CLIMA AI', price: '125 000 FCFA', icon: '🌡️' },
-  ];
+
 
   useEffect(() => {
     setMounted(true);
@@ -164,19 +160,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* --- SERVICES --- */}
-      <section id="services" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16 section-fade">
-          <span className="font-mono-tech text-cyan-marsal text-sm tracking-widest uppercase">Expertise Domotique</span>
-          <h2 className="text-4xl md:text-5xl font-light mt-4">Une intelligence <span className="text-magenta-marsal font-bold">invisible</span></h2>
-          <div className="w-20 h-px bg-gradient-to-r from-transparent via-cyan-marsal to-transparent mx-auto mt-6"></div>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          <ServiceCard icon={<Shield className="text-cyan-marsal" />} title="Sécurité absolue" desc="Systèmes de surveillance 4K, détection faciale IA, alarmes connectées et accès biométrique." delay="0.1s" />
-          <ServiceCard icon={<Zap className="text-magenta-marsal" />} title="Énergie intelligente" desc="Gestion prédictive de la consommation, réduction jusqu'à 32% grâce à notre IA propriétaire." delay="0.2s" />
-          <ServiceCard icon={<Monitor className="text-cyan-marsal" />} title="Confort total" desc="Éclairage d'ambiance, climatisation intelligente, volets motorisés, scénarios personnalisés." delay="0.3s" />
-        </div>
-      </section>
+
+
+      <AvantagesGaranties />
 
       {/* --- GALLERY CAROUSEL --- */}
       <section id="galerie" className="py-16 relative overflow-hidden">
@@ -219,54 +205,16 @@ export default function Page() {
         </div>
       </section>
 
-      {/* --- WHY US --- */}
-      <section id="avantages" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="section-fade">
-            <span className="font-mono-tech text-cyan-marsal text-sm tracking-[2px] uppercase">Pourquoi Marsal ?</span>
-            <h2 className="text-4xl md:text-5xl font-light mt-4 leading-tight">
-              La technologie au service de l' <span className="text-magenta-marsal font-bold">excellence</span>
-            </h2>
-            <div className="space-y-10 mt-12">
-              <StatItem value="+500" label="installations" desc="Une confiance établie auprès des plus grandes résidences de Cotonou et d'Abidjan." />
-              <StatItem value="24/7" label="support premium" desc="Une assistance réactive et personnalisée, 7 jours sur 7." />
-              <StatItem value="10 ans" label="garantie" desc="Notre engagement sur la durabilité et la qualité de nos solutions." />
-            </div>
-          </div>
-          <div className="relative group section-fade delay-200 min-h-[400px]">
-            <div className="aspect-square relative overflow-hidden rounded-[14px] border-[0.5px] border-cyan-marsal/12 bg-obsidian shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full h-full">
-              <WhyUsShader />
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-60"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DashboardShowcase />
 
-      {/* --- PRODUCTS MARQUEE --- */}
-      <section id="produits" className="py-16 overflow-hidden">
-        <div className="text-center mb-12 section-fade">
-          <span className="font-mono-tech text-cyan-marsal text-sm tracking-widest uppercase">Collection Signature</span>
-          <h2 className="text-4xl md:text-5xl font-light mt-4">Les <span className="text-magenta-marsal font-bold">incontournables</span></h2>
-        </div>
-        
-        <div className="relative w-full overflow-hidden">
-          <div className="flex gap-8 animate-marquee-slow whitespace-nowrap">
-            {[...marqueeProducts, ...marqueeProducts].map((product, idx) => (
-              <div key={idx} className="glass-card p-6 w-72 inline-block text-center flex-shrink-0">
-                <div className="text-4xl mb-3">{product.icon}</div>
-                <div className="text-lg font-semibold">{product.name}</div>
-                <div className="text-cyan-marsal font-mono-tech text-sm mt-2">{product.price}</div>
-                <button 
-                  onClick={() => handleWhatsApp(product.name)}
-                  className="mt-4 px-4 py-2 border border-cyan-marsal/30 rounded-full text-xs font-mono-tech hover:bg-cyan-marsal/10 transition w-full"
-                >
-                  Commander via WhatsApp →
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+
+      {/* --- STORE SECTION --- */}
+      <StoreSection />
+
+
+      
+      <PreFooterSection />
 
       {/* --- CONTACT CTA --- */}
       <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
@@ -357,31 +305,5 @@ export default function Page() {
         }
       `}</style>
     </main>
-  );
-}
-
-function ServiceCard({ icon, title, desc, delay }: { icon: React.ReactNode, title: string, desc: string, delay: string }) {
-  return (
-    <div className="glass-card p-8 section-fade" style={{ transitionDelay: delay }}>
-      <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6">
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-silver-marsal/60 text-sm leading-relaxed">{desc}</p>
-    </div>
-  );
-}
-
-function StatItem({ value, label, desc }: { value: string, label: string, desc: string }) {
-  return (
-    <div className="flex gap-4">
-      <div className="w-1 h-full bg-gradient-to-b from-cyan-marsal to-magenta-marsal rounded-full"></div>
-      <div>
-        <h3 className="text-4xl font-black leading-none tracking-tighter">
-          <span className="text-cyan-marsal">{value}</span> <span className="text-silver-marsal/80">{label}</span>
-        </h3>
-        <p className="text-silver-marsal/60 text-sm mt-2">{desc}</p>
-      </div>
-    </div>
   );
 }

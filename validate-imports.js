@@ -37,7 +37,9 @@ allPassed &= validateFile('app/page.tsx', [
   { check: '"use client"', label: 'use client directive' },
   { check: "import WhyUsShader from '../components/ui/why-us-shader'", label: 'WhyUsShader relative import' },
   { check: "import { useTheme } from 'next-themes'", label: 'Theme hook import' },
+  { check: "import PreFooterSection from '../components/PreFooterSection'", label: 'PreFooterSection relative import' },
   { check: 'export default function Page()', label: 'export default Page()' },
+  { check: '<PreFooterSection />', label: 'PreFooterSection component rendered' },
 ]);
 
 // Test 2: app/layout.tsx
