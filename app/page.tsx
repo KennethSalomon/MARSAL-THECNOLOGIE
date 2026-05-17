@@ -20,12 +20,12 @@ import {
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import StoreSection from '../components/StoreSection';
-import AvantagesGaranties from '../components/AvantagesGaranties';
+import ShaderCards from '../components/ShaderCards';
 import PreFooterSection from '../components/PreFooterSection';
 
 import TestimonialsSection from '../components/TestimonialsSection';
 import PartnersMarquee from '../components/PartnersMarquee';
-import EditorialScrollSection from '../components/EditorialScrollSection';
+import FeatureSection from '../components/FeatureSection';
 import { BackgroundPaths } from '../components/background-paths';
 
 export default function Page() {
@@ -130,10 +130,10 @@ export default function Page() {
       {/* --- HERO SECTION --- */}
       <BackgroundPaths />
 
-      {/* --- BENTO GRID SECTION --- */}
-      <EditorialScrollSection />
+      {/* --- FEATURE SECTION --- */}
+      <FeatureSection />
 
-      <AvantagesGaranties />
+      <ShaderCards />
 
 
 
@@ -251,8 +251,8 @@ export default function Page() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6">
 
-          <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
-            <div className="col-span-1 md:col-span-2 lg:col-span-2 text-left">
+          <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-3">
+            <div className="col-span-1 text-left">
               <div className="mb-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full border border-cyan-marsal/40 flex items-center justify-center">
                   <span className="text-cyan-marsal font-bold text-xl">M</span>
@@ -284,26 +284,15 @@ export default function Page() {
             </div>
 
             <div className="text-left">
-              <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Solutions</h4>
-              <ul className="space-y-4 text-left">
-                {['Domotique Résidentielle', 'Sécurité & Alarme', 'Gestion Énergétique', 'Contrôle d\'Accès'].map((text) => (
-                  <li key={text}>
-                    <a href="#" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-sm font-light">
-                      {text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="text-left">
-              <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Entreprise</h4>
+              <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Liens Rapides</h4>
               <ul className="space-y-4 text-left">
                 {[
                   { t: 'Accueil', h: '#' },
                   { t: 'Services', h: '#services' },
                   { t: 'Galerie', h: '#galerie' },
-                  { t: 'Avantages', h: '#avantages' }
+                  { t: 'Avantages', h: '#avantages' },
+                  { t: 'Digital Store', h: '#shop' },
+                  { t: 'Contact', h: '#contact' }
                 ].map((item) => (
                   <li key={item.t}>
                     <a href={item.h} className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-sm font-light">
@@ -315,20 +304,37 @@ export default function Page() {
             </div>
 
             <div className="text-left">
-              <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Légal & Contact</h4>
-              <ul className="space-y-4 text-left">
-                {[
-                  { t: 'Digital Store', h: '#shop' },
-                  { t: 'Contact', h: '#contact' },
-                  { t: 'Mentions Légales', h: '#' }
-                ].map((item) => (
-                  <li key={item.t}>
-                    <a href={item.h} className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-sm font-light">
-                      {item.t}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Localisation</h4>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Marsal+Technologies+Cotonou+Bénin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group block rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800/60 transition-all duration-300 hover:border-cyan-marsal/50"
+              >
+                <div className="relative h-40 overflow-hidden">
+                  <img
+                    src="/images/map1.png"
+                    alt="Marsal Technologies - Light Mode"
+                    className="dark:hidden block w-full h-full object-cover"
+                  />
+                  <img
+                    src="/images/map2.png"
+                    alt="Marsal Technologies - Dark Mode"
+                    className="dark:block hidden w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="px-4 py-2 bg-cyan-marsal text-black text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg">
+                      Voir l'itinéraire
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4 bg-neutral-50 dark:bg-neutral-900/40">
+                  <p className="text-neutral-700 dark:text-neutral-300 text-xs font-light leading-relaxed">
+                    Marsal Technologies — Derrière la SOBEBRA, 4006 Quartier Jak, Cotonou
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
 

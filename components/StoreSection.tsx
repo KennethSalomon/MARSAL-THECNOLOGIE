@@ -7,10 +7,12 @@ import {
   Plus,
   Minus,
   ChevronRight,
+  ChevronLeft,
   MessageCircle,
   Cpu,
   Wifi,
-  Layers
+  Layers,
+  Search
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
@@ -52,7 +54,7 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative group bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/60 rounded-2xl overflow-hidden p-5 transition-all duration-500 hover:border-cyan-marsal/30"
+      className="relative group bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/60 rounded-2xl overflow-hidden p-4 transition-all duration-500 hover:border-cyan-marsal/30"
     >
       {/* Spotlight Effect */}
       <div
@@ -64,19 +66,19 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
 
       {/* Badge */}
       {product.badge && (
-        <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-magenta-marsal/20 border border-magenta-marsal/30 text-[9px] font-mono-tech text-magenta-marsal uppercase tracking-widest">
+        <div className="absolute top-3 right-3 z-20 px-2 py-0.5 rounded-full bg-magenta-marsal/20 border border-magenta-marsal/30 text-[8px] font-mono-tech text-magenta-marsal uppercase tracking-widest">
           {product.badge}
         </div>
       )}
 
       {/* Product Image */}
-      <div className="relative h-48 mb-6 rounded-xl overflow-hidden bg-black/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+      <div className="relative h-32 mb-4 rounded-xl overflow-hidden bg-black/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
         <img
           src={product.image}
           alt={product.name}
-          width={200}
-          height={200}
-          className="object-contain w-full h-full p-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          width={150}
+          height={150}
+          className="object-contain w-full h-full p-3 opacity-80 group-hover:opacity-100 transition-opacity"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
           }}
@@ -85,38 +87,38 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
 
       {/* Content */}
       <div className="relative z-10">
-        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{product.name}</h3>
-        <p className="text-neutral-600 dark:text-neutral-400 text-xs line-clamp-2 mb-4 leading-relaxed h-8">
+        <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-1.5">{product.name}</h3>
+        <p className="text-neutral-600 dark:text-neutral-400 text-[10px] line-clamp-2 mb-3 leading-relaxed h-8">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-cyan-500 dark:text-cyan-400 font-mono-tech text-sm font-bold">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-cyan-500 dark:text-cyan-400 font-mono-tech text-xs font-bold">
             {product.price.toLocaleString()} FCFA
           </span>
         </div>
 
         {/* Controls */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-100 dark:bg-neutral-900 p-1 text-neutral-900 dark:text-white">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-100 dark:bg-neutral-900 p-0.5 text-neutral-900 dark:text-white">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-8 h-8 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
+              className="w-6 h-6 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
             >
-              <Minus size={14} />
+              <Minus size={12} />
             </button>
-            <span className="w-8 text-center text-xs font-mono-tech">{quantity}</span>
+            <span className="w-6 text-center text-[10px] font-mono-tech">{quantity}</span>
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
+              className="w-6 h-6 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
             >
-              <Plus size={14} />
+              <Plus size={12} />
             </button>
           </div>
 
           <Button
             onClick={() => onAddToCart(product, quantity)}
-            className="flex-1 h-10 bg-cyan-marsal text-obsidian text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300"
+            className="flex-1 h-8 bg-cyan-marsal text-obsidian text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300"
           >
             Ajouter
           </Button>
@@ -131,11 +133,20 @@ const StoreSection = () => {
   const [activeTab, setActiveTab] = useState<'produits' | 'catalogue' | 'bons-plans'>('produits');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const products: Product[] = [
     { id: 'p1', name: 'NEXUS MX-8', price: 285000, description: 'Cerveau domotique centralisé ultra-rapide.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
     { id: 'p2', name: 'KRYPTON SL-7', price: 189000, description: 'Serrure biométrique à reconnaissance faciale.', image: '/images/krypton-sl7.jpg', category: 'domotique' },
     { id: 'p3', name: 'SENTINEL AI', price: 145000, description: 'Caméra de surveillance avec IA prédictive.', image: '/images/sentinel-ai.jpg', category: 'domotique' },
+    { id: 'p4', name: 'AURA LIGHTING', price: 165000, description: 'Système d\'ambiance lumineuse adaptatif.', image: '/images/aura-lighting.jpg', category: 'domotique' },
+    { id: 'p5', name: 'CHRONOS PANEL', price: 220000, description: 'Écran tactile de contrôle mural en verre brossé.', image: '/images/chronos-panel.jpg', category: 'domotique' },
+    { id: 'p6', name: 'VALKYRIE SOUND', price: 195000, description: 'Barre de son encastrée invisible.', image: '/images/valkyrie-sound.jpg', category: 'domotique' },
+    { id: 'p7', name: 'HERMES GATE', price: 175000, description: 'Contrôleur d\'accès de portail automatisé.', image: '/images/hermes-gate.jpg', category: 'domotique' },
+    { id: 'p8', name: 'ZEPHYR HVAC', price: 245000, description: 'Gestionnaire thermique éco-efficace.', image: '/images/zephyr-hvac.jpg', category: 'domotique' },
+    { id: 'p9', name: 'HYDRA VALVE', price: 135000, description: 'Sécurité et coupure d\'eau intelligente.', image: '/images/hydra-valve.jpg', category: 'domotique' },
   ];
 
   const bonsPlans: Product[] = [
@@ -168,6 +179,32 @@ const StoreSection = () => {
   const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  // Filter products based on search query
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Scroll manual function for carousel
+  const scrollManual = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -340 : 340; // Card width + gap
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (productName: string) => {
+    setSearchQuery(productName);
+    setShowSuggestions(false);
+    // Scroll to the product in carousel
+    const productIndex = products.findIndex(p => p.name === productName);
+    if (productIndex !== -1 && scrollContainerRef.current) {
+      const scrollAmount = productIndex * 340;
+      scrollContainerRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   const handleWhatsApp = () => {
     const list = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
     const message = `Bonjour Marsal Technologie, je souhaite commander les articles suivants :\n${list}\n\nTotal estimé : ${cartTotal.toLocaleString()} FCFA.\nMerci de me confirmer la disponibilité.`;
@@ -180,7 +217,7 @@ const StoreSection = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,6 +232,43 @@ const StoreSection = () => {
           >
             Catalogue & <span className="text-magenta-marsal font-bold">Solutions</span>
           </motion.h2>
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative max-w-xl mx-auto mb-12">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-600 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Rechercher un produit..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setShowSuggestions(e.target.value.length > 0);
+              }}
+              onFocus={() => setShowSuggestions(searchQuery.length > 0)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white py-3 pl-12 pr-4 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-cyan-500 transition-colors"
+            />
+          </div>
+
+          {/* Predictive Suggestions Dropdown */}
+          {showSuggestions && filteredProducts.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900/95 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-2xl overflow-hidden z-50">
+              {filteredProducts.slice(0, 5).map((product) => (
+                <button
+                  key={product.id}
+                  onClick={() => handleSuggestionClick(product.name)}
+                  className="w-full px-4 py-3 text-left hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors flex items-center justify-between group"
+                >
+                  <span className="text-neutral-900 dark:text-white text-sm font-light">{product.name}</span>
+                  <span className="text-cyan-500 dark:text-cyan-400 text-xs font-mono-tech opacity-0 group-hover:opacity-100 transition-opacity">
+                    {product.price.toLocaleString()} FCFA
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Tabs */}
@@ -235,11 +309,44 @@ const StoreSection = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="grid md:grid-cols-3 gap-8"
               >
-                {products.map(p => (
-                  <SpotlightCard key={p.id} product={p} onAddToCart={addToCart} />
-                ))}
+                {/* Carousel Container */}
+                <div
+                  className="relative flex overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+                  ref={scrollContainerRef}
+                >
+                  <div className="flex gap-6 py-4 flex-nowrap">
+                    {(searchQuery ? filteredProducts : products).map(p => (
+                      <div key={p.id} className="snap-center flex-shrink-0 w-[300px]">
+                        <SpotlightCard product={p} onAddToCart={addToCart} />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Fade Masks edges */}
+                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white dark:from-black to-transparent z-10 pointer-events-none" />
+                  <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white dark:from-black to-transparent z-10 pointer-events-none" />
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="w-full flex justify-end px-6 md:px-12 mt-8 relative z-20">
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => scrollManual('left')}
+                      className="border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white rounded-full p-4 hover:border-cyan-500 transition-colors group"
+                      aria-label="Produit précédent"
+                    >
+                      <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+                    </button>
+                    <button
+                      onClick={() => scrollManual('right')}
+                      className="border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white rounded-full p-4 hover:border-cyan-500 transition-colors group"
+                      aria-label="Produit suivant"
+                    >
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+                    </button>
+                  </div>
+                </div>
               </motion.div>
             )}
 

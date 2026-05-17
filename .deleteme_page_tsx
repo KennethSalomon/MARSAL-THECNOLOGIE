@@ -1,3 +1,0 @@
-# This file marks that page.tsx at the root needs to be deleted
-# Use: del page.tsx
-# The official page is at app/page.tsx
