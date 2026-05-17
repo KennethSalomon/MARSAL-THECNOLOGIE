@@ -14,6 +14,11 @@ echo "1️⃣  Vérification des fichiers critiques..."
 [ -f "components/ui/theme-provider.tsx" ] && echo "   ✅ components/ui/theme-provider.tsx" || echo "   ❌ theme-provider.tsx MANQUANT"
 
 echo ""
+echo "1️⃣b Vérification des assets critiques..."
+[ -f "public/images/nexus-mx8.jpg" ] && echo "   ✅ public/images/nexus-mx8.jpg (Fallback OK)" || echo "   ❌ public/images/nexus-mx8.jpg MANQUANT"
+[ -f "public/images/nexus-mx8.jpg" ] || echo "      👉 Action : Placez l'image de secours dans /public/images/ pour stabiliser le Store."
+
+echo ""
 echo "2️⃣  Vérification des imports relatifs..."
 grep -q "from '../components/ui/" app/page.tsx && echo "   ✅ page.tsx utilise imports relatifs" || echo "   ❌ page.tsx a des imports alias @/"
 grep -q "from \"../components/ui/" app/layout.tsx && echo "   ✅ layout.tsx utilise imports relatifs" || echo "   ❌ layout.tsx a des imports alias @/"

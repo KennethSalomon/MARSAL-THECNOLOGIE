@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShoppingCart,
@@ -96,7 +96,14 @@ const SpotlightCard = ({ product, onDirectWhatsApp }: { product: Product, onDire
           height={150}
           className="object-contain w-full h-full p-3 opacity-80 group-hover:opacity-100 transition-opacity"
           onError={(e) => {
-            e.currentTarget.style.display = 'none';
+            const localFallback = "/images/nexus-mx8.jpg";
+            const remoteFallback = "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=400";
+            
+            if (e.currentTarget.src.includes(localFallback)) {
+              e.currentTarget.src = remoteFallback;
+            } else {
+              e.currentTarget.src = localFallback;
+            }
           }}
         />
       </div>
@@ -146,6 +153,7 @@ const SpotlightCard = ({ product, onDirectWhatsApp }: { product: Product, onDire
 
 /** --- MAIN STORE SECTION COMPONENT --- */
 const StoreSection = () => {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<'produits' | 'catalogue' | 'bons-plans'>('produits');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -154,21 +162,27 @@ const StoreSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   const products: Product[] = [
     { id: 'p1', name: 'NEXUS MX-8', price: 285000, description: 'Cerveau domotique centralisé ultra-rapide.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
     { id: 'p2', name: 'KRYPTON SL-7', price: 189000, description: 'Serrure biométrique à reconnaissance faciale.', image: '/images/krypton-sl7.jpg', category: 'domotique' },
-    { id: 'p3', name: 'SENTINEL AI', price: 145000, description: 'Caméra de surveillance avec IA prédictive.', image: '/images/sentinel-ai.jpg', category: 'domotique' },
-    { id: 'p4', name: 'AURA LIGHTING', price: 165000, description: 'Système d\'ambiance lumineuse adaptatif.', image: '/images/aura-lighting.jpg', category: 'domotique' },
-    { id: 'p5', name: 'CHRONOS PANEL', price: 220000, description: 'Écran tactile de contrôle mural en verre brossé.', image: '/images/chronos-panel.jpg', category: 'domotique' },
-    { id: 'p6', name: 'VALKYRIE SOUND', price: 195000, description: 'Barre de son encastrée invisible.', image: '/images/valkyrie-sound.jpg', category: 'domotique' },
-    { id: 'p7', name: 'HERMES GATE', price: 175000, description: 'Contrôleur d\'accès de portail automatisé.', image: '/images/hermes-gate.jpg', category: 'domotique' },
-    { id: 'p8', name: 'ZEPHYR HVAC', price: 245000, description: 'Gestionnaire thermique éco-efficace.', image: '/images/zephyr-hvac.jpg', category: 'domotique' },
-    { id: 'p9', name: 'HYDRA VALVE', price: 135000, description: 'Sécurité et coupure d\'eau intelligente.', image: '/images/hydra-valve.jpg', category: 'domotique' },
+    { id: 'p3', name: 'SENTINEL AI', price: 145000, description: 'Caméra de surveillance avec IA prédictive.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p4', name: 'AURA LIGHTING', price: 165000, description: 'Système d\'ambiance lumineuse adaptatif.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p5', name: 'CHRONOS PANEL', price: 220000, description: 'Écran tactile de contrôle mural en verre brossé.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p6', name: 'VALKYRIE SOUND', price: 195000, description: 'Barre de son encastrée invisible.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p7', name: 'HERMES GATE', price: 175000, description: 'Contrôleur d\'accès de portail automatisé.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p8', name: 'ZEPHYR HVAC', price: 245000, description: 'Gestionnaire thermique éco-efficace.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
+    { id: 'p9', name: 'HYDRA VALVE', price: 135000, description: 'Sécurité et coupure d\'eau intelligente.', image: '/images/nexus-mx8.jpg', category: 'domotique' },
   ];
 
   const bonsPlans: Product[] = [
-    { id: 'b1', name: 'AirPods Pro 2', price: 125000, description: "Excellent état, boîte complète. Réduction active.", image: '/images/airpods-pro2.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
-    { id: 'b2', name: 'JBL Pulse 5', price: 95000, description: "Légères marques d'usure, son parfait.", image: '/images/jbl-pulse5.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
+    { id: 'b1', name: 'AirPods Pro 2', price: 125000, description: "Excellent état, boîte complète. Réduction active.", image: '/images/nexus-mx8.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
+    { id: 'b2', name: 'JBL Pulse 5', price: 95000, description: "Légères marques d'usure, son parfait.", image: '/images/nexus-mx8.jpg', category: 'bons-plans', badge: 'Premium Second Hand' },
   ];
 
   const catalogue = [

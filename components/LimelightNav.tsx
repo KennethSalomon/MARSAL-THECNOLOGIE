@@ -21,8 +21,6 @@ export default function LimelightNav() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
-
   const navItems: NavItem[] = [
     { id: 'accueil', label: 'Accueil', href: '#accueil' },
     { id: 'solutions', label: 'Solutions', href: '#solutions' },
@@ -62,6 +60,8 @@ export default function LimelightNav() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-lg md:hidden">
