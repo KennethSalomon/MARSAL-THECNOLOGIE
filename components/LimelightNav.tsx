@@ -11,10 +11,17 @@ interface NavItem {
 }
 
 export default function LimelightNav() {
+  const [mounted, setMounted] = useState(false);
   const [activeId, setActiveId] = useState('accueil');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const navItems: NavItem[] = [
     { id: 'accueil', label: 'Accueil', href: '#accueil' },

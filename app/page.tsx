@@ -385,8 +385,7 @@ export default function Page() {
       {/* Floating WhatsApp Button */}
       <FloatingWhatsApp />
 
-      {/* Fluid Menu for Mobile/Tablet */}
-      <FluidMenu />
+      <LimelightNav />
 
       <style jsx global>{`
         .section-fade {
