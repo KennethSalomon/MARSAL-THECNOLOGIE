@@ -53,13 +53,13 @@ export default function FeatureSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-3 rounded-xl font-medium transition-all shadow-lg shadow-cyan-500/10 flex items-center justify-center gap-2">
+            <a href="#catalogue" className="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-3 rounded-xl font-medium transition-all shadow-lg shadow-cyan-500/10 flex items-center justify-center gap-2">
               Découvrir nos solutions
               <ArrowRight size={18} />
-            </button>
-            <button className="border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 px-6 py-3 rounded-xl font-medium transition-all">
+            </a>
+            <a href="#avantages" className="border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 px-6 py-3 rounded-xl font-medium transition-all">
               En savoir plus
-            </button>
+            </a>
           </div>
         </motion.div>
 

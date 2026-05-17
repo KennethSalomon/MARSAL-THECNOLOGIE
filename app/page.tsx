@@ -26,11 +26,14 @@ import PreFooterSection from '../components/PreFooterSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import PartnersMarquee from '../components/PartnersMarquee';
 import FeatureSection from '../components/FeatureSection';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import LimelightNav from '../components/LimelightNav';
 import { BackgroundPaths } from '../components/background-paths';
 
 export default function Page() {
   const [mounted, setMounted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const isLight = theme === 'light';
 
@@ -44,6 +47,13 @@ export default function Page() {
 
   useEffect(() => {
     setMounted(true);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -85,14 +95,17 @@ export default function Page() {
     const text = productName
       ? `Bonjour, je suis intéressé par le produit ${productName} de MARSAL TECHNOLOGIES.`
       : "Bonjour, j'aimerais en savoir plus sur vos services.";
-    window.open(`https://wa.me/22990000000?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/2290154036641?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
-    <main className={`min-h-screen font-exo transition-colors duration-500 ${isLight ? 'bg-[#f5f5f5] text-[#0a0a0a]' : 'bg-obsidian text-white'}`}>
-
+    <main className={`min-h-screen font-exo transition-colors duration-500 ${isLight ? 'bg-[#f5f5f5] text-[#0a0a0a]' : 'bg-obsidian text-white'} scroll-smooth`}>
       {/* --- HEADER --- */}
-      <header className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-cyan-marsal/20 transition-all duration-300 ${isLight ? 'bg-white/80' : 'bg-obsidian/80'}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? `${isLight ? 'bg-white/70 backdrop-blur-md border-b border-neutral-200/60' : 'bg-black/70 backdrop-blur-md border-b border-neutral-900/80'}`
+          : `${isLight ? 'bg-white/80' : 'bg-obsidian/80'} backdrop-blur-md border-b border-cyan-marsal/20`
+      }`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full border border-cyan-marsal/40 flex items-center justify-center hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
@@ -105,9 +118,16 @@ export default function Page() {
           </div>
 
           <nav className="hidden md:flex gap-8">
-            {['Accueil', 'Services', 'Galerie', 'Avantages', 'Produits', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="font-mono-tech text-xs text-silver-marsal/70 hover:text-cyan-marsal transition-colors uppercase tracking-widest">
-                {item}
+            {[
+              { label: 'Accueil', href: '#accueil' },
+              { label: 'Solutions', href: '#solutions' },
+              { label: 'Avantages', href: '#avantages' },
+              { label: 'Catalogue', href: '#catalogue' },
+              { label: 'Témoignages', href: '#temoignages' },
+              { label: 'Contact', href: '#contact' }
+            ].map((item) => (
+              <a key={item.href} href={item.href} className="font-mono-tech text-xs text-silver-marsal/70 hover:text-cyan-marsal transition-colors uppercase tracking-widest">
+                {item.label}
               </a>
             ))}
           </nav>
@@ -128,21 +148,31 @@ export default function Page() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <BackgroundPaths />
+      <div id="accueil">
+        <BackgroundPaths />
+      </div>
 
       {/* --- FEATURE SECTION --- */}
-      <FeatureSection />
+      <div id="solutions">
+        <FeatureSection />
+      </div>
 
-      <ShaderCards />
+      <div id="avantages">
+        <ShaderCards />
+      </div>
 
 
 
 
       {/* --- STORE SECTION --- */}
-      <StoreSection />
+      <div id="catalogue">
+        <StoreSection />
+      </div>
 
       {/* --- TESTIMONIALS --- */}
-      <TestimonialsSection />
+      <div id="temoignages">
+        <TestimonialsSection />
+      </div>
 
 
       {/* --- CONTACT SECTION --- */}
@@ -171,7 +201,7 @@ export default function Page() {
                 </div>
                 <div>
                   <p className="text-[10px] text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em] mb-1 font-mono-tech">Email Direct</p>
-                  <a href="mailto:contact@marsaltech.com" className="text-xl font-light text-neutral-700 dark:text-neutral-300 hover:text-cyan-marsal dark:hover:text-cyan-marsal transition-colors">contact@marsaltech.com</a>
+                  <a href="mailto:marsaltechnologie@gmail.com" className="text-xl font-light text-neutral-700 dark:text-neutral-300 hover:text-cyan-marsal dark:hover:text-cyan-marsal transition-colors">marsaltechnologie@gmail.com</a>
                 </div>
               </div>
 
@@ -225,6 +255,7 @@ export default function Page() {
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
+                  onClick={() => window.open('https://wa.me/2290154036641?text=Bonjour,%20je%20souhaite%20discuter%20d\'un%20projet%20avec%20Marsal%20Technologies.', '_blank')}
                   className="w-full bg-cyan-marsal text-black font-bold py-5 rounded-2xl flex items-center justify-center gap-3 group relative overflow-hidden transition-all shadow-[0_10px_30px_rgba(0,229,255,0.2)]"
                 >
                   <span className="text-sm tracking-widest uppercase">Envoyer le projet</span>
@@ -269,12 +300,14 @@ export default function Page() {
                 {[
                   { icon: Facebook, href: '#' },
                   { icon: Twitter, href: '#' },
-                  { icon: Linkedin, href: '#' },
-                  { icon: Instagram, href: '#' }
+                  { icon: Linkedin, href: 'https://bj.linkedin.com/in/marsal-smarttech-b9119b274?trk=public_post_comment_actor-image3' },
+                  { icon: Instagram, href: 'https://www.instagram.com/marsal_technologies_benin/reels/' }
                 ].map((item, i) => (
                   <a
                     key={i}
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 flex items-center justify-center hover:border-cyan-marsal/30 hover:text-cyan-marsal transition-all text-neutral-400 dark:text-neutral-600 hover:text-cyan-marsal dark:hover:text-cyan-marsal"
                   >
                     <item.icon size={18} />
@@ -287,11 +320,11 @@ export default function Page() {
               <h4 className="mb-6 font-mono-tech text-[10px] font-bold tracking-[3px] uppercase text-cyan-marsal opacity-80">Liens Rapides</h4>
               <ul className="space-y-4 text-left">
                 {[
-                  { t: 'Accueil', h: '#' },
-                  { t: 'Services', h: '#services' },
-                  { t: 'Galerie', h: '#galerie' },
+                  { t: 'Accueil', h: '#accueil' },
+                  { t: 'Solutions', h: '#solutions' },
                   { t: 'Avantages', h: '#avantages' },
-                  { t: 'Digital Store', h: '#shop' },
+                  { t: 'Catalogue', h: '#catalogue' },
+                  { t: 'Témoignages', h: '#temoignages' },
                   { t: 'Contact', h: '#contact' }
                 ].map((item) => (
                   <li key={item.t}>
@@ -313,12 +346,12 @@ export default function Page() {
               >
                 <div className="relative h-40 overflow-hidden">
                   <img
-                    src="/images/map1.png"
+                src="/images/map1.png"
                     alt="Marsal Technologies - Light Mode"
                     className="dark:hidden block w-full h-full object-cover"
                   />
                   <img
-                    src="/images/map2.png"
+                src="/images/map2.png"
                     alt="Marsal Technologies - Dark Mode"
                     className="dark:block hidden w-full h-full object-cover"
                   />
@@ -348,6 +381,12 @@ export default function Page() {
           </div>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <FloatingWhatsApp />
+
+      {/* Fluid Menu for Mobile/Tablet */}
+      <FluidMenu />
 
       <style jsx global>{`
         .section-fade {

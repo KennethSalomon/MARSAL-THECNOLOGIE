@@ -32,8 +32,24 @@ interface CartItem extends Product {
   quantity: number;
 }
 
+/** --- SKELETON CARD COMPONENT --- */
+const SkeletonCard = () => {
+  return (
+    <div className="relative bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/60 rounded-2xl overflow-hidden p-4 animate-pulse">
+      <div className="h-32 mb-4 rounded-xl bg-neutral-200 dark:bg-neutral-800" />
+      <div className="h-6 mb-2 rounded bg-neutral-200 dark:bg-neutral-800 w-3/4" />
+      <div className="h-4 mb-4 rounded bg-neutral-200 dark:bg-neutral-800 w-full" />
+      <div className="h-4 mb-4 rounded bg-neutral-200 dark:bg-neutral-800 w-1/2" />
+      <div className="flex items-center gap-2">
+        <div className="w-6 h-6 rounded bg-neutral-200 dark:bg-neutral-800" />
+        <div className="flex-1 h-8 rounded bg-neutral-200 dark:bg-neutral-800" />
+      </div>
+    </div>
+  );
+};
+
 /** --- SPOTLIGHT CARD COMPONENT --- */
-const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart: (p: Product, q: number) => void }) => {
+const SpotlightCard = ({ product, onDirectWhatsApp }: { product: Product, onDirectWhatsApp: (p: Product, q: number) => void }) => {
   const [quantity, setQuantity] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -117,10 +133,10 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
           </div>
 
           <Button
-            onClick={() => onAddToCart(product, quantity)}
+            onClick={() => onDirectWhatsApp(product, quantity)}
             className="flex-1 h-8 bg-cyan-marsal text-obsidian text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300"
           >
-            Ajouter
+            Commander
           </Button>
         </div>
       </div>
@@ -135,6 +151,7 @@ const StoreSection = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const products: Product[] = [
@@ -170,6 +187,11 @@ const StoreSection = () => {
       return [...prev, { ...product, quantity }];
     });
     setIsCartOpen(true);
+  };
+
+  const handleDirectWhatsApp = (product: Product, quantity: number) => {
+    const message = `Bonjour Marsal Technologie, je souhaite commander le produit suivant :\n\n- ${product.name} x${quantity}\n\nPrix unitaire : ${product.price.toLocaleString()} FCFA\nTotal : ${(product.price * quantity).toLocaleString()} FCFA\n\nMerci de me confirmer la disponibilité.`;
+    window.open(`https://wa.me/2290154036641?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const removeFromCart = (id: string) => {
@@ -209,7 +231,7 @@ const StoreSection = () => {
     const list = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
     const message = `Bonjour Marsal Technologie, je souhaite commander les articles suivants :\n${list}\n\nTotal estimé : ${cartTotal.toLocaleString()} FCFA.\nMerci de me confirmer la disponibilité.`;
     // encodeURIComponent ensures spaces become %20 and all chars are safely encoded on all mobile browsers
-    window.open(`https://wa.me/22990000000?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/2290154036641?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -245,6 +267,8 @@ const StoreSection = () => {
               onChange={(e) => {
                 setSearchQuery(e.target.value);
                 setShowSuggestions(e.target.value.length > 0);
+                setIsLoading(true);
+                setTimeout(() => setIsLoading(false), 400);
               }}
               onFocus={() => setShowSuggestions(searchQuery.length > 0)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
@@ -316,11 +340,19 @@ const StoreSection = () => {
                   ref={scrollContainerRef}
                 >
                   <div className="flex gap-6 py-4 flex-nowrap">
-                    {(searchQuery ? filteredProducts : products).map(p => (
-                      <div key={p.id} className="snap-center flex-shrink-0 w-[300px]">
-                        <SpotlightCard product={p} onAddToCart={addToCart} />
-                      </div>
-                    ))}
+                    {isLoading ? (
+                      Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="snap-center flex-shrink-0 w-[300px]">
+                          <SkeletonCard />
+                        </div>
+                      ))
+                    ) : (
+                      (searchQuery ? filteredProducts : products).map(p => (
+                        <div key={p.id} className="snap-center flex-shrink-0 w-[300px]">
+                          <SpotlightCard product={p} onDirectWhatsApp={handleDirectWhatsApp} />
+                        </div>
+                      ))
+                    )}
                   </div>
 
                   {/* Fade Masks edges */}
@@ -359,7 +391,7 @@ const StoreSection = () => {
                 className="grid md:grid-cols-3 gap-8"
               >
                 {bonsPlans.map(p => (
-                  <SpotlightCard key={p.id} product={p} onAddToCart={addToCart} />
+                  <SpotlightCard key={p.id} product={p} onDirectWhatsApp={handleDirectWhatsApp} />
                 ))}
               </motion.div>
             )}
