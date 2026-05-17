@@ -2,11 +2,11 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ShoppingCart, 
-  Plus, 
-  Minus, 
-  ChevronRight, 
+import {
+  ShoppingCart,
+  Plus,
+  Minus,
+  ChevronRight,
   MessageCircle,
   Cpu,
   Wifi,
@@ -47,15 +47,15 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative group bg-obsidian/40 border border-white/10 rounded-2xl overflow-hidden p-5 transition-all duration-500 hover:border-cyan-marsal/30"
+      className="relative group bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/60 rounded-2xl overflow-hidden p-5 transition-all duration-500 hover:border-cyan-marsal/30"
     >
       {/* Spotlight Effect */}
-      <div 
+      <div
         className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
           background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(0, 229, 255, 0.1), transparent 40%)`
@@ -71,8 +71,8 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
 
       {/* Product Image */}
       <div className="relative h-48 mb-6 rounded-xl overflow-hidden bg-black/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-        <img 
-          src={product.image} 
+        <img
+          src={product.image}
           alt={product.name}
           width={200}
           height={200}
@@ -85,36 +85,36 @@ const SpotlightCard = ({ product, onAddToCart }: { product: Product, onAddToCart
 
       {/* Content */}
       <div className="relative z-10">
-        <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
-        <p className="text-silver-marsal/50 text-xs line-clamp-2 mb-4 leading-relaxed h-8">
+        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{product.name}</h3>
+        <p className="text-neutral-600 dark:text-neutral-400 text-xs line-clamp-2 mb-4 leading-relaxed h-8">
           {product.description}
         </p>
-        
+
         <div className="flex items-center justify-between mb-6">
-          <span className="text-cyan-marsal font-mono-tech text-sm font-bold">
+          <span className="text-cyan-500 dark:text-cyan-400 font-mono-tech text-sm font-bold">
             {product.price.toLocaleString()} FCFA
           </span>
         </div>
 
         {/* Controls */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center border border-white/10 rounded-lg bg-white/5 p-1">
-            <button 
+          <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-neutral-100 dark:bg-neutral-900 p-1 text-neutral-900 dark:text-white">
+            <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white transition"
+              className="w-8 h-8 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
             >
               <Minus size={14} />
             </button>
             <span className="w-8 text-center text-xs font-mono-tech">{quantity}</span>
-            <button 
+            <button
               onClick={() => setQuantity(quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white transition"
+              className="w-8 h-8 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition"
             >
               <Plus size={14} />
             </button>
           </div>
-          
-          <Button 
+
+          <Button
             onClick={() => onAddToCart(product, quantity)}
             className="flex-1 h-10 bg-cyan-marsal text-obsidian text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300"
           >
@@ -176,22 +176,22 @@ const StoreSection = () => {
   };
 
   return (
-    <section className="py-32 bg-[#050505] relative overflow-hidden z-20" id="store">
+    <section className="py-32 bg-white dark:bg-black relative overflow-hidden z-20 transition-colors duration-300" id="store">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="font-mono-tech text-cyan-marsal text-xs tracking-[4px] uppercase mb-4 block"
           >
             Digital Store
           </motion.span>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-light text-white"
+            className="text-4xl md:text-6xl font-light text-neutral-900 dark:text-white"
           >
             Catalogue & <span className="text-magenta-marsal font-bold">Solutions</span>
           </motion.h2>
@@ -199,7 +199,7 @@ const StoreSection = () => {
 
         {/* Tabs */}
         <div className="flex justify-center mb-16">
-          <div className="inline-flex p-1 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md">
+          <div className="inline-flex p-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-2xl backdrop-blur-md">
             {[
               { id: 'produits', label: 'Produits Domotiques' },
               { id: 'catalogue', label: 'Catalogue' },
@@ -210,11 +210,11 @@ const StoreSection = () => {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={cn(
                   "relative px-6 py-3 text-xs font-mono-tech tracking-widest uppercase transition-colors duration-300 rounded-xl",
-                  activeTab === tab.id ? "text-obsidian" : "text-white/60 hover:text-white"
+                  activeTab === tab.id ? "text-neutral-900" : "text-neutral-600 dark:text-white/60 hover:text-neutral-900 dark:hover:text-white"
                 )}
               >
                 {activeTab === tab.id && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeTab"
                     className="absolute inset-0 bg-cyan-marsal rounded-xl z-0"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
@@ -230,7 +230,7 @@ const StoreSection = () => {
         <div className="min-h-[500px]">
           <AnimatePresence mode="wait">
             {activeTab === 'produits' && (
-              <motion.div 
+              <motion.div
                 key="produits"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -244,7 +244,7 @@ const StoreSection = () => {
             )}
 
             {activeTab === 'bons-plans' && (
-              <motion.div 
+              <motion.div
                 key="bons-plans"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -258,7 +258,7 @@ const StoreSection = () => {
             )}
 
             {activeTab === 'catalogue' && (
-              <motion.div 
+              <motion.div
                 key="catalogue"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -266,14 +266,14 @@ const StoreSection = () => {
                 className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
               >
                 {catalogue.map((cat, idx) => (
-                  <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-cyan-marsal/20 transition-all duration-500">
+                  <div key={idx} className="p-8 rounded-2xl bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/60 hover:border-cyan-marsal/20 transition-all duration-500">
                     <div className="w-12 h-12 rounded-xl bg-cyan-marsal/10 flex items-center justify-center mb-6 text-cyan-marsal">
                       <cat.icon size={24} />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-wider">{cat.title}</h3>
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-wider">{cat.title}</h3>
                     <ul className="space-y-4">
                       {cat.items.map((item, i) => (
-                        <li key={i} className="flex items-center gap-3 text-silver-marsal/50 text-sm hover:text-cyan-marsal transition-colors group cursor-default">
+                        <li key={i} className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400 text-sm hover:text-cyan-marsal transition-colors group cursor-default">
                           <div className="w-1 h-1 rounded-full bg-cyan-marsal/30 group-hover:bg-cyan-marsal" />
                           {item}
                         </li>
@@ -290,14 +290,14 @@ const StoreSection = () => {
       {/* Floating Cart */}
       <AnimatePresence>
         {cartCount > 0 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
             className="fixed bottom-8 right-8 z-[100]"
           >
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
                 className="w-16 h-16 rounded-full bg-cyan-marsal text-obsidian shadow-[0_0_30px_rgba(0,229,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95"
               >
@@ -308,34 +308,34 @@ const StoreSection = () => {
               </button>
 
               {isCartOpen && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  className="absolute bottom-20 right-0 w-80 bg-obsidian/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+                  className="absolute bottom-20 right-0 w-80 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-2xl border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-2xl"
                 >
-                  <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                    <h4 className="text-sm font-mono-tech uppercase tracking-widest text-white">Votre Panier</h4>
-                    <button onClick={() => setIsCartOpen(false)} className="text-white/40 hover:text-white">×</button>
+                  <div className="p-6 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+                    <h4 className="text-sm font-mono-tech uppercase tracking-widest text-neutral-900 dark:text-white">Votre Panier</h4>
+                    <button onClick={() => setIsCartOpen(false)} className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white text-lg">×</button>
                   </div>
-                  
+
                   <div className="max-h-60 overflow-y-auto p-4 space-y-4">
                     {cart.map(item => (
-                      <div key={item.id} className="flex items-center justify-between">
+                      <div key={item.id} className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-900/50 pb-2 last:border-0 last:pb-0">
                         <div>
-                          <div className="text-xs font-bold text-white">{item.name}</div>
-                          <div className="text-[10px] text-silver-marsal/50">{item.quantity} x {item.price.toLocaleString()} FCFA</div>
+                          <div className="text-xs font-bold text-neutral-900 dark:text-white">{item.name}</div>
+                          <div className="text-[10px] text-neutral-500 dark:text-neutral-400">{item.quantity} x {item.price.toLocaleString()} FCFA</div>
                         </div>
-                        <button onClick={() => removeFromCart(item.id)} className="text-magenta-marsal/50 hover:text-magenta-marsal text-xs">Supprimer</button>
+                        <button onClick={() => removeFromCart(item.id)} className="text-magenta-marsal hover:text-magenta-marsal/80 text-xs">Supprimer</button>
                       </div>
                     ))}
                   </div>
 
-                  <div className="p-6 bg-white/5">
+                  <div className="p-6 bg-neutral-50 dark:bg-neutral-900/40 border-t border-neutral-200 dark:border-neutral-800">
                     <div className="flex justify-between mb-4">
-                      <span className="text-xs text-silver-marsal/60">Total Estimé</span>
-                      <span className="text-sm font-bold text-cyan-marsal">{cartTotal.toLocaleString()} FCFA</span>
+                      <span className="text-xs text-neutral-500 dark:text-neutral-400">Total Estimé</span>
+                      <span className="text-sm font-bold text-cyan-500 dark:text-cyan-400">{cartTotal.toLocaleString()} FCFA</span>
                     </div>
-                    <Button 
+                    <Button
                       onClick={handleWhatsApp}
                       className="w-full h-12 bg-[#00a884] hover:bg-[#00c99e] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(0,168,132,0.3)]"
                     >

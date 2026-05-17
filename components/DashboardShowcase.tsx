@@ -4,7 +4,7 @@ import { ContainerScroll } from "./ui/container-scroll-animation";
 
 export default function DashboardShowcase() {
   return (
-    <section className="relative bg-[#050505] overflow-hidden">
+    <section className="relative bg-obsidian overflow-hidden">
       <ContainerScroll
         titleComponent={
           <>

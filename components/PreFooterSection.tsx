@@ -47,7 +47,7 @@ const PreFooterSection = () => {
   return (
     <section className="py-12 px-6 max-w-5xl mx-auto overflow-hidden">
       <motion.div
-        className="relative rounded-2xl overflow-hidden border border-cyan-marsal/20 bg-obsidian/40 backdrop-blur-xl group"
+        className="relative rounded-2xl overflow-hidden border border-neutral-200 dark:border-cyan-marsal/20 bg-neutral-50 dark:bg-obsidian/40 backdrop-blur-xl group"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -60,43 +60,43 @@ const PreFooterSection = () => {
 
         <div className="relative z-10 grid h-full grid-cols-1 items-center gap-6 p-6 md:p-10 lg:grid-cols-2">
           <div>
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-cyan-marsal/30 bg-cyan-marsal/5 text-cyan-marsal text-[9px] font-mono-tech tracking-widest uppercase mb-3"
             >
               <Sparkles size={12} />
               Accès Privilégié
             </motion.div>
-            
+
             <motion.h2
-              className="text-2xl md:text-3xl font-light leading-tight tracking-tight text-white"
+              className="text-2xl md:text-3xl font-light leading-tight tracking-tight text-neutral-900 dark:text-white"
               variants={itemVariants}
             >
               Restez à la pointe de l'<span className="text-cyan-marsal font-bold">innovation</span>
             </motion.h2>
-            
+
             <motion.p
-              className="mt-3 max-w-xl text-sm text-silver-marsal/60 font-light leading-relaxed"
+              className="mt-3 max-w-xl text-sm text-neutral-600 dark:text-neutral-400 font-light leading-relaxed"
               variants={itemVariants}
             >
               Inscrivez-vous à notre lettre d'information exclusive pour recevoir les dernières tendances en domotique de luxe et sécurité intelligente.
             </motion.p>
           </div>
 
-          <motion.div 
+          <motion.div
             className="flex w-full max-w-md flex-col"
             variants={itemVariants}
           >
             <form
               onSubmit={handleSubmit}
-              className="flex w-full flex-col gap-4 sm:flex-row p-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md"
+              className="flex w-full flex-col gap-4 sm:flex-row p-2 rounded-2xl bg-neutral-100 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 backdrop-blur-md"
             >
               <Input
                 type="email"
                 placeholder="Votre adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-10 flex-grow border-none bg-transparent text-sm text-white placeholder:text-silver-marsal/30 focus-visible:ring-0 focus-visible:ring-offset-0 px-3"
+                className="h-10 flex-grow bg-white dark:bg-neutral-950 text-sm text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-800 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus-visible:ring-1 focus-visible:ring-cyan-500 px-3 rounded-lg"
                 required
               />
               <Button
@@ -108,9 +108,9 @@ const PreFooterSection = () => {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
-            <motion.p 
+            <motion.p
               variants={itemVariants}
-              className="mt-4 text-[10px] text-silver-marsal/40 font-mono-tech uppercase tracking-widest text-center sm:text-left"
+              className="mt-4 text-[10px] text-neutral-500 dark:text-neutral-500 font-mono-tech uppercase tracking-widest text-center sm:text-left"
             >
               Respect de la vie privée garanti. Désinscription en un clic.
             </motion.p>

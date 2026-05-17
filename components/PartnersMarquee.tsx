@@ -20,21 +20,21 @@ const PartnerChip = ({ name, tagline }: { name: string; tagline: string }) => (
     {/* Decorative accent dot */}
     <span className="w-1.5 h-1.5 rounded-full bg-cyan-marsal/60 group-hover:bg-cyan-marsal transition-colors duration-300 flex-shrink-0" />
     <div className="flex flex-col">
-      <span className="font-sans font-semibold tracking-wider text-lg text-white leading-none whitespace-nowrap">
+      <span className="font-sans font-semibold tracking-wider text-lg text-neutral-900 dark:text-white leading-none whitespace-nowrap transition-colors duration-300">
         {name}
       </span>
-      <span className="font-mono-tech text-[9px] text-silver-marsal/50 tracking-[2px] uppercase mt-0.5 group-hover:text-cyan-marsal/70 transition-colors duration-300">
+      <span className="font-mono-tech text-[9px] text-neutral-500 dark:text-silver-marsal/50 tracking-[2px] uppercase mt-0.5 group-hover:text-cyan-marsal/70 transition-colors duration-300">
         {tagline}
       </span>
     </div>
     {/* Separator */}
-    <span className="ml-8 w-px h-8 bg-white/10 group-hover:bg-cyan-marsal/20 transition-colors duration-300 flex-shrink-0" />
+    <span className="ml-8 w-px h-8 bg-neutral-200 dark:bg-white/10 group-hover:bg-cyan-marsal/20 transition-colors duration-300 flex-shrink-0" />
   </div>
 );
 
 export default function PartnersMarquee() {
   return (
-    <section className="py-20 bg-[#050505] relative overflow-hidden border-t border-white/5" id="partenaires">
+    <section className="py-20 bg-white dark:bg-black relative overflow-hidden transition-colors duration-300" id="partenaires">
       {/* Background ambiance */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 bg-cyan-marsal/3 blur-[100px]" />
@@ -59,9 +59,9 @@ export default function PartnersMarquee() {
       {/* Marquee wrapper with edge fade masks */}
       <div className="relative w-full overflow-hidden">
         {/* Left fade */}
-        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white dark:from-black via-white/80 dark:via-black/80 to-transparent z-10 pointer-events-none transition-all duration-300" />
         {/* Right fade */}
-        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white dark:from-black via-white/80 dark:via-black/80 to-transparent z-10 pointer-events-none transition-all duration-300" />
 
         {/* Scrolling row */}
         <motion.div

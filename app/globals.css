@@ -94,3 +94,12 @@ html {
   background: #d400ff;
 }
 
+/* Masquer la barre de défilement (scrollbar-hide) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

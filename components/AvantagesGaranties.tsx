@@ -3,13 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GlowCard } from './ui/spotlight-card';
-import { 
-  Zap, 
-  ShieldCheck, 
-  Wrench, 
-  Headphones, 
-  Sliders, 
-  MapPin 
+import {
+  Zap,
+  ShieldCheck,
+  Wrench,
+  Headphones,
+  Sliders,
+  MapPin
 } from 'lucide-react';
 
 export default function AvantagesGaranties() {
@@ -53,30 +53,30 @@ export default function AvantagesGaranties() {
   ];
 
   return (
-    <section className="py-24 bg-[#050505] relative overflow-hidden" id="avantages-garanties">
+    <section className="py-24 bg-white dark:bg-obsidian relative overflow-hidden" id="avantages-garanties">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         {/* Header */}
         <div className="text-center mb-20">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="font-mono-tech text-cyan-marsal text-sm tracking-[4px] uppercase mb-4 block"
           >
             Pourquoi Nous Choisir ?
           </motion.span>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-light text-neutral-900 dark:text-white leading-tight"
           >
             Puissance. Sécurité. <span className="text-magenta-marsal font-bold">Contrôle.</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mt-6 text-silver-marsal/70 max-w-2xl mx-auto text-lg font-light leading-relaxed"
+            className="mt-6 text-neutral-600 dark:text-silver-marsal/70 max-w-2xl mx-auto text-lg font-light leading-relaxed"
           >
             Tout ce qu’il faut pour sécuriser, moderniser et connecter vos espaces avec des solutions fiables et professionnelles.
           </motion.p>
@@ -96,17 +96,17 @@ export default function AvantagesGaranties() {
                 <div className="mb-6 w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 tracking-wide">{feature.title}</h3>
-                <p className="text-silver-marsal/60 leading-relaxed text-sm">
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-4 tracking-wide">{feature.title}</h3>
+                <p className="text-neutral-600 dark:text-silver-marsal/60 leading-relaxed text-sm">
                   {feature.desc}
                 </p>
               </GlowCard>
             </motion.div>
           ))}
         </div>
-        
+
       </div>
-      
+
       {/* Background Gradients */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-marsal/5 blur-[150px] pointer-events-none rounded-full" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-magenta-marsal/5 blur-[150px] pointer-events-none rounded-full" />
