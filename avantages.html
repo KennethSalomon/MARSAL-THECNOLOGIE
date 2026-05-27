@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marsal Technologies — Pourquoi choisir Marsal : solutions connectées, sécurité avancée, installation professionnelle à Cotonou." />
+  <title>Avantages · Marsal Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .page-hero {
+      background: var(--bg-light);
+      padding-top: calc(68px + 5rem);
+      padding-bottom: 5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .page-hero h1 { margin-top: 1rem; }
+    .page-hero p { margin: 1.25rem auto 0; max-width: 540px; font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* Big advantage cards */
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .adv-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(2rem, 3vw, 3rem);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .adv-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: rgba(56,111,168,.3);
+    }
+    .adv-card::after {
+      content: '';
+      position: absolute;
+      bottom: -50px; right: -50px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .adv-card:hover::after { opacity: 1; }
+
+    .adv-icon {
+      width: 64px; height: 64px;
+      background: var(--accent-light);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.75rem;
+    }
+    .adv-icon svg { width: 32px; height: 32px; color: var(--accent); }
+
+    .adv-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: .875rem;
+      line-height: 1.2;
+    }
+    .adv-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.75; margin-bottom: 1.5rem; }
+
+    .adv-features { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+    .adv-features li {
+      display: flex; align-items: center; gap: .625rem;
+      font-size: .82rem; color: var(--text-main); font-weight: 500;
+    }
+    .check {
+      width: 20px; height: 20px; flex-shrink: 0;
+      background: var(--accent);
+      border-radius: 50%;
+      display: grid; place-items: center;
+    }
+    .check svg { width: 10px; height: 10px; color: #fff; }
+
+    @media (max-width: 900px) { .adv-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 600px) and (max-width: 900px) { .adv-grid { grid-template-columns: 1fr 1fr; } .adv-grid .adv-card:last-child { grid-column: span 2; } }
+
+    /* Why us — comparison strip */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .compare-col {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .compare-col.highlight {
+      background: var(--accent);
+      border-color: var(--accent-dark);
+    }
+    .compare-col h4 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+    }
+    .compare-col.highlight h4 { color: rgba(255,255,255,.9); }
+    .compare-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .compare-list li { display: flex; align-items: center; gap: .75rem; font-size: .875rem; }
+    .compare-col:not(.highlight) .compare-list li { color: var(--text-muted); }
+    .compare-col.highlight .compare-list li { color: rgba(255,255,255,.85); }
+    .x-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(220,53,69,.15); display: grid; place-items: center; flex-shrink: 0; }
+    .x-icon svg { width: 10px; height: 10px; color: #DC3545; }
+    .check-white { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,.25); display: grid; place-items: center; flex-shrink: 0; }
+    .check-white svg { width: 10px; height: 10px; color: #fff; }
+    @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header id="site-header" role="banner"></header>
+
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="pill reveal" style="display:inline-flex;">Pourquoi Marsal ?</div>
+        <h1 class="display-xl reveal reveal-delay-1">
+          Puissance.<br>
+          <span class="text-accent">Sécurité.</span><br>
+          Contrôle.
+        </h1>
+        <p class="reveal reveal-delay-2">
+          Trois piliers qui définissent l'excellence Marsal et transforment votre quotidien.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 grandes cartes avantages -->
+    <section class="section" style="background:var(--bg-white);">
+      <div class="container">
+        <div class="adv-grid">
+
+          <!-- Carte 1 : Solutions connectées -->
+          <div class="adv-card reveal">
+            <div class="adv-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3>Solutions<br>Connectées</h3>
+            <p>
+              Un écosystème intelligent, unifié et évolutif. Chaque appareil communique avec les autres pour créer des automatisations puissantes qui simplifient votre vie. Une seule application pour tout contrôler.
+            </p>
+            <ul class="adv-features">
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Protocoles Zigbee, Z-Wave &amp; Wi-Fi
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Intégration Google Home, Alexa, Apple HomeKit
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Automatisations basées sur l'IA comportementale
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Fonctionne même sans connexion Internet (mode local)
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Évolutif : ajoutez des modules à tout moment
+              </li>
+            </ul>
+          </div>
+
+          <!-- Carte 2 : Sécurité avancée -->
+          <div class="adv-card reveal reveal-delay-1">
+            <div class="adv-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <h3>Sécurité<br>Avancée</h3>
+            <p>
+              Une protection complète qui ne dort jamais. Caméras HD avec vision nocturne, détection de mouvement, alarmes intelligentes et contrôle d'accès biométrique — votre sécurité est entre de mains expertes.
+            </p>
+            <ul class="adv-features">
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Caméras 4K avec détection IA des intrus
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Alarme anti-intrusion avec notification SMS immédiate
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Serrures connectées &amp; accès par empreinte digitale
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Enregistrement cloud sécurisé 30 jours
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Centre de téléassistance disponible 24h/24
+              </li>
+            </ul>
+          </div>
+
+          <!-- Carte 3 : Installation professionnelle -->
+          <div class="adv-card reveal reveal-delay-2">
+            <div class="adv-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <h3>Installation<br>Professionnelle</h3>
+            <p>
+              Nos techniciens certifiés interviennent dans le respect total de votre intérieur. Câblage discret, finitions impeccables, mise en service rapide et formation à votre système incluse.
+            </p>
+            <ul class="adv-features">
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Techniciens certifiés Somfy, Hikvision &amp; Legrand
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Délai d'intervention rapide : 48h à Cotonou
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Garantie 2 ans pièces &amp; main d'œuvre
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Formation complète de toute la famille incluse
+              </li>
+              <li>
+                <div class="check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                Contrat de maintenance annuel disponible
+              </li>
+            </ul>
+          </div>
+
+        </div><!-- /adv-grid -->
+      </div>
+    </section>
+
+    <!-- Comparison section -->
+    <section class="section" style="background:var(--bg-light);">
+      <div class="container">
+        <div class="section-header reveal" style="text-align:center;">
+          <div class="pill" style="display:inline-flex;">Comparaison</div>
+          <h2 class="display-lg" style="margin-top:1rem;">Marsal vs. Solutions<br>traditionnelles</h2>
+        </div>
+        <div class="compare-grid reveal">
+          <div class="compare-col">
+            <h4>Solutions traditionnelles</h4>
+            <ul class="compare-list">
+              <li><div class="x-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div> Interrupteurs manuels, une pièce à la fois</li>
+              <li><div class="x-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div> Aucune visibilité sur la consommation d'énergie</li>
+              <li><div class="x-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div> Sécurité basique sans alertes intelligentes</li>
+              <li><div class="x-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div> Aucune gestion à distance possible</li>
+              <li><div class="x-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div> Systèmes non évolutifs, coûteux à modifier</li>
+            </ul>
+          </div>
+          <div class="compare-col highlight">
+            <h4>Marsal Technologies</h4>
+            <ul class="compare-list">
+              <li><div class="check-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div> Contrôle total depuis une seule application</li>
+              <li><div class="check-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div> Économies d'énergie mesurables jusqu'à 60 %</li>
+              <li><div class="check-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div> Sécurité AI avec notifications en temps réel</li>
+              <li><div class="check-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div> Contrôle total à distance, partout dans le monde</li>
+              <li><div class="check-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div> Architecture modulaire, évolutive à tout moment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background:var(--bg-white);">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div>
+            <h2>Faites l'expérience<br>de la différence Marsal.</h2>
+            <p>Devis gratuit, consultation à domicile, installation en 48h.</p>
+          </div>
+          <a href="/contact.html" class="btn-white">
+            Démarrer maintenant
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer" role="contentinfo"></footer>
+  <div id="whatsapp-widget"></div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

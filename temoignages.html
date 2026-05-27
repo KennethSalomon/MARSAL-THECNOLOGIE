@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
+  <title>Témoignages · Marsal Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    .page-hero {
+      background: var(--bg-light);
+      padding-top: calc(68px + 4rem);
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    /* Filter Tabs */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-block: 3rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-white);
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(56,111,168,0.2);
+    }
+
+    /* Testimonial Cards */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      transition: all 0.4s ease;
+    }
+    .testi-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 1;
+      transform: scale(1);
+    }
+    .testi-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-lg);
+    }
+    .testi-card.hidden {
+      display: none;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    
+    /* New visual elements */
+    .testi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .location-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+    .b2b-icon {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-left: 0.5rem;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .star-rating { color: var(--accent); margin-bottom: 1rem; font-size: 1.1rem; }
+    .testi-quote { font-size: 1rem; line-height: 1.7; color: var(--text-main); margin-bottom: 2rem; font-style: italic; }
+    .testi-meta { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--bg-light); pt: 1.5rem; }
+    .author-circle { 
+        width: 48px; height: 48px; border-radius: 50%; background: var(--accent-light); 
+        display: grid; place-items: center; color: var(--accent); font-weight: 700;
+    }
+
+    /* Form Styles */
+    .review-form-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin-bottom: 4rem;
+    }
+    .star-rating-input {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--border);
+    }
+    .star-rating-input i { cursor: pointer; transition: color 0.2s; }
+    .star-rating-input i.active { color: var(--accent); }
+    
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-main); }
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus { outline: none; border-color: var(--accent); }
+  </style>
+</head>
+<body class="antialiased subpixel-antialiased">
+
+  <header id="site-header" role="banner"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="pill reveal">Retours d'expérience</div>
+        <h1 class="display-lg reveal reveal-delay-1" style="margin-top:1.5rem;">
+          La Voix de nos Utilisateurs<br><span class="text-accent"> Expériences Réelles</span>
+        </h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        
+        <!-- New Review Form -->
+        <div class="review-form-card reveal">
+          <h3 class="display-md" style="margin-bottom: 2rem;">Laissez votre avis</h3>
+          <form id="review-form">
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Nom complet</label>
+                <input type="text" id="rev-name" class="form-control" placeholder="Ex: Jean Koffi" required>
+              </div>
+              <div class="form-group">
+                <label>Entreprise / Ville</label>
+                <input type="text" id="rev-org" class="form-control" placeholder="Ex: Cotonou, Haie Vive" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Note globale</label>
+              <div class="star-rating-input" id="star-input">
+                <i class="fa-solid fa-star" data-value="1"></i>
+                <i class="fa-solid fa-star" data-value="2"></i>
+                <i class="fa-solid fa-star" data-value="3"></i>
+                <i class="fa-solid fa-star" data-value="4"></i>
+                <i class="fa-solid fa-star" data-value="5"></i>
+              </div>
+            </div>
+            <div class="form-group">
+                <label>Type de projet</label>
+                <select id="rev-cat" class="form-control">
+                  <option value="private">Résidence Privée</option>
+                  <option value="pro">Bureau / Entreprise</option>
+                  <option value="hotel">Hôtel / Solution Pro</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label>Votre commentaire</label>
+              <textarea id="rev-text" class="form-control" rows="4" placeholder="Partagez votre expérience..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Publier mon avis</button>
+          </form>
+          <div id="form-success" style="display:none; color: var(--accent); font-weight: 700; margin-top: 1rem;">
+            Merci ! Votre avis a été publié instantanément.
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="section-header" style="text-align: center;">
+            <div class="filter-container reveal">
+                <button class="filter-btn active" data-filter="all">Tout</button>
+                <button class="filter-btn" data-filter="private">Résidences Privées</button>
+                <button class="filter-btn" data-filter="pro">Bureaux / Entreprises</button>
+                <button class="filter-btn" data-filter="hotel">Hôtels / Solutions Pro</button>
+            </div>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="testi-grid" id="testi-grid">
+          
+          <!-- Item 1 -->
+          <article class="testi-card reveal" data-category="private">
+            <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Haie Vive</div>
+            </div>
+            <p class="testi-quote">"L'installation de la domotique dans ma villa à la Haie Vive a totalement changé notre quotidien. Le contrôle des lumières et de la clim à distance nous permet d'économiser gros sur la facture SBEE."</p>
+            <div class="testi-meta">
+              <div class="author-circle">OC</div>
+              <div>
+                <div class="name" style="font-weight:700;">Ousmane C.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Villa</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="testi-card reveal" data-category="pro">
+            <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Cadjehoun</div>
+            </div>
+            <p class="testi-quote">"Sécuriser notre showroom à Cadjehoun était notre priorité. Les caméras IA et le système d'accès par empreinte sont d'une fiabilité exemplaire. Une équipe très pro."</p>
+            <div class="testi-meta">
+              <div class="author-circle">AD</div>
+              <div>
+                <div class="name" style="font-weight:700;">Awa D.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Gérante Showroom <i class="fa-solid fa-briefcase b2b-icon"></i></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="testi-card reveal" data-category="hotel">
+            <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Ouidah</div>
+            </div>
+            <p class="testi-quote">"Le déploiement des serrures intelligentes dans notre complexe à Ouidah a fluidifié le check-in. Nos clients adorent la modernité du système et nous, l'audit des accès."</p>
+            <div class="testi-meta">
+              <div class="author-circle">RM</div>
+              <div>
+                <div class="name" style="font-weight:700;">Renaud M.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directeur d'Hôtel <i class="fa-solid fa-hotel b2b-icon"></i></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="testi-card reveal" data-category="private">
+            <div class="star-rating">★★★★★</div>
+            <p class="testi-quote">"Vivre dans un appartement connecté à Calavi est un luxe abordable avec Marsal. La programmation des volets roulants au coucher du soleil est devenue indispensable."</p>
+            <div class="testi-meta">
+              <div class="author-circle">ST</div>
+              <div>
+                <div class="name" style="font-weight:700;">Sandra T.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Appartement Premium · Calavi</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="testi-card reveal" data-category="pro">
+            <div class="star-rating">★★★★★</div>
+            <p class="testi-quote">"Pour notre cabinet d'avocats à Ganhi, nous avions besoin d'un contrôle d'accès strict. La solution Marsal est intuitive et ultra-sécurisée. Je recommande vivement."</p>
+            <div class="testi-meta">
+              <div class="author-circle">ML</div>
+              <div>
+                <div class="name" style="font-weight:700;">Me. Luc B.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Cabinet Juridique · Ganhi</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="testi-card reveal" data-category="hotel">
+            <div class="star-rating">★★★★★</div>
+            <p class="testi-quote">"L'automatisation de la climatisation dans les chambres de notre boutique-hôtel a réduit nos coûts énergétiques de 35% dès le premier trimestre. Indispensable."</p>
+            <div class="testi-meta">
+              <div class="author-circle">FP</div>
+              <div>
+                <div class="name" style="font-weight:700;">Fatima P.</div>
+                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Boutique Hôtel · Grand-Popo</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background:var(--bg-light); border-top: 1px solid var(--border);">
+      <div class="container" style="text-align:center;">
+        <h2 class="display-md" style="margin-bottom:1.5rem;">Prêt à vivre l'expérience Marsal ?</h2>
+        <p style="color:var(--text-muted); margin-bottom:2.5rem; max-width:600px; margin-inline:auto;">
+          Rejoignez nos clients satisfaits et sécurisez votre espace dès aujourd'hui avec nos solutions sur-mesure.
+        </p>
+        <a href="/contact.html" class="btn btn-primary" style="padding: 1.25rem 3rem;">Démarrer mon projet</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" role="contentinfo"></footer>
+  <div id="whatsapp-widget"></div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    /* --- Testimonials Filtering --- */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.testi-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active state
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        cards.forEach(card => {
+          // Apply fade out effect
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          
+          setTimeout(() => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.classList.remove('hidden');
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 50);
+            } else {
+              card.classList.add('hidden');
+              card.style.display = 'none';
+            }
+          }, 300);
+        });
+      });
+    });
+
+    /* --- Review Form Logic --- */
+    const stars = document.querySelectorAll('#star-input i');
+    let currentRating = 5;
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        currentRating = parseInt(star.dataset.value);
+        stars.forEach((s, idx) => {
+          s.classList.toggle('active', idx < currentRating);
+        });
+      });
+    });
+    // Default to 5
+    stars.forEach(s => s.classList.add('active'));
+
+    const reviewForm = document.getElementById('review-form');
+    const testiGrid = document.getElementById('testi-grid');
+
+    reviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('rev-name').value;
+      const org = document.getElementById('rev-org').value;
+      const cat = document.getElementById('rev-cat').value;
+      const text = document.getElementById('rev-text').value;
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+      const starString = '★'.repeat(currentRating) + '☆'.repeat(5 - currentRating);
+
+      const newCard = document.createElement('article');
+      newCard.className = 'testi-card';
+      newCard.style.animation = 'fadeIn 0.6s forwards';
+      newCard.setAttribute('data-category', cat);
+      
+      newCard.innerHTML = `
+        <div class="testi-top">
+            <div class="star-rating">${starString}</div>
+            <div class="location-badge">${org.split(',')[0]}</div>
+        </div>
+        <p class="testi-quote">"${text}"</p>
+        <div class="testi-meta">
+          <div class="author-circle">${initials}</div>
+          <div>
+            <div class="name" style="font-weight:700;">${name}</div>
+            <div class="role" style="font-size:0.8rem; color:var(--text-muted);">${cat === 'private' ? 'Client Résidentiel' : 'Client B2B'}</div>
+          </div>
+        </div>
+      `;
+
+      // Prepend to grid
+      testiGrid.prepend(newCard);
+
+      // Feedback and Reset
+      reviewForm.reset();
+      document.getElementById('form-success').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'none';
+      }, 4000);
+
+      // Reset stars
+      currentRating = 5;
+      stars.forEach(s => s.classList.add('active'));
+    });
+  </script>
+</body>
+</html>

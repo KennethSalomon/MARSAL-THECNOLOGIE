@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marsal Technologies — Catalogue de produits domotiques et de sécurité intelligente à Cotonou, Bénin." />
+  <title>Catalogue · Marsal Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .page-hero {
+      background: var(--bg-light);
+      padding-top: calc(68px + 3.5rem);
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+      max-width: 340px;
+    }
+    .search-input-wrap svg {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 17px; height: 17px;
+      color: var(--text-light);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      padding: .7rem 1rem .7rem 2.6rem;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      font-size: .875rem;
+      font-family: inherit;
+      background: var(--bg-white);
+      color: var(--text-main);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,111,168,.1);
+    }
+    .search-input::placeholder { color: var(--text-light); }
+
+    .filter-tabs { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .filter-tab {
+      padding: .55rem 1.2rem;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--bg-white);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: default;
+      position: relative;
+    }
+    .product-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: rgba(56,111,168,.25);
+    }
+    .product-card[data-hidden="true"] { display: none; }
+
+    /* Badge "Bon Plan" */
+    .product-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .25rem .65rem;
+      border-radius: 100px;
+      z-index: 1;
+    }
+    .product-badge.bon-plan { background: #2D9E6F; }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .product-img svg { width: 80px; height: 80px; color: var(--border); }
+    .product-img-icon {
+      width: 80px; height: 80px;
+      background: var(--accent-light);
+      border-radius: 22px;
+      display: grid; place-items: center;
+    }
+    .product-img-icon svg { width: 42px; height: 42px; color: var(--accent); }
+
+    .product-body { padding: 1.25rem; }
+    .product-cat {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: .35rem;
+    }
+    .product-name {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: .35rem;
+    }
+    .product-desc { font-size: .8rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+    .product-price {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .product-price .from { font-size: .7rem; color: var(--text-light); font-weight: 500; display: block; }
+    .btn-product {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem 1.1rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 100px;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition);
+    }
+    .btn-product:hover { background: var(--accent-dark); transform: scale(1.03); }
+    .btn-product svg { width: 14px; height: 14px; }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-light);
+    }
+    .empty-state svg { width: 56px; height: 56px; margin-bottom: 1rem; opacity: .4; }
+    .empty-state p { font-size: .9rem; }
+  </style>
+</head>
+<body>
+
+  <header id="site-header" role="banner"></header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+       
+        <h1 class="display-xl reveal reveal-delay-1" style="margin-top:1rem;max-width:680px;">
+          Nos équipements<br><span class="text-accent">haut de gamme.</span>
+        </h1>
+        <p class="reveal reveal-delay-2" style="font-size:1.05rem;color:var(--text-muted);max-width:520px;margin-top:1rem;line-height:1.7;">
+          Sélection rigoureuse des meilleurs produits domotiques et de sécurité — certifiés, installés et garantis par nos techniciens.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--bg-white);">
+      <div class="container">
+
+        <!-- Filter bar -->
+        <div class="filter-bar reveal">
+          <div class="search-input-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input
+              type="search"
+              class="search-input"
+              id="product-search"
+              placeholder="Rechercher un produit…"
+              aria-label="Rechercher un produit"
+            />
+          </div>
+          <div class="filter-tabs" role="tablist" aria-label="Filtres par catégorie">
+            <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">Tous</button>
+            <button class="filter-tab" data-filter="serrures-intelligentes" role="tab" aria-selected="false">Serrures Intelligentes</button>
+            <button class="filter-tab" data-filter="domotique" role="tab" aria-selected="false">Domotique</button>
+            <button class="filter-tab" data-filter="cameras" role="tab" aria-selected="false">Caméras</button>
+            <button class="filter-tab" data-filter="energie-solaire" role="tab" aria-selected="false">Énergie Solaire</button>
+            <button class="filter-tab" data-filter="solutions-hotel" role="tab" aria-selected="false">Solutions Hôtel</button>
+            <button class="filter-tab" data-filter="securite-presence" role="tab" aria-selected="false">Accès & Présence</button>
+            <button class="filter-tab" data-filter="autres" role="tab" aria-selected="false">Autres</button>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+
+          <!-- SERRURES INTELLIGENTES -->
+          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="smartlock pro biométrique empreinte code">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Serrures Intelligentes</div>
+              <div class="product-name">SmartLock Pro</div>
+              <p class="product-desc">Serrure biométrique (empreinte + code + badge) avec journal d'accès en temps réel et contrôle à distance.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20SmartLock%20Pro" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Serrures Intelligentes</div>
+              <div class="product-name">RFID Elite Hotel Lock</div>
+              <p class="product-desc">Système de verrouillage par carte magnétique haute fréquence. Finition acier brossé et gestion centralisée.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- DOMOTIQUE -->
+          <article class="product-card reveal" data-category="domotique" data-name="hub central nexus 128 appareils zigbee z-wave">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Domotique</div>
+              <div class="product-name">Nexus Hub Central v2</div>
+              <p class="product-desc">Passerelle domotique universelle pilotant jusqu'à 128 équipements Zigbee et WiFi.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Nexus%20Hub" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- SOLUTIONS HÔTEL -->
+          <article class="product-card reveal" data-category="solutions-hotel" data-name="pack gestion hôtel complet serrures caméras">
+            <div class="product-badge bon-plan">Premium</div>
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 11a3 3 0 106 0 3 3 0 00-6 0z"/><rect x="9" y="9" width="6" height="6" rx="1"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Solutions Hôtel</div>
+              <div class="product-name">Integrated Hotel Ecosystem</div>
+              <p class="product-desc">Suite logicielle et matérielle pour gestion d'accès, économie d'énergie et confort client.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Pack%20Gestion%20H%C3%B4tel" target="_blank" rel="noopener" class="btn-product">
+                    Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CAMERAS -->
+          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
+            <div class="product-badge bon-plan">Populaire</div>
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Caméras</div>
+              <div class="product-name">Krypton 4K CCTV Pro</div>
+              <p class="product-desc">Surveillance Ultra-HD avec détection intelligente de forme humaine et vision nocturne couleur.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
+                    Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- RIDEAUX -->
+          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1zm7 0v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1h-4a1 1 0 00-1 1zm7 0v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1h-4a1 1 0 00-1 1z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Rideaux Intelligents</div>
+              <div class="product-name">Smart Curtain Track</div>
+              <p class="product-desc">Système de rail motorisé silencieux avec contrôle par application et scènes automatiques.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ENERGIE SOLAIRE -->
+          <article class="product-card reveal" data-category="energie-solaire" data-name="onduleur pure sine hybrid inverter 3kva">
+            <div class="product-badge">Nouveau</div>
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Systèmes Énergie</div>
+              <div class="product-name">Pure Sine Hybrid Inverter</div>
+              <p class="product-desc">Onduleur hybride 3kVA/5kVA haute performance pour autonomie énergétique totale.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Onduleur" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-category="energie-solaire" data-name="éclairage solaire led premium autonome">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Éclairage Solaire</div>
+              <div class="product-name">Premium Solar Street Light</div>
+              <p class="product-desc">Projecteur LED industriel autonome avec batterie lithium haute capacité et capteur crépusculaire.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Eclairage%20Solaire" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACCES & PRESENCE -->
+          <article class="product-card reveal" data-category="securite-presence" data-name="système pointage zkteco biométrique présence">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Contrôle de Présence</div>
+              <div class="product-name">ZKTeco iClock Attendance</div>
+              <p class="product-desc">Terminal de pointage biométrique (visage + empreinte) avec logiciel de gestion RH intégré.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20ZKTeco" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-category="securite-presence" data-name="interphone vidéo ip visiophone sécurité">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Interphonie</div>
+              <div class="product-name">Video IP Door Intercom</div>
+              <p class="product-desc">Visiophone connecté avec écran tactile intérieur et redirection d'appels sur smartphone.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Interphone" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- BUREAUTIQUE -->
+          <article class="product-card reveal" data-category="autres" data-name="tableau blanc interactif tactile 55 pouces">
+            <div class="product-img">
+              <div class="product-img-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-cat">Bureautique Pro</div>
+              <div class="product-name">Interactive White Board 55"</div>
+              <p class="product-desc">Écran tactile collaboratif 4K avec logiciel de présentation intégré pour salles de conférence.</p>
+              <div class="product-footer">
+                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Tableau%20Blanc" target="_blank" rel="noopener" class="btn-product">
+                  Demander un devis
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Empty state (caché par défaut) -->
+          <div class="empty-state" id="empty-state" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
+            </svg>
+            <p>Aucun produit ne correspond à votre recherche.</p>
+          </div>
+
+        </div><!-- /product-grid -->
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-sm" style="background:var(--bg-light);">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div>
+            <h2>Vous ne trouvez pas<br>ce que vous cherchez ?</h2>
+            <p>Contactez-nous — nous sourcingeons les équipements sur commande.</p>
+          </div>
+          <a href="https://wa.me/22954036641?text=Bonjour%20Marsal%2C%20je%20cherche%20un%20produit%20sp%C3%A9cifique." target="_blank" rel="noopener" class="btn-white">
+            Nous contacter
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer" role="contentinfo"></footer>
+  <div id="whatsapp-widget"></div>
+  <script src="/js/main.js"></script>
+  <script>
+    /* ── Catalogue filtering & search ── */
+    (function() {
+      const searchInput = document.getElementById('product-search');
+      const filterTabs  = document.querySelectorAll('.filter-tab');
+      const cards       = document.querySelectorAll('.product-card[data-category]');
+      const emptyState  = document.getElementById('empty-state');
+      let activeFilter  = 'all';
+
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const cat  = card.dataset.category;
+          const name = card.dataset.name;
+          const matchesCat  = activeFilter === 'all' || cat === activeFilter;
+          const matchesQuery = !query || name.includes(query);
+          const show = matchesCat && matchesQuery;
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected','true');
+          activeFilter = tab.dataset.filter;
+          applyFilters();
+        });
+      });
+
+      searchInput.addEventListener('input', applyFilters);
+    })();
+  </script>
+</body>
+</html>
