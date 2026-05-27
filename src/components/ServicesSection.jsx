@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import ExpandableGallery from '@/components/gallery-animation';
+import GalleryAnimation from "./GalleryAnimation";
 
 /**
  * SECTION 3: Services - Premium Expandable Gallery Integration
