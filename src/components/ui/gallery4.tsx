@@ -34,9 +34,9 @@ const Gallery4 = ({
   useEffect(() => {
     if (!carouselApi) return;
     const updateSelection = () => {
-      setCanScrollPrev(carouselApi.canScrollPrev());
-      setCanScrollNext(carouselApi.canScrollNext());
-      setCurrentSlide(carouselApi.selectedScrollSnap());
+      setCanScrollPrev(carouselApi?.canScrollPrev() ?? false);
+      setCanScrollNext(carouselApi?.canScrollNext() ?? false);
+      setCurrentSlide(carouselApi?.selectedScrollSnap() ?? 0);
     };
     updateSelection();
     carouselApi.on("select", updateSelection);
@@ -85,7 +85,7 @@ const Gallery4 = ({
           }}
         >
           <CarouselContent className="ml-0">
-            {items.map((item) => (
+            {(items ?? []).map((item) => (
               <CarouselItem
                 key={item.id}
                 className="max-w-[320px] pl-[20px] lg:max-w-[400px]"
@@ -96,6 +96,9 @@ const Gallery4 = ({
                       src={item.image}
                       alt={item.title}
                       className="absolute h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/logo.jpeg';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#444A52]/90 via-[#444A52]/20 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8">
@@ -117,7 +120,7 @@ const Gallery4 = ({
           </CarouselContent>
         </Carousel>
         <div className="mt-8 flex justify-center gap-2">
-          {items.map((_, index) => (
+          {(items ?? []).map((_, index) => (
             <button
               key={index}
               className={`h-1.5 transition-all rounded-full ${

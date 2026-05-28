@@ -21,7 +21,7 @@ export function ServicesSection() {
 
         {/* Gallery4 Component */}
         <Gallery4
-          items={SERVICES_GALLERY.items}
+          items={SERVICES_GALLERY?.items ?? []}
           className="my-12"
         />
 

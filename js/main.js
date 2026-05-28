@@ -207,11 +207,11 @@ const WHATSAPP_HTML = `
 function injectComponents() {
   // Header
   const header = document.getElementById('site-header');
-  if (header) header.innerHTML = HEADER_HTML;
+  if (header) header.innerHTML = HEADER_HTML || "";
 
   // Footer
   const footer = document.getElementById('site-footer');
-  if (footer) footer.innerHTML = FOOTER_HTML;
+  if (footer) footer.innerHTML = FOOTER_HTML || "";
 
   // WhatsApp
   const waContainer = document.getElementById('whatsapp-widget');
@@ -221,16 +221,18 @@ function injectComponents() {
 /* ── 3. NAV ACTIVE PAGE ─────────────────────────────────────── */
 
 function setActivePage() {
-  const path = window.location.pathname;
+  const path = window.location.pathname || "/index.html";
   // Detect current page key
   let current = 'index';
   if (path.includes('solutions'))   current = 'solutions';
   if (path.includes('catalogue'))   current = 'catalogue';
   if (path.includes('temoignages')) current = 'temoignages';
   if (path.includes('contact'))     current = 'contact';
-
+ 
   document.querySelectorAll('[data-page]').forEach(link => {
-    link.classList.toggle('active', link.dataset.page === current);
+    if (link instanceof HTMLElement && link.dataset.page) {
+      link.classList.toggle('active', link.dataset.page === current);
+    }
   });
 }
 
@@ -286,7 +288,7 @@ function initScrollReveal() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting && entry.target) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
@@ -299,8 +301,12 @@ function initScrollReveal() {
 /* ── 7. COUNTER ANIMATION ───────────────────────────────────── */
 
 function animateCounter(el) {
+  if (!el?.dataset?.target) return;
+  
   const target = parseFloat(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
+  if (isNaN(target)) return;
+
+  const suffix = el.dataset.suffix || ''; 
   const duration = 1800;
   const start = performance.now();
 
