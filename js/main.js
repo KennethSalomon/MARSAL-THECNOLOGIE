@@ -19,7 +19,6 @@ const HEADER_HTML = `
       <ul class="nav-links">
         <li><a href="/index.html" data-page="index">Accueil</a></li>
         <li><a href="/solutions.html" data-page="solutions">Solutions</a></li>
-        <li><a href="/avantages.html" data-page="avantages">Avantages</a></li>
         <li><a href="/catalogue.html" data-page="catalogue">Catalogue</a></li>
         <li><a href="/temoignages.html" data-page="temoignages">Témoignages</a></li>
         <li><a href="/contact.html" data-page="contact">Contact</a></li>
@@ -46,7 +45,6 @@ const HEADER_HTML = `
 <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
   <a href="/index.html" data-page="index">Accueil</a>
   <a href="/solutions.html" data-page="solutions">Solutions</a>
-  <a href="/avantages.html" data-page="avantages">Avantages</a>
   <a href="/catalogue.html" data-page="catalogue">Catalogue</a>
   <a href="/temoignages.html" data-page="temoignages">Témoignages</a>
   <a href="/contact.html" data-page="contact">Contact</a>
@@ -106,7 +104,6 @@ const FOOTER_HTML = `
       <ul>
         <li><a href="/index.html">Accueil</a></li>
         <li><a href="/solutions.html">Nos Solutions</a></li>
-        <li><a href="/avantages.html">Avantages</a></li>
         <li><a href="/catalogue.html">Catalogue</a></li>
         <li><a href="/temoignages.html">Témoignages</a></li>
         <li><a href="/contact.html">Contact & Devis</a></li>
@@ -228,7 +225,6 @@ function setActivePage() {
   // Detect current page key
   let current = 'index';
   if (path.includes('solutions'))   current = 'solutions';
-  if (path.includes('avantages'))   current = 'avantages';
   if (path.includes('catalogue'))   current = 'catalogue';
   if (path.includes('temoignages')) current = 'temoignages';
   if (path.includes('contact'))     current = 'contact';
