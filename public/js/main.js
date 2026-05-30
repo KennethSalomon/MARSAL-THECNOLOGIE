@@ -257,17 +257,45 @@ function initBurger() {
   const btnBurger = document.getElementById('burger-btn');
   const btnClose = document.getElementById('close-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-
+  const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  
   if (!btnBurger || !mobileMenu) return;
 
   const openMenu = () => {
     mobileMenu.classList.add('is-active');
     document.body.style.overflow = 'hidden';
+    
+    // Focus trap setup
+    const focusableContent = mobileMenu.querySelectorAll(focusableElements);
+    if (focusableContent.length > 0) {
+      setTimeout(() => focusableContent[0].focus(), 100);
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Tab' || !mobileMenu.classList.contains('is-active')) return;
+      const first = focusableContent[0];
+      const last = focusableContent[focusableContent.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        last.focus(); e.preventDefault();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        first.focus(); e.preventDefault();
+      }
+    };
+
+    mobileMenu._keydownHandler = handleKeyDown;
+    document.addEventListener('keydown', handleKeyDown);
   };
 
   const closeMenu = () => {
     mobileMenu.classList.remove('is-active');
     document.body.style.overflow = '';
+    
+    if (mobileMenu._keydownHandler) {
+      document.removeEventListener('keydown', mobileMenu._keydownHandler);
+    }
+    // Restore focus to trigger
+    btnBurger.focus();
   };
 
   btnBurger.addEventListener('click', openMenu);

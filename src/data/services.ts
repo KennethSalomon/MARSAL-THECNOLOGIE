@@ -36,13 +36,6 @@ export const SERVICES_GALLERY = {
       image: "/images/commande.jfif"
     },
     {
-      id: "smart-solar-pro",
-      title: "Énergie Solaire Pro",
-      description: "Systèmes photovoltaïques hybrides pour une autonomie énergétique totale.",
-      href: "/images/panneau.png",
-      image: "/images/panneau.png"
-    },
-    {
       id: "video-ia",
       title: "Vidéosurveillance IA",
       description: "Reconnaissance faciale et analyse de mouvement intelligente pour votre sécurité.",

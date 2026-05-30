@@ -96,6 +96,7 @@ export function AboutSection() {
                       <img 
                         src={item.src} 
                         alt={item.alt} 
+                        loading="lazy"
                         className="w-full aspect-[4/3] lg:aspect-auto lg:h-[450px] object-cover rounded-3xl shadow-2xl border border-[#C2C8D4]" 
                       />
                     </div>

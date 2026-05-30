@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 interface ProductCardProps {
+  id: string;
   title: string;
   category: string;
   description: string;
@@ -63,9 +64,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
     if (imageSrc && imageSrc.trim() !== "" && imageSrc !== "/images/") {
       return imageSrc;
     }
-    const randomIndex = Math.floor(Math.random() * FALLBACK_IMAGES.length);
+    // Fallback déterministe basé sur la longueur du titre pour la stabilité
+    const randomIndex = title.length % FALLBACK_IMAGES.length;
     return FALLBACK_IMAGES[randomIndex];
-  }, [imageSrc]);
+  }, [imageSrc, title]);
 
   return (
     <article 
@@ -81,6 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img 
           src={finalImageSrc} 
           alt={title} 
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 rounded-t-2xl" 
           onError={(e) => {
             // Sécurité anti-carré blanc : charge le logo si l'image locale est introuvable

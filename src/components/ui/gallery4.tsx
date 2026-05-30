@@ -20,63 +20,10 @@ export interface Gallery4Props {
   className?: string;
 }
 
-// 1. On définit de superbes données par défaut directement ici pour éviter les crashs
-const defaultSlides: Gallery4Item[] = [
-  {
-    id: "slide-1",
-    title: "Maison Intelligente & Connectée",
-    description: "Pilotez votre éclairage, vos volets et vos équipements multimédias en un seul geste.",
-    href: "#",
-    image: "/images/cam1.png"
-  },
-  {
-    id: "slide-2",
-    title: "Sécurité Haute Performance",
-    description: "Caméras de vidéosurveillance et capteurs connectés pour une protection intégrale 24/7.",
-    href: "#",
-    image: "/images/panneau.png"
-  },
-  {
-    id: "slide-3",
-    title: "Contrôle d'Accès Premium",
-    description: "Serrures biométriques et gestion des accès à distance pour votre totale sérénité.",
-    href: "#",
-    image: "/images/serrure.png"
-  },
-  {
-    id: "slide-4",
-    title: "Énergie Solaire & Autonomie",
-    description: "Optimisez votre consommation avec nos solutions solaires hybrides et stockage intelligent.",
-    href: "#",
-    image: "/images/panneau.png"
-  },
-  {
-    id: "slide-5",
-    title: "Vidéosurveillance Intelligente",
-    description: "Gardez un œil sur votre propriété avec des caméras 4K et détection d'intrusion par IA.",
-    href: "#",
-    image: "/images/camera.png"
-  },
-  {
-    id: "slide-6",
-    title: "Audio & Cinéma Maison",
-    description: "Vivez une immersion sonore totale avec nos systèmes audio multi-pièces et home cinéma.",
-    href: "#",
-    image: "/images/cam2.png"
-  },
-  {
-    id: "slide-7",
-    title: "Réseaux & Connectivité",
-    description: "Un Wi-Fi ultra-rapide et stable partout, pour supporter tous vos objets connectés.",
-    href: "#",
-    image: "/images/domotique.png"
-  }
-];
-
 const Gallery4 = ({
   title = "Solutions Domotiques",
   description = "Découvrez nos dernières réalisations en matière d'automatisation résidentielle et de sécurité de luxe.",
-  items = defaultSlides, // 2. On utilise nos slides sécurisées ici
+  items = [],
   className,
 }: Gallery4Props) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
@@ -166,6 +113,7 @@ const Gallery4 = ({
                       <img
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
                         className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/images/logo.png';
