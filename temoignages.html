@@ -111,9 +111,41 @@
       background: var(--bg-white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 3rem;
       margin-bottom: 4rem;
+      padding: 0;
+      overflow: hidden;
     }
+
+    .form-split-layout {
+      display: grid;
+      grid-template-columns: 4fr 6fr;
+      min-height: 550px;
+    }
+
+    .form-visual-side {
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .form-side-logo {
+      max-width: 180px;
+      height: auto;
+      filter: grayscale(1);
+      opacity: 0.6;
+    }
+
+    .form-content-side {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .star-rating-input {
       display: flex;
       gap: 0.5rem;
@@ -135,6 +167,63 @@
       transition: border-color 0.2s;
     }
     .form-control:focus { outline: none; border-color: var(--accent); }
+
+    /* --- Infinite Marquee Styles --- */
+    .marquee-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-block: 2rem;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .marquee-row-top {
+      animation-name: scrollLeft;
+      animation-duration: 45s;
+    }
+
+    .marquee-row-bottom {
+      animation-name: scrollRight;
+      animation-duration: 45s;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .testi-card {
+      width: 420px;
+      flex-shrink: 0;
+      white-space: normal;
+    }
+
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    @media (max-width: 768px) {
+      .testi-card { width: 320px; padding: 1.5rem; }
+      .marquee-container { mask-image: none; -webkit-mask-image: none; }
+      .form-split-layout { grid-template-columns: 1fr; }
+      .form-visual-side { padding: 3rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .form-content-side { padding: 2rem; }
+    }
   </style>
 </head>
 <body class="antialiased subpixel-antialiased">
@@ -154,49 +243,6 @@
     <section class="section">
       <div class="container">
         
-        <!-- New Review Form -->
-        <div class="review-form-card reveal">
-          <h3 class="display-md" style="margin-bottom: 2rem;">Laissez votre avis</h3>
-          <form id="review-form">
-            <div class="grid-2">
-              <div class="form-group">
-                <label>Nom complet</label>
-                <input type="text" id="rev-name" class="form-control" placeholder="Ex: Jean Koffi" required>
-              </div>
-              <div class="form-group">
-                <label>Entreprise / Ville</label>
-                <input type="text" id="rev-org" class="form-control" placeholder="Ex: Cotonou, Haie Vive" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Note globale</label>
-              <div class="star-rating-input" id="star-input">
-                <i class="fa-solid fa-star" data-value="1"></i>
-                <i class="fa-solid fa-star" data-value="2"></i>
-                <i class="fa-solid fa-star" data-value="3"></i>
-                <i class="fa-solid fa-star" data-value="4"></i>
-                <i class="fa-solid fa-star" data-value="5"></i>
-              </div>
-            </div>
-            <div class="form-group">
-                <label>Type de projet</label>
-                <select id="rev-cat" class="form-control">
-                  <option value="private">Résidence Privée</option>
-                  <option value="pro">Bureau / Entreprise</option>
-                  <option value="hotel">Hôtel / Solution Pro</option>
-                </select>
-            </div>
-            <div class="form-group">
-              <label>Votre commentaire</label>
-              <textarea id="rev-text" class="form-control" rows="4" placeholder="Partagez votre expérience..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Publier mon avis</button>
-          </form>
-          <div id="form-success" style="display:none; color: var(--accent); font-weight: 700; margin-top: 1rem;">
-            Merci ! Votre avis a été publié instantanément.
-          </div>
-        </div>
-
         <!-- Filter Bar -->
         <div class="section-header" style="text-align: center;">
             <div class="filter-container reveal">
@@ -207,96 +253,302 @@
             </div>
         </div>
 
-        <!-- Testimonials Grid -->
-        <div class="testi-grid" id="testi-grid">
+        <!-- Infinite Scrolling Marquees -->
+        <div class="marquee-container reveal">
           
-          <!-- Item 1 -->
-          <article class="testi-card reveal" data-category="private">
-            <div class="testi-top">
+          <!-- Row 1: Leftward Scroll -->
+          <div class="marquee-track marquee-row-top">
+            <!-- Group 1 -->
+            <article class="testi-card" data-category="private">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Fidjrossè</div>
+              </div>
+              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
+              <div class="testi-meta">
+                <div class="author-circle">AK</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Adeola K.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Villa</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Cotonou</div>
+              </div>
+              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
+              <div class="testi-meta">
+                <div class="author-circle">MS</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Marie-Solange D.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directrice Boutique</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Bénin</div>
+              </div>
+              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des standards européens."</p>
+              <div class="testi-meta">
+                <div class="author-circle">JB</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Jean-Baptiste A.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Architecte</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="private">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Fidjrossè</div>
+              </div>
+              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
+              <div class="testi-meta">
+                <div class="author-circle">DD</div>
+                <div>
+                  <div class="name" style="font-weight:700;">M. Dossou</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Résidentiel</div>
+                </div>
+              </div>
+            </article>
+            <!-- Duplicate Group 1 -->
+            <article class="testi-card" data-category="private">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Fidjrossè</div>
+              </div>
+              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
+              <div class="testi-meta">
+                <div class="author-circle">AK</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Adeola K.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Villa</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Cotonou</div>
+              </div>
+              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
+              <div class="testi-meta">
+                <div class="author-circle">MS</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Marie-Solange D.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directrice Boutique</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Bénin</div>
+              </div>
+              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des standards européens."</p>
+              <div class="testi-meta">
+                <div class="author-circle">JB</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Jean-Baptiste A.</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Architecte</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="private">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Fidjrossè</div>
+              </div>
+              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
+              <div class="testi-meta">
+                <div class="author-circle">DD</div>
+                <div>
+                  <div class="name" style="font-weight:700;">M. Dossou</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Résidentiel</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Row 2: Rightward Scroll -->
+          <div class="marquee-track marquee-row-bottom">
+            <!-- Group 2 -->
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Cocotiers</div>
+              </div>
+              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes projets de luxe. Leur expertise technique est la référence au Bénin."</p>
+              <div class="testi-meta">
+                <div class="author-circle">AA</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Mme Akotognon</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Cabinet Architecture</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Patte d'Oie</div>
+              </div>
+              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle d'accès biométrique est fluide et ultra-sécurisé."</p>
+              <div class="testi-meta">
+                <div class="author-circle">LL</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Dr. Lawson</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directeur Clinique</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="hotel">
+              <div class="testi-top">
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Haie Vive</div>
-            </div>
-            <p class="testi-quote">"L'installation de la domotique dans ma villa à la Haie Vive a totalement changé notre quotidien. Le contrôle des lumières et de la clim à distance nous permet d'économiser gros sur la facture SBEE."</p>
-            <div class="testi-meta">
-              <div class="author-circle">OC</div>
-              <div>
-                <div class="name" style="font-weight:700;">Ousmane C.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Propriétaire Villa</div>
               </div>
-            </div>
-          </article>
-
-          <!-- Item 2 -->
-          <article class="testi-card reveal" data-category="pro">
-            <div class="testi-top">
+              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal est un argument de vente majeur pour nos clients VIP."</p>
+              <div class="testi-meta">
+                <div class="author-circle">GG</div>
+                <div>
+                  <div class="name" style="font-weight:700;">M. Gnahoui</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Promoteur Immobilier</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
                 <div class="star-rating">★★★★★</div>
-                <div class="location-badge">Cadjehoun</div>
-            </div>
-            <p class="testi-quote">"Sécuriser notre showroom à Cadjehoun était notre priorité. Les caméras IA et le système d'accès par empreinte sont d'une fiabilité exemplaire. Une équipe très pro."</p>
-            <div class="testi-meta">
-              <div class="author-circle">AD</div>
-              <div>
-                <div class="name" style="font-weight:700;">Awa D.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Gérante Showroom <i class="fa-solid fa-briefcase b2b-icon"></i></div>
+                <div class="location-badge">Ganhi</div>
               </div>
-            </div>
-          </article>
-
-          <!-- Item 3 -->
-          <article class="testi-card reveal" data-category="hotel">
-            <div class="testi-top">
+              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé des équipements nous fait gagner un temps précieux."</p>
+              <div class="testi-meta">
+                <div class="author-circle">SS</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Mme Soglo</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directrice Agence</div>
+                </div>
+              </div>
+            </article>
+            <!-- Duplicate Group 2 -->
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
                 <div class="star-rating">★★★★★</div>
-                <div class="location-badge">Ouidah</div>
+                <div class="location-badge">Cocotiers</div>
+              </div>
+              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes projets de luxe. Leur expertise technique est la référence au Bénin."</p>
+              <div class="testi-meta">
+                <div class="author-circle">AA</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Mme Akotognon</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Cabinet Architecture</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Patte d'Oie</div>
+              </div>
+              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle d'accès biométrique est fluide et ultra-sécurisé."</p>
+              <div class="testi-meta">
+                <div class="author-circle">LL</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Dr. Lawson</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directeur Clinique</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="hotel">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Haie Vive</div>
+              </div>
+              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal est un argument de vente majeur pour nos clients VIP."</p>
+              <div class="testi-meta">
+                <div class="author-circle">GG</div>
+                <div>
+                  <div class="name" style="font-weight:700;">M. Gnahoui</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Promoteur Immobilier</div>
+                </div>
+              </div>
+            </article>
+            <article class="testi-card" data-category="pro">
+              <div class="testi-top">
+                <div class="star-rating">★★★★★</div>
+                <div class="location-badge">Ganhi</div>
+              </div>
+              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé des équipements nous fait gagner un temps précieux."</p>
+              <div class="testi-meta">
+                <div class="author-circle">SS</div>
+                <div>
+                  <div class="name" style="font-weight:700;">Mme Soglo</div>
+                  <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directrice Agence</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        </div>
+
+        <!-- New Review Form: Split Layout -->
+        <div class="review-form-card reveal" style="margin-top: 5rem;">
+          <div class="form-split-layout">
+            <div class="form-visual-side">
+              <img src="/images/logo.png" alt="Logo Marsal Technologies" class="form-side-logo">
             </div>
-            <p class="testi-quote">"Le déploiement des serrures intelligentes dans notre complexe à Ouidah a fluidifié le check-in. Nos clients adorent la modernité du système et nous, l'audit des accès."</p>
-            <div class="testi-meta">
-              <div class="author-circle">RM</div>
-              <div>
-                <div class="name" style="font-weight:700;">Renaud M.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Directeur d'Hôtel <i class="fa-solid fa-hotel b2b-icon"></i></div>
+            
+            <div class="form-content-side">
+              <h3 class="display-md" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Laissez votre avis</h3>
+              <form id="review-form">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label>Nom complet</label>
+                    <input type="text" id="rev-name" class="form-control" placeholder="Jean Koffi" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Entreprise / Ville</label>
+                    <input type="text" id="rev-org" class="form-control" placeholder="Cotonou" required>
+                  </div>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label>Note globale</label>
+                  <div class="star-rating-input" id="star-input" style="font-size: 1.25rem; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Type de projet</label>
+                    <select id="rev-cat" class="form-control">
+                      <option value="private">Résidence Privée</option>
+                      <option value="pro">Bureau / Entreprise</option>
+                      <option value="hotel">Hôtel / Solution Pro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Votre commentaire</label>
+                  <textarea id="rev-text" class="form-control" rows="3" placeholder="Partagez votre expérience..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Publier mon avis</button>
+              </form>
+              <div id="form-success" style="display:none; color: var(--accent); font-weight: 700; margin-top: 1rem; text-align: center;">
+                Merci ! Votre avis a été publié instantanément.
               </div>
             </div>
-          </article>
-
-          <!-- Item 4 -->
-          <article class="testi-card reveal" data-category="private">
-            <div class="star-rating">★★★★★</div>
-            <p class="testi-quote">"Vivre dans un appartement connecté à Calavi est un luxe abordable avec Marsal. La programmation des volets roulants au coucher du soleil est devenue indispensable."</p>
-            <div class="testi-meta">
-              <div class="author-circle">ST</div>
-              <div>
-                <div class="name" style="font-weight:700;">Sandra T.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Appartement Premium · Calavi</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Item 5 -->
-          <article class="testi-card reveal" data-category="pro">
-            <div class="star-rating">★★★★★</div>
-            <p class="testi-quote">"Pour notre cabinet d'avocats à Ganhi, nous avions besoin d'un contrôle d'accès strict. La solution Marsal est intuitive et ultra-sécurisée. Je recommande vivement."</p>
-            <div class="testi-meta">
-              <div class="author-circle">ML</div>
-              <div>
-                <div class="name" style="font-weight:700;">Me. Luc B.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Cabinet Juridique · Ganhi</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Item 6 -->
-          <article class="testi-card reveal" data-category="hotel">
-            <div class="star-rating">★★★★★</div>
-            <p class="testi-quote">"L'automatisation de la climatisation dans les chambres de notre boutique-hôtel a réduit nos coûts énergétiques de 35% dès le premier trimestre. Indispensable."</p>
-            <div class="testi-meta">
-              <div class="author-circle">FP</div>
-              <div>
-                <div class="name" style="font-weight:700;">Fatima P.</div>
-                <div class="role" style="font-size:0.8rem; color:var(--text-muted);">Boutique Hôtel · Grand-Popo</div>
-              </div>
-            </div>
-          </article>
-
+          </div>
         </div>
       </div>
     </section>

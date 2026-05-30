@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 const ABOUT_CAROUSEL_IMAGES = [
   { src: "/images/1.png", alt: "Intérieur connecté Marsal Technologies" },
   { src: "/images/2.png", alt: "Système de sécurité intelligent" },
-  { src: "/images/logo.jpeg", alt: "Innovation et Expertise" },
+  { src: "/images/logo.png", alt: "Innovation et Expertise" },
 ];
 
 export function AboutSection() {
@@ -46,13 +46,22 @@ export function AboutSection() {
   }, [api]);
 
   return (
-    <section ref={sectionRef} className="section" style={{ background: 'var(--bg-white)', borderBottom: '1px solid var(--border)' }}>
+    <section 
+      ref={sectionRef} 
+      className={`section-sm ${isVisible ? 'visible' : ''}`} 
+      style={{ 
+        background: 'var(--bg-white)', 
+        borderBottom: '1px solid var(--border)', 
+        paddingBlock: 'clamp(2rem, 5vw, 5rem)',
+        opacity: isVisible ? 1 : 0, 
+        transition: 'opacity 0.8s ease-out' 
+      }}
+    >
       <div className="container">
-        <div className="grid-2 align-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Bloc de texte conservant la structure originale */}
-          <div className={`reveal ${isVisible ? 'visible' : ''}`}>
-            <div className={`hero-actions reveal reveal-delay-3 ${isVisible ? 'visible' : ''}`} style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div className="order-2 lg:order-1" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease-out 0.2s' }}>
+            <div className="hero-actions" style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
               <a href="/solutions.html" className="btn btn-primary">
                 Découvrir nos solutions
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -61,17 +70,16 @@ export function AboutSection() {
               </a>
               <a href="/catalogue.html" className="btn btn-ghost">Voir le catalogue</a>
             </div>
-            <h2 className="display-md" style={{ margin: '1.5rem 0' }}>Innovation, Sécurité & Expertise</h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
+            <h2 className="display-md" style={{ margin: '1.5rem 0', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>Innovation, Sécurité & Expertise</h2>
+            <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
               Marsal Technologies se spécialise dans les solutions modernes de sécurité et d'automatisation intelligentes pour les maisons, les bureaux et les entreprises. Nous proposons des technologies innovantes, notamment des serrures intelligentes, des systèmes de surveillance, des systèmes de contrôle d'accès, des solutions réseau, des interrupteurs intelligents et d'autres dispositifs de sécurité intelligents qui améliorent la sécurité, le confort et l'efficacité.
             </p>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-main)', lineHeight: '1.8' }}>
+            <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8' }}>
               Notre objectif est de fournir des solutions fiables, modernes et conviviales qui répondent aux besoins évolutifs de nos clients grâce à une installation professionnelle, une expertise technique et un service de qualité.
             </p>
           </div>
 
-          {/* Bloc Carrousel Automatique */}
-          <div className={`reveal reveal-delay-1 ${isVisible ? 'visible' : ''}`}>
+          <div className={`order-1 lg:order-2 w-full reveal reveal-delay-1 ${isVisible ? 'visible' : ''}`}>
             <Carousel 
               setApi={setApi} 
               opts={{ 
@@ -88,7 +96,7 @@ export function AboutSection() {
                       <img 
                         src={item.src} 
                         alt={item.alt} 
-                        className="w-full h-[400px] object-cover rounded-2xl shadow-xl border border-[#C2C8D4]" 
+                        className="w-full aspect-[4/3] lg:aspect-auto lg:h-[450px] object-cover rounded-3xl shadow-2xl border border-[#C2C8D4]" 
                       />
                     </div>
                   </CarouselItem>

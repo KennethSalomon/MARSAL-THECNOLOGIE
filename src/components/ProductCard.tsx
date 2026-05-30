@@ -81,11 +81,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img 
           src={finalImageSrc} 
           alt={title} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
-          style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 rounded-t-2xl" 
           onError={(e) => {
             // Sécurité anti-carré blanc : charge le logo si l'image locale est introuvable
-            (e.target as HTMLImageElement).src = '/images/logo.jpeg';
+            (e.target as HTMLImageElement).src = '/images/logo.png';
           }}
         />
       </div>

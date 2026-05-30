@@ -19,6 +19,13 @@
 
   <style>
     /* ── Page-specific overrides ── */
+    :root {
+      --section-spacing: clamp(4rem, 8vw, 8rem);
+      --container-max: 1280px;
+      --grid-gap: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .section { padding-block: var(--section-spacing); }
 
     /* Bento decorative circles */
     .bento-circle {
@@ -89,6 +96,244 @@
       transition: color var(--transition);
     }
     .logo-brand:hover { color: var(--text-light); }
+
+    /* ── Testimonials Marquee ── */
+    .marquee-container {
+      position: relative;
+      overflow: hidden;
+      padding: 0 50px; /* Espace pour le dégradé */
+      margin-top: 2.5rem; /* Espacement par rapport au titre */
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50px; /* Largeur du dégradé */
+      pointer-events: none; /* Permet d'interagir avec le contenu en dessous */
+      z-index: 1;
+    }
+
+    .marquee-container::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-white) 0%, transparent 100%);
+    }
+
+    .marquee-container::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-white) 0%, transparent 100%);
+    }
+
+    .marquee-wrapper {
+      display: flex;
+      white-space: nowrap; /* Empêche le retour à la ligne des cartes */
+      animation: marquee-scroll 40s linear infinite; /* Vitesse de défilement */
+    }
+
+    .marquee-wrapper:hover {
+      animation-play-state: paused; /* Met en pause au survol */
+    }
+
+    .marquee-wrapper .testimonial-card {
+      flex-shrink: 0; /* Empêche les cartes de rétrécir */
+      width: 320px; /* Largeur fixe pour chaque carte */
+      margin-right: 1.5rem; /* Espacement entre les cartes */
+      white-space: normal; /* Permet au texte de la carte de revenir à la ligne */
+      /* Assurez-vous que les styles de base de testimonial-card sont appliqués (bordures, ombres, etc.) */
+      border-radius: 12px; /* Exemple, ajustez si nécessaire pour correspondre au design */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Exemple, ajustez si nécessaire */
+      padding: 1.5rem;
+      background: var(--bg-white); /* S'assurer que le fond est blanc */
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); } /* Défilement de la moitié de la largeur totale du contenu (une série complète) */
+    }
+
+    /* ── Footer Localization Map ── */
+    .footer-map-card {
+      position: relative;
+      width: 100%;
+      height: 280px; /* Ajustable selon le layout du footer */
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-light);
+      transition: border-color var(--transition);
+    }
+
+    .footer-map-card:hover {
+      border-color: var(--accent);
+    }
+
+    .footer-map-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .footer-map-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.05); /* Léger voile pour faire ressortir le badge */
+    }
+
+    .google-maps-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: var(--bg-white);
+      padding: 14px 28px;
+      border-radius: 100px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .google-maps-badge:hover { transform: scale(1.05); }
+    .badge-tagline { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; }
+    .badge-main-text { font-size: 14px; font-weight: 600; color: var(--text-main); }
+
+    .hero-title-brand { color: #386FA8; }
+    .hero-title-main { color: #ffffff; }
+
+    /* ── Responsive System ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--grid-gap);
+    }
+    @media (max-width: 820px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .display-xl {
+      font-size: clamp(2.5rem, 10vw, 5.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links, .header-cta .btn { display: none !important; }
+      .burger { display: flex !important; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content-wrapper {
+        padding-bottom: 6rem;
+        /* Overlay de protection pour la lisibilité sur mobile */
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      }
+      
+      .stats-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        padding: 2rem;
+      }
+
+      .section, .section-sm {
+        padding-block: 3.5rem;
+      }
+    }
+
+    /* ── Mobile Navigation Drawer ── */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #ffffff !important;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-nav.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .mobile-nav-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .mobile-nav a {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem !important;
+      font-weight: 600 !important;
+      color: var(--text-main);
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+
+    .mobile-nav .btn-primary { margin-top: 8px; width: 100%; max-width: 280px; }
+
+    /* ── Burger Animation ── */
+    .burger {
+      width: 30px;
+      height: 20px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+      padding: 0;
+    }
+
+    .burger span {
+      width: 100%;
+      height: 2px;
+      background: var(--text-main);
+      transition: 0.3s;
+    }
+
+    .burger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    @media (max-width: 480px) {
+      .footer-map-card { height: 220px; }
+      .google-maps-badge { padding: 10px 20px; }
+      .badge-main-text { font-size: 12px; }
+    }
+    
+    /* ── FIX : Visibilité permanente du bouton Solutions ── */
+    .hero-actions,
+    .btn-all-solutions,
+    a[href*="solutions"].btn {
+      display: inline-flex !important; /* Force le display indépendamment des scripts */
+    }
+
+    /* Force l'affichage des sections React dans #root pour éviter le conflit reveal/main.js */
+    #root .reveal {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
   </style>
 </head>
 <body>
@@ -123,9 +368,8 @@
 
             <!-- Main headline -->
             <h1 class="display-xl reveal reveal-delay-1">
-             <span>Chez Marsal Technologies : </span> Vivez<br>
-              <span class="text-accent">en toute sécurisé.</span>
-              
+              <span class="hero-title-brand">Chez Marsal technologies:</span><br>
+              <span class="hero-title-main">Vivez en toute sécurité.</span>
             </h1>
 
             
@@ -154,20 +398,14 @@
 
     </section><!-- /hero -->
 
-    <!-- ═══════════════════════════════════════════
-         SECTION : À PROPOS (DÉTAILLÉ)
-         ═══════════════════════════════════════════ -->
-    <div id="root"></div>
-
-
-    <!-- ═══════════════════════════════════════════
+    <section class="section-sm" style="background:var(--bg-light); padding-bottom: 1.5rem;">
+<!-- ═══════════════════════════════════════════
          SECTION 2 · STATS
          ═══════════════════════════════════════════ -->
-    <section class="section-sm" style="background:var(--bg-light);">
       <div class="container">
         <div class="stats-strip reveal">
           <div class="stat-item">
-            <div class="value" data-counter data-target="320" data-suffix="+">0+</div>
+            <div class="value" data-counter data-target="320" data-suffix="+">320+</div>
             <div class="label">Installations réalisées</div>
           </div>
           <div class="stat-item">
@@ -186,17 +424,15 @@
       </div>
     </section>
 
+    
+
+    
+
 
     <!-- ═══════════════════════════════════════════
-         SECTION 3 · BENTO GRID SERVICES
+         SECTION 3 · BENTO GRID SERVICES (Espacement réduit)
          ═══════════════════════════════════════════ -->
-    <section class="section" style="background:var(--bg-white);">
-      <div class="container">
-        <!-- React Gallery4 Component Mounts Here -->
-        <!-- Le contenu est géré par le point d'entrée unique id="root" en haut -->
-      </div>
-    </section><!-- /bento -->
-
+   <div id="root"></div>
 
     <!-- ═══════════════════════════════════════════
          SECTION 4 · COMMENT ÇA MARCHE
@@ -215,11 +451,7 @@
 
             <!-- Visual card -->
             <div class="card reveal" style="background:var(--bg-white);padding:2rem;text-align:center;">
-              <div style="width:72px;height:72px;background:var(--accent);border-radius:18px;display:grid;place-items:center;margin:0 auto 1.25rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
-              </div>
+              <img src="/images/2.png" alt="Mockup d'installation domotique" class="w-full h-auto object-contain mb-4" />
               <p class="display-md" style="font-size:1.1rem;color:var(--text-main);">Maison connectée<br><span style="color:var(--accent);">prête en 48h</span></p>
               <p style="font-size:.82rem;color:var(--text-muted);margin-top:.5rem;">Pour les installations résidentielles standard</p>
             </div>
@@ -297,50 +529,138 @@
           <h2 class="display-lg">La confiance de<br>nos clients, notre fierté.</h2>
         </div>
 
-        <div class="testi-mini">
+        <div class="marquee-container">
+          <div class="marquee-wrapper">
+            <!-- Groupe 1 des témoignages -->
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone, même quand je suis à Paris."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AK</div>
+                <div class="author-info">
+                  <div class="name">Adeola K.</div>
+                  <div class="role">Propriétaire de villa, Fidjrossè</div>
+                </div>
+              </div>
+            </div>
 
-          <div class="testimonial-card reveal">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="margin-top:.75rem;">
-              "Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone, même quand je suis à Paris."
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">AK</div>
-              <div class="author-info">
-                <div class="name">Adeola K.</div>
-                <div class="role">Propriétaire de villa, Fidjrossè</div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "L'installation dans notre showroom a été réalisée en deux jours, proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est vraiment professionnelle."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MS</div>
+                <div class="author-info">
+                  <div class="name">Marie-Solange D.</div>
+                  <div class="role">Directrice de boutique, Cotonou</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des plus grands standards européens."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">JB</div>
+                <div class="author-info">
+                  <div class="name">Jean-Baptiste A.</div>
+                  <div class="role">Architecte, Cabinet Archi+</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nouveaux témoignages -->
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "Notre hôtel a été transformé. Les serrures intelligentes et la gestion énergétique ont optimisé nos opérations et l'expérience client, nous permettant d'offrir un service inégalé."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MD</div>
+                <div class="author-info">
+                  <div class="name">M. Dupont</div>
+                  <div class="role">Gérant, Hôtel Le Phénix</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "Marsal Technologies a rendu nos bureaux plus intelligents et sécurisés. La gestion centralisée de l'éclairage, de la climatisation et de la sécurité est un atout majeur pour notre productivité et notre empreinte écologique."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MT</div>
+                <div class="author-info">
+                  <div class="name">Mme Traoré</div>
+                  <div class="role">CEO, InnovCorp (Bureaux Connectés)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "Pour nos résidences de luxe, nous faisons confiance à Marsal Technologies. Leurs solutions domotiques intégrées, de la sécurité aux systèmes de divertissement, sont un argument de vente incontournable et très apprécié de nos acquéreurs."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MK</div>
+                <div class="author-info">
+                  <div class="name">M. Kouamé</div>
+                  <div class="role">Directeur, Résidences Élite (Promoteur Immobilier)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Duplication du groupe 1 pour l'effet infini -->
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone, même quand je suis à Paris."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AK</div>
+                <div class="author-info">
+                  <div class="name">Adeola K.</div>
+                  <div class="role">Propriétaire de villa, Fidjrossè</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "L'installation dans notre showroom a été réalisée en deux jours, proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est vraiment professionnelle."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MS</div>
+                <div class="author-info">
+                  <div class="name">Marie-Solange D.</div>
+                  <div class="role">Directrice de boutique, Cotonou</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="testimonial-text" style="margin-top:.75rem;">
+                "En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des plus grands standards européens."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">JB</div>
+                <div class="author-info">
+                  <div class="name">Jean-Baptiste A.</div>
+                  <div class="role">Architecte, Cabinet Archi+</div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="testimonial-card reveal reveal-delay-1">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="margin-top:.75rem;">
-              "L'installation dans notre showroom a été réalisée en deux jours, proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est vraiment professionnelle."
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">MS</div>
-              <div class="author-info">
-                <div class="name">Marie-Solange D.</div>
-                <div class="role">Directrice de boutique, Cotonou</div>
-              </div>
-            </div>
           </div>
-
-          <div class="testimonial-card reveal reveal-delay-2">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="margin-top:.75rem;">
-              "En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des plus grands standards européens."
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">JB</div>
-              <div class="author-info">
-                <div class="name">Jean-Baptiste A.</div>
-                <div class="role">Architecte, Cabinet Archi+</div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
         <div style="text-align:center;margin-top:2.5rem;" class="reveal">

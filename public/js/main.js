@@ -11,7 +11,7 @@ const HEADER_HTML = `
 
     <!-- Logo -->
     <a href="/index.html" class="logo-wrap" aria-label="Marsal Technologies — Accueil">
-      <img src="/images/logo.jpeg" alt="Marsal Technologies Logo" class="logo-img">
+      <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img">
     </a>
 
     <!-- Navigation desktop -->
@@ -43,12 +43,20 @@ const HEADER_HTML = `
 
 <!-- Mobile nav overlay -->
 <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
-  <a href="/index.html" data-page="index">Accueil</a>
-  <a href="/solutions.html" data-page="solutions">Solutions</a>
-  <a href="/catalogue.html" data-page="catalogue">Catalogue</a>
-  <a href="/temoignages.html" data-page="temoignages">Témoignages</a>
-  <a href="/contact.html" data-page="contact">Contact</a>
-  <a href="/contact.html" class="btn btn-primary" style="margin-top:1rem;justify-content:center;">Devis gratuit</a>
+  <div class="mobile-nav-header">
+    <div class="logo-wrap">
+      <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img" style="height: 45px; width: auto;">
+    </div>
+  </div>
+  
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <a href="/index.html" data-page="index">Accueil</a>
+    <a href="/solutions.html" data-page="solutions">Solutions</a>
+    <a href="/catalogue.html" data-page="catalogue">Catalogue</a>
+    <a href="/temoignages.html" data-page="temoignages">Témoignages</a>
+    <a href="/contact.html" data-page="contact">Contact</a>
+    <a href="/contact.html" class="btn btn-primary" style="margin-top:1rem;justify-content:center;">Devis gratuit</a>
+  </div>
 </nav>
 `;
 
@@ -59,7 +67,7 @@ const FOOTER_HTML = `
     <!-- Colonne 1 : Description + Réseaux -->
     <div class="footer-col">
       <a href="/index.html" class="logo-wrap" style="margin-bottom:1.25rem;display:inline-flex;">
-        <img src="/images/logo.jpeg" alt="Marsal Technologies Logo" class="logo-img">
+        <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img">
       </a>
       <p style="font-size:.875rem;color:var(--text-muted);line-height:1.7;max-width:280px;">
         Solutions domotiques et de sécurité intelligente pour un habitat connecté, sûr et luxueux à Cotonou et dans tout le Bénin.
@@ -120,18 +128,15 @@ const FOOTER_HTML = `
         <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.4;">
           Derrière la SOBEBRA, 4006 Quartier Jak, Cotonou
         </p>
-        <!-- Refined Map Mockup -->
-        <div class="map-mockup" role="img" aria-label="Carte de localisation de Marsal Technologies">
-          <div class="map-pin">
-            <div class="map-pin-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
+        <!-- Map Container with centered badge -->
+        <div style="position:relative; width:100%; height:180px; border-radius:18px; overflow:hidden; border:1px solid var(--border);">
+          <img src="/images/map.jpg" alt="Carte de localisation Marsal Technologies" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.04);">
+            <div style="background:var(--bg-white); padding:12px 24px; border-radius:100px; box-shadow:0 8px 24px rgba(0,0,0,0.12); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:2px;">
+              <span style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--accent); letter-spacing:0.05em;">Nous trouver</span>
+              <span style="font-size:13px; font-weight:600; color:var(--text-main);">Ouvrir dans Google Maps</span>
             </div>
-            <span class="map-pin-label">Nous trouver</span>
           </div>
-          <div class="map-overlay-badge">Ouvrir dans Google Maps</div>
         </div>
       </a>
       <p style="font-size:.8rem;color:var(--text-muted);margin-top:1rem;">
@@ -224,11 +229,11 @@ function setActivePage() {
   const path = window.location.pathname || "/index.html";
   // Detect current page key
   let current = 'index';
-  if (path.includes('solutions'))   current = 'solutions';
-  if (path.includes('catalogue'))   current = 'catalogue';
+  if (path.includes('solutions')) current = 'solutions';
+  if (path.includes('catalogue')) current = 'catalogue';
   if (path.includes('temoignages')) current = 'temoignages';
-  if (path.includes('contact'))     current = 'contact';
- 
+  if (path.includes('contact')) current = 'contact';
+
   document.querySelectorAll('[data-page]').forEach(link => {
     if (link instanceof HTMLElement && link.dataset.page) {
       link.classList.toggle('active', link.dataset.page === current);
@@ -249,35 +254,31 @@ function initHeaderScroll() {
 /* ── 5. BURGER MENU ─────────────────────────────────────────── */
 
 function initBurger() {
-  const btn    = document.getElementById('burger-btn');
-  const mobileNav = document.getElementById('mobile-nav');
-  if (!btn || !mobileNav) return;
+  const btnBurger = document.getElementById('burger-btn');
+  const btnClose = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  btn.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    btn.classList.toggle('open', isOpen);
-    btn.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (!btnBurger || !mobileMenu) return;
+
+  const openMenu = () => {
+    mobileMenu.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    mobileMenu.classList.remove('is-active');
+    document.body.style.overflow = '';
+  };
+
+  btnBurger.addEventListener('click', openMenu);
+  if (btnClose) btnClose.addEventListener('click', closeMenu);
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
-  // Close on link click
-  mobileNav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // Close on Escape
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
-      mobileNav.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
+    if (e.key === 'Escape' && mobileMenu.classList.contains('is-active')) closeMenu();
   });
 }
 
@@ -295,18 +296,25 @@ function initScrollReveal() {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    // Exclusion spécifique du bouton solutions de la logique de masquage
+    if (el.classList.contains('btn') && el.getAttribute('href')?.includes('solutions')) {
+      el.classList.add('visible');
+      return;
+    }
+    observer.observe(el);
+  });
 }
 
 /* ── 7. COUNTER ANIMATION ───────────────────────────────────── */
 
 function animateCounter(el) {
   if (!el?.dataset?.target) return;
-  
+
   const target = parseFloat(el.dataset.target);
   if (isNaN(target)) return;
 
-  const suffix = el.dataset.suffix || ''; 
+  const suffix = el.dataset.suffix || '';
   const duration = 1800;
   const start = performance.now();
 

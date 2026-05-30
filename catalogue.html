@@ -12,23 +12,26 @@
   <style>
     .page-hero {
       background: var(--bg-light);
-      padding-top: calc(68px + 3.5rem);
-      padding-bottom: 3.5rem;
+      padding-top: calc(68px + clamp(2rem, 5vw, 4rem));
+      padding-bottom: clamp(2rem, 5vw, 4rem);
       border-bottom: 1px solid var(--border);
     }
 
     /* Filter bar */
     .filter-bar {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
       gap: 1rem;
-      flex-wrap: wrap;
       margin-bottom: 2.5rem;
     }
+    @media (min-width: 1024px) {
+      .filter-bar { flex-direction: row; align-items: center; }
+    }
+
     .search-input-wrap {
       position: relative;
-      flex: 1;
-      min-width: 220px;
+      width: 100%;
       max-width: 340px;
     }
     .search-input-wrap svg {
@@ -57,9 +60,15 @@
     }
     .search-input::placeholder { color: var(--text-light); }
 
-    .filter-tabs { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .filter-tabs { 
+      display: flex; gap: .5rem; overflow-x: auto; 
+      padding-bottom: 0.5rem; scrollbar-width: none;
+    }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    
     .filter-tab {
-      padding: .55rem 1.2rem;
+      white-space: nowrap;
+      padding: .5rem 1rem;
       border-radius: 100px;
       font-size: .82rem;
       font-weight: 600;
@@ -75,8 +84,9 @@
     /* Product grid */
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
+      align-items: stretch;
     }
     .product-card {
       background: var(--bg-white);
@@ -86,6 +96,9 @@
       transition: all var(--transition);
       cursor: default;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
     .product-card:hover {
       box-shadow: var(--shadow-lg);
@@ -112,12 +125,21 @@
 
     .product-img {
       width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--bg-light);
+      height: 240px;
+      flex-shrink: 0;
+      overflow: hidden;
+      background-color: #f8f9fa;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+    }
+    .product-img img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      padding: 1rem !important;
     }
     .product-img svg { width: 80px; height: 80px; color: var(--border); }
     .product-img-icon {
@@ -128,7 +150,12 @@
     }
     .product-img-icon svg { width: 42px; height: 42px; color: var(--accent); }
 
-    .product-body { padding: 1.25rem; }
+    .product-body {
+      padding: 1.25rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
     .product-cat {
       font-size: .72rem;
       font-weight: 700;
@@ -150,6 +177,7 @@
       align-items: center;
       justify-content: space-between;
       gap: .5rem;
+      margin-top: auto;
     }
     .product-price {
       font-family: 'Sora', sans-serif;
@@ -239,7 +267,7 @@
           <!-- SERRURES INTELLIGENTES -->
           <article class="product-card reveal" data-category="serrures-intelligentes" data-name="smartlock pro biométrique empreinte code">
             <div class="product-img">
-              <img src="/images/smartlock-pro.png" alt="SmartLock Pro" class="w-full h-40 object-contain p-4" />
+              <img src="/images/ser1.png" alt="SmartLock Pro" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Serrures Intelligentes</div>
@@ -255,7 +283,7 @@
 
           <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
             <div class="product-img">
-              <img src="/images/rfid-hotel.png" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
+              <img src="/images/ser3.png" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Serrures Intelligentes</div>
@@ -272,7 +300,7 @@
           <!-- DOMOTIQUE -->
           <article class="product-card reveal" data-category="domotique" data-name="hub central nexus 128 appareils zigbee z-wave">
             <div class="product-img">
-              <img src="/images/nexus-hub.png" alt="Nexus Hub Central v2" class="w-full h-40 object-contain p-4" />
+              <img src="/images/pacelle.png" alt="Nexus Hub Central v2" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Domotique</div>
@@ -290,11 +318,8 @@
           <article class="product-card reveal" data-category="solutions-hotel" data-name="pack gestion hôtel complet serrures caméras">
             <div class="product-badge bon-plan">Premium</div>
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 11a3 3 0 106 0 3 3 0 00-6 0z"/><rect x="9" y="9" width="6" height="6" rx="1"/>
-                </svg>
-              </div>
+               <img src="/images/table.png" alt="Nexus Hub Central v2" class="w-full h-40 object-contain p-4" />
+             
             </div>
             <div class="product-body">
               <div class="product-cat">Solutions Hôtel</div>
@@ -312,7 +337,7 @@
           <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
             <div class="product-badge bon-plan">Populaire</div>
             <div class="product-img">
-              <img src="/images/krypton-4k.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
+              <img src="/images/cam3.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Caméras</div>
@@ -329,11 +354,7 @@
           <!-- RIDEAUX -->
           <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1zm7 0v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1h-4a1 1 0 00-1 1zm7 0v14a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1h-4a1 1 0 00-1 1z"/>
-                </svg>
-              </div>
+              <img src="/images/ridau.png" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Rideaux Intelligents</div>
@@ -351,11 +372,7 @@
           <article class="product-card reveal" data-category="energie-solaire" data-name="onduleur pure sine hybrid inverter 3kva">
             <div class="product-badge">Nouveau</div>
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-              </div>
+              <img src="/images/onduleur.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Systèmes Énergie</div>
@@ -371,11 +388,7 @@
 
           <article class="product-card reveal" data-category="energie-solaire" data-name="éclairage solaire led premium autonome">
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
-              </div>
+              <img src="/images/panneau.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Éclairage Solaire</div>
@@ -392,11 +405,7 @@
           <!-- ACCES & PRESENCE -->
           <article class="product-card reveal" data-category="securite-presence" data-name="système pointage zkteco biométrique présence">
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
+              <img src="/images/pointage.png" alt="ZKTeco iClock Attendance" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Contrôle de Présence</div>
@@ -412,11 +421,7 @@
 
           <article class="product-card reveal" data-category="securite-presence" data-name="interphone vidéo ip visiophone sécurité">
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                </svg>
-              </div>
+              <img src="/images/ecran.png" alt="Video IP Door Intercom" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Interphonie</div>
@@ -433,11 +438,7 @@
           <!-- BUREAUTIQUE -->
           <article class="product-card reveal" data-category="autres" data-name="tableau blanc interactif tactile 55 pouces">
             <div class="product-img">
-              <div class="product-img-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-              </div>
+              <img src="/images/table.png" alt="Interactive White Board 55\"" class="w-full h-40 object-contain p-4" />
             </div>
             <div class="product-body">
               <div class="product-cat">Bureautique Pro</div>
