@@ -235,6 +235,31 @@
 
       @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
       @keyframes wave { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+
+      /* Styles pour la section conversationnelle avec image de fond */
+      .conversation-section {
+        position: relative;
+        background-image: url('/images/solution.jfif');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+
+      .conversation-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.65); /* Overlay sombre pour la lisibilité */
+        z-index: 1;
+      }
+
+      .conversation-section > * {
+        position: relative;
+        z-index: 2;
+      }
     </style>
 
     <!-- Solutions détaillées -->
@@ -293,13 +318,13 @@
     
     
 
-    <!-- SECTION CONVERSATIONNELLE (Remplace la comparaison) -->
-    <section class="section" style="background:var(--bg-light); overflow: hidden;">
+    <!-- SECTION CONVERSATIONNELLE  -->
+    <section class="section conversation-section" style="overflow: hidden;">
       <div class="container">
         <div class="section-header reveal" style="text-align:center;">
           
-          <h2 class="display-lg" style="margin-top:1rem;">La sérénité retrouvée</h2>
-          <p style="margin: 1rem auto 2rem; max-width: 540px; color: var(--text-muted);">Découvrez comment Marsal transforme l'inquiétude en tranquillité à travers cet échange type.</p>
+          <h2 class="display-lg" style="margin-top:1rem; color: #FFFFFF !important;">La sérénité retrouvée</h2>
+          <p style="margin: 1rem auto 2rem; max-width: 540px; color: rgba(255, 255, 255, 0.8) !important;">Découvrez comment Marsal transforme l'inquiétude en tranquillité à travers cet échange type.</p>
         </div>
 
         <div class="chat-window" id="chat-trigger">
