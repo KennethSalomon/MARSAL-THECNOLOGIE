@@ -8,5 +8,12 @@
         "distDir": "dist"
       }
     }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/solutions", "destination": "/solutions.html" },
+    { "source": "/catalogue", "destination": "/catalogue.html" },
+    { "source": "/temoignages", "destination": "/temoignages.html" }
   ]
 }

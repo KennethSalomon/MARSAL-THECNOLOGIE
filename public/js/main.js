@@ -53,7 +53,7 @@ const HEADER_HTML = `
 </nav>
 `;
 
-// Fonction qui génère la grille des partenaires (remplace l'ancien marquee)
+// Fonction qui génère la grille des partenaires (prend toute la largeur)
 function generatePartnersGrid() {
   const partners = [
     { name: "Delta Motors", logo: "https://logo.clearbit.com/delta-motors.com?size=120&format=png", fallback: "Delta Motors" },
@@ -114,31 +114,26 @@ const FOOTER_HTML = `
         Solutions domotiques et de sécurité intelligente pour un habitat connecté, sûr et luxueux à Cotonou et dans tout le Bénin.
       </p>
       <div class="social-links">
-        <!-- Facebook -->
         <a href="https://www.facebook.com/Marsaltechnologies" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
           </svg>
         </a>
-        <!-- Instagram -->
         <a href="https://www.instagram.com/marsal_technologies?igsh=MW41c2V5OTVjd2Jvcg==" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
           </svg>
         </a>
-        <!-- TikTok -->
         <a href="https://www.tiktok.com/@marsaltechnologies?_r=1&_t=ZS-96UGg353BMy" class="social-btn" aria-label="TikTok" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
             <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/>
           </svg>
         </a>
-        <!-- LinkedIn -->
         <a href="https://bj.linkedin.com/in/marsal-smarttech-b9119b274?trk=public_post_comment_actor-image" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2a2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
           </svg>
         </a>
-        <!-- WhatsApp -->
         <a href="https://wa.me/22954036641" class="social-btn" aria-label="WhatsApp" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -169,7 +164,6 @@ const FOOTER_HTML = `
         <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.4;">
           Derrière la SOBEBRA, 4006 Quartier Jak, Cotonou
         </p>
-        <!-- Map Container with centered badge -->
         <div style="position:relative; width:100%; height:180px; border-radius:18px; overflow:hidden; border:1px solid var(--border);">
           <img src="/images/map.jpg" alt="Carte de localisation Marsal Technologies" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
           <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.04);">
@@ -187,9 +181,11 @@ const FOOTER_HTML = `
 
   </div>
 
-  <!-- Nouvelle section partenaires (grille) - remplace l'ancien marquee -->
+  <!-- SECTION PARTENAIRES - PLEINE LARGEUR -->
   <div class="footer-partners-section">
-    ${generatePartnersGrid()}
+    <div class="partners-fullwidth">
+      ${generatePartnersGrid()}
+    </div>
   </div>
 
   <!-- Bottom bar -->
@@ -219,15 +215,12 @@ const WHATSAPP_HTML = `
 /* ── 2. INJECTION DES COMPOSANTS ────────────────────────────── */
 
 function injectComponents() {
-  // Header
   const header = document.getElementById('site-header');
   if (header && !header.firstChild) header.innerHTML = HEADER_HTML;
 
-  // Footer
   const footer = document.getElementById('site-footer');
   if (footer && !footer.firstChild) footer.innerHTML = FOOTER_HTML;
 
-  // WhatsApp
   const waContainer = document.getElementById('whatsapp-widget');
   if (waContainer) waContainer.innerHTML = WHATSAPP_HTML;
 }
@@ -396,79 +389,102 @@ function initAdvancedAtmosphereSwitcher() {
   btnJour.classList.add('active');
 }
 
-/* ── 9. INJECTION STYLES PARTENAIRES (Bleus) ─────────────────── */
+/* ── 9. INJECTION STYLES PARTENAIRES (PLEINE LARGEUR) ───────── */
 
 function injectPartnersStyles() {
   const style = document.createElement('style');
   style.textContent = `
+    /* SECTION PARTENAIRES - PLEINE LARGEUR */
     .footer-partners-section {
-      margin: 3rem 0 2rem;
-      padding: 2rem 0 1rem;
-      border-top: 1px solid rgba(30, 107, 158, 0.2);
-      border-bottom: 1px solid rgba(30, 107, 158, 0.2);
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
       background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+      padding: 3rem 0 2rem;
+      border-top: 1px solid rgba(30, 107, 158, 0.25);
+      border-bottom: 1px solid rgba(30, 107, 158, 0.25);
     }
+    
+    .partners-fullwidth {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
     .partners-grid-wrapper {
       text-align: center;
     }
+    
     .partners-header {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
+    
     .partners-subtitle {
       color: #1E6B9E;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.75rem;
+      letter-spacing: 4px;
+      font-size: 0.7rem;
       font-weight: 600;
       display: block;
       margin-bottom: 0.5rem;
     }
+    
     .partners-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 0.75rem;
     }
+    
     .partners-separator {
-      width: 60px;
+      width: 70px;
       height: 3px;
       background: linear-gradient(90deg, #1E6B9E, #4A9FD8, #1E6B9E);
       margin: 0 auto;
       border-radius: 3px;
     }
+    
     .partners-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem 1.5rem;
       align-items: center;
       justify-items: center;
     }
+    
     .partner-card {
       text-align: center;
       transition: transform 0.3s ease;
       width: 100%;
-      max-width: 170px;
+      max-width: 180px;
     }
+    
     .partner-card:hover {
       transform: translateY(-5px);
     }
+    
     .partner-logo {
       background: rgba(255, 255, 255, 0.03);
       border-radius: 16px;
       padding: 1rem;
-      height: 95px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.3s ease;
     }
+    
     .partner-card:hover .partner-logo {
-      border-color: rgba(30, 107, 158, 0.5);
-      box-shadow: 0 0 15px rgba(30, 107, 158, 0.2);
+      border-color: rgba(30, 107, 158, 0.6);
+      box-shadow: 0 0 20px rgba(30, 107, 158, 0.2);
     }
+    
     .partner-logo img {
       max-width: 100%;
       max-height: 65px;
@@ -478,11 +494,13 @@ function injectPartnersStyles() {
       filter: brightness(0.9) contrast(1.1);
       transition: filter 0.3s ease;
     }
+    
     .partner-card:hover .partner-logo img {
       filter: brightness(1) contrast(1.2);
     }
+    
     .partner-name {
-      margin-top: 0.75rem;
+      margin-top: 0.8rem;
       font-size: 0.7rem;
       font-weight: 500;
       color: #9CA3AF;
@@ -490,17 +508,37 @@ function injectPartnersStyles() {
       letter-spacing: 1px;
       transition: color 0.3s ease;
     }
+    
     .partner-card:hover .partner-name {
       color: #1E6B9E;
     }
-    @media (max-width: 768px) {
+    
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
       .partners-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 1.5rem;
+      }
+      .partner-logo {
+        height: 85px;
+        padding: 0.8rem;
+      }
+      .partner-logo img {
+        max-height: 55px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-partners-section {
+        padding: 2rem 0 1.5rem;
+      }
+      .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
         gap: 1rem;
       }
       .partner-logo {
         height: 75px;
-        padding: 0.75rem;
+        padding: 0.6rem;
       }
       .partner-logo img {
         max-height: 48px;
@@ -509,12 +547,23 @@ function injectPartnersStyles() {
         font-size: 0.6rem;
       }
       .partners-title {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
     }
+    
     @media (max-width: 480px) {
       .partners-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .partner-card {
+        max-width: 100%;
+      }
+      .partner-logo {
+        height: 70px;
+      }
+      .partner-logo img {
+        max-height: 45px;
       }
     }
   `;
