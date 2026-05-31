@@ -65,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       return imageSrc;
     }
     // Fallback déterministe basé sur la longueur du titre pour la stabilité
-    const randomIndex = title.length % FALLBACK_IMAGES.length;
+    const randomIndex = (title?.length || 0) % FALLBACK_IMAGES.length;
     return FALLBACK_IMAGES[randomIndex];
   }, [imageSrc, title]);
 

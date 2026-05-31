@@ -270,7 +270,7 @@
 
         <!-- Infinite Scrolling Marquees -->
         <div class="marquee-container reveal">
-          
+          <div id="testi-grid-anchor"></div>
           <!-- Row 1: Leftward Scroll -->
           <div class="marquee-track marquee-row-top">
             <!-- Group 1 -->
@@ -635,7 +635,7 @@
     stars.forEach(s => s.classList.add('active'));
 
     const reviewForm = document.getElementById('review-form');
-    const testiGrid = document.getElementById('testi-grid');
+    const marqueeTrack = document.querySelector('.marquee-row-top');
 
     reviewForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -668,8 +668,8 @@
         </div>
       `;
 
-      // Prepend to grid
-      testiGrid.prepend(newCard);
+      // Prepend to marquee track
+      marqueeTrack.prepend(newCard);
 
       // Feedback and Reset
       reviewForm.reset();

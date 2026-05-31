@@ -205,12 +205,12 @@ const WHATSAPP_HTML = `
 function injectComponents() {
   // Header
   const header = document.getElementById('site-header');
-  // On injecte le header si l'élément existe et est vide
-  if (header && header.innerHTML.trim() === "") header.innerHTML = HEADER_HTML;
+  // On injecte le header si l'élément existe et est vide pour éviter les doubles injections
+  if (header && !header.firstChild) header.innerHTML = HEADER_HTML;
 
   // Footer
   const footer = document.getElementById('site-footer');
-  if (footer) footer.innerHTML = FOOTER_HTML;
+  if (footer && !footer.firstChild) footer.innerHTML = FOOTER_HTML;
 
   // WhatsApp
   const waContainer = document.getElementById('whatsapp-widget');
@@ -220,11 +220,13 @@ function injectComponents() {
 /* ── 3. NAV ACTIVE PAGE ─────────────────────────────────────── */
 
 function setActivePage() {
-  const path = window.location.pathname || "/index.html";
+  const path = window.location.pathname;
+  const fileName = path.split('/').filter(Boolean).pop() || "index.html";
+  
   // Detect current page key
-  let current = 'index';
-  if (path.includes('solutions.html')) current = 'solutions';
-  if (path.includes('catalogue')) current = 'catalogue';
+  let current = (fileName === "index.html" || fileName === "/") ? 'index' : '';
+  if (fileName.includes('solutions')) current = 'solutions';
+  if (fileName.includes('catalogue')) current = 'catalogue';
   if (path.includes('temoignages')) current = 'temoignages';
   if (path.includes('contact')) current = 'contact';
 
