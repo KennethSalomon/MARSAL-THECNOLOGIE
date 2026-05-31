@@ -3,287 +3,264 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Contactez Marsal Technologies pour vos projets de domotique et sécurité intelligente à Cotonou. Devis sur-mesure pour résidences et entreprises." />
+  <meta name="description" content="Contactez Marsal Technologies pour vos projets de domotique, sécurité intelligente et automatisation à Cotonou, Bénin." />
   <title>Contact · Marsal Technologies</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Global CSS -->
   <link rel="stylesheet" href="/css/style.css" />
 
   <style>
-    /* --- Contact Page Specific Styles --- */
-    .contact-hero {
-      padding-top: calc(68px + 4rem);
-      padding-bottom: 4rem;
-      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-white) 100%);
-      border-bottom: 1px solid var(--border);
+    :root {
+      --accent-blue: #386FA8;
+      --accent: var(--accent-blue);
+      --bg-dark: #0A0A0A;
+      --text-gray: #9CA3AF;
+      --card-bg: #FFFFFF;
+      --card-text: #1B1B33;
     }
 
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 3rem;
-      padding-block: 5rem;
+    body {
+      background-color: var(--bg-dark);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
     }
 
-    /* Column Left: Visual (5/12) */
-    .contact-visual-col { grid-column: span 5; }
-    
-    /* Column Right: Form (7/12) */
-    .contact-form-col { grid-column: span 7; }
-
-    @media (max-width: 1024px) {
-      .contact-grid { gap: 4rem; }
-      .contact-visual-col, .contact-form-col { grid-column: span 12; }
+    /* --- Navigation & Header Styles --- */
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
     }
+    .nav-links a.active { color: var(--accent-blue) !important; }
 
-    /* Visual Block */
-    .visual-mockup {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      height: 320px;
+    .btn-primary { font-family: 'Inter', sans-serif; font-weight: 600; }
+
+    /* --- Hero Section --- */
+    .page-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/1.png');
+      background-size: cover;
+      background-position: center;
+      height: 450px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2rem;
-      overflow: hidden;
-      position: relative;
-    }
-    .visual-mockup::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(56,111,168,0.1) 0%, transparent 70%);
-    }
-
-    /* Form Styling */
-    .form-group { margin-bottom: 1.5rem; }
-    .form-label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .form-input {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 0.95rem;
-      color: var(--text-main);
-      background: var(--bg-white);
-      transition: all var(--transition);
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent);
-    }
-
-    /* Magnetic Button Container */
-    .magnetic-wrap {
-      display: inline-block;
-      position: relative;
-    }
-
-    /* Skeleton Loader */
-    .skeleton-wrap { display: none; }
-    .skeleton-box {
-      background: #f1f3f6;
-      border-radius: var(--radius-sm);
-      height: 400px;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .skeleton-box::after {
-      content: "";
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      transform: translateX(-100%);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-      100% { transform: translateX(100%); }
-    }
-    
-    .animate-pulse {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .5; }
-    }
-
-    .success-msg {
-      display: none;
       text-align: center;
-      padding: 3rem;
-      background: var(--accent-light);
-      border-radius: var(--radius);
-      border: 1px solid rgba(56,111,168,0.2);
     }
 
-    .response-badge {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 1rem;
-      display: block;
+    .page-hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
     }
+
+    .breadcrumbs {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .breadcrumbs a { color: #fff; text-decoration: none; transition: color 0.3s; }
+    .breadcrumbs a:hover { color: var(--accent-blue); }
+    .breadcrumbs span { margin: 0 10px; }
+
+    /* --- Contact Info Grid --- */
+    .contact-info-section { padding: 100px 0; }
+    .section-tag { color: var(--accent-blue); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 10px; text-align: center; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; text-align: center; margin-bottom: 50px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      color: var(--card-text);
+      padding: 50px 30px;
+      border-radius: 4px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-bottom: 3px solid transparent;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-10px);
+      border-bottom-color: var(--accent-blue);
+      box-shadow: 0 20px 40px rgba(56, 111, 168, 0.2);
+    }
+
+    .contact-card i {
+      font-size: 2.5rem;
+      color: var(--accent-blue);
+      margin-bottom: 20px;
+    }
+
+    .contact-card h3 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 700; }
+    .contact-card p { margin: 5px 0; line-height: 1.6; color: #555; }
+
+    /* --- Form Section --- */
+    .form-section { padding-bottom: 100px; max-width: 800px; margin: 0 auto; padding-inline: 20px; }
+    .form-subtitle { color: var(--text-gray); font-size: 0.9rem; text-align: center; margin-bottom: 30px; }
+    
+    .contact-form { display: grid; gap: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; }
+    .form-control {
+      width: 100%;
+      background: #151515;
+      border: 1px solid #333;
+      padding: 15px;
+      color: #fff;
+      font-family: inherit;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    .form-control:focus { outline: none; border-color: var(--accent-blue); }
+    
+    .btn-submit {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 18px 40px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #2a547e;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    #form-feedback { margin-top: 20px; padding: 15px; border-radius: 4px; display: none; text-align: center; }
+    .success { background: rgba(45, 158, 111, 0.2); color: #2D9E6F; border: 1px solid #2D9E6F; }
+
+    /* --- Map Section --- */
+    .map-section { line-height: 0; }
+    .map-section iframe { filter: grayscale(0.5) contrast(1.2) invert(0.9) hue-rotate(180deg); }
   </style>
 </head>
-<body class="antialiased subpixel-antialiased">
+<body>
 
+  <!-- Injection Header dynamique via main.js -->
   <header id="site-header" role="banner"></header>
 
   <main>
-    <!-- Hero Section -->
-    <section class="contact-hero">
-      <div class="container">
-        <div class="pill reveal">Contact & Devis</div>
-        <h1 class="display-lg reveal reveal-delay-1" style="margin-top:1.5rem;">
-          Donnons vie à vos projets<br>d'automatisation.
-        </h1>
-        <p class="reveal reveal-delay-2" style="max-width: 600px; margin-top:1.5rem;">
-          Que ce soit pour une résidence privée, un complexe hôtelier ou vos bureaux, nos experts conçoivent votre écosystème sur-mesure.
-        </p>
-      </div>
-    </section>
-
-    <section class="section" style="background:var(--bg-white);">
-      <div class="container">
-        <div class="contact-grid">
-          
-          <!-- Left Column: Visual & Direct Contact -->
-          <div class="contact-visual-col reveal">
-            <div class="visual-mockup">
-              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-              </svg>
-            </div>
-            
-            <h3 class="display-md" style="font-size: 1.25rem; margin-bottom: 1rem;">Prise de contact directe</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">
-              Marsal Technologies se spécialise dans les solutions modernes de sécurité et d'automatisation intelligentes. Notre objectif est de fournir des solutions fiables, modernes et conviviales grâce à une installation professionnelle.
-            </p>
-
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-              <a href="https://wa.me/22954036641?text=Merci%20d'avoir%20contact%C3%A9%20Marsal%20Technologies.%20Veuillez%20nous%20envoyer%20vos%20demandes%20et%20nous%20vous%20r%C3%A9pondrons%20dans%20les%20plus%20brefs%20d%C3%A9lais." target="_blank" class="btn" style="background:#25D366; color:white; justify-content:center;">
-                WhatsApp Business
-              </a>
-              <a href="mailto:marsalsmarttechnologies@gmail.com" class="btn btn-ghost" style="justify-content:center; border: 1px solid var(--border);">
-                marsalsmarttechnologies@gmail.com
-              </a>
-              <a href="https://www.instagram.com/marsal_technologies" target="_blank" class="btn btn-outline" style="justify-content:center;">
-                Suivre nos réalisations sur Instagram
-              </a>
-            </div>
-          </div>
-
-          <!-- Right Column: Form Configurator -->
-          <div class="contact-form-col reveal reveal-delay-1">
-            <div id="contact-form-container">
-              <form id="marsal-contact-form">
-                <div class="grid-2">
-                  <div class="form-group">
-                    <label class="form-label" for="name">Nom Complet</label>
-                    <input type="text" id="name" class="form-input" placeholder="Ex: Jean Dupont" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label" for="phone">Téléphone / WhatsApp</label>
-                    <input type="tel" id="phone" class="form-input" placeholder="+229 ..." required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="project-type">Type de Projet</label>
-                  <select id="project-type" class="form-input" style="appearance: none;">
-                    <option value="residentiel">Résidentiel (Villa / Appartement)</option>
-                    <option value="entreprise">Entreprise / Bureaux</option>
-                    <option value="hotel">Hôtellerie / Résidence</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="message">Votre Message</label>
-                  <textarea id="message" class="form-input" rows="5" placeholder="Décrivez brièvement votre besoin..."></textarea>
-                </div>
-                
-                <div class="magnetic-wrap">
-                  <button type="submit" id="submit-btn" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1rem; transition: transform 0.1s ease-out;">
-                    Envoyer ma demande
-                  </button>
-                </div>
-                <span class="response-badge italic">Temps de réponse moyen : moins de 2 heures par WhatsApp.</span>
-              </form>
-            </div>
-
-            <!-- Skeleton Loading (Conseil 1) -->
-            <div id="skeleton-loader" class="skeleton-wrap" style="display:none;">
-              <div class="skeleton-box animate-pulse" style="background:#E2E8F0;"></div>
-            </div>
-
-            <!-- Success Message (Hidden) -->
-            <div id="success-message" class="success-msg">
-              <h3 class="display-md" style="color: var(--accent); margin-bottom: 1rem;">Demande envoyée !</h3>
-              <p>Merci de votre confiance. Un expert Marsal vous recontactera sous 24h.</p>
-            </div>
-          </div>
-
+    <!-- 1. Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero-content reveal">
+        <h1>Contactez-Nous</h1>
+        <div class="breadcrumbs">
+          <a href="index.html">Accueil</a>
+          <span>/</span>
+          <span>Contact</span>
         </div>
       </div>
     </section>
+
+    <!-- 2. Contact Info Grid -->
+    <section class="contact-info-section">
+      <div class="container">
+        <span class="section-tag reveal">Trouvez Nous</span>
+        <h2 class="section-title reveal reveal-delay-1">Nos Coordonnées</h2>
+        
+        <div class="contact-grid">
+          <div class="contact-card reveal reveal-delay-1">
+            <i class="fa-solid fa-phone-volume"></i>
+            <h3>Téléphones</h3>
+            <p>+229 01 54 03 66 41</p>
+            <p>+229 01 56 16 63 78</p>
+            <br>
+            <i class="fa-solid fa-clock"></i>
+            <h3>Horaires</h3>
+            <p>Lundi – Samedi</p>
+            <p>8h00 – 18h00 (UTC+1)</p>
+          </div>
+
+          <div class="contact-card reveal reveal-delay-2">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Adresses</h3>
+            <p>Derrière la SOBEBRA, 4006</p>
+            <p>Quartier Jak, Cotonou, Bénin</p>
+            <div style="position:relative; width:100%; height:180px; border-radius:18px; overflow:hidden; border:1px solid var(--border);">
+          <img src="/images/map.jpg" alt="Carte de localisation Marsal Technologies" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.04);">
+            <div style="background:var(--bg-white); padding:12px 24px; border-radius:100px; box-shadow:0 8px 24px rgba(0,0,0,0.12); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:2px;">
+              <span style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--accent); letter-spacing:0.05em;">Nous trouver</span>
+              <span style="font-size:13px; font-weight:600; color:var(--text-main);">Ouvrir dans Google Maps</span>
+            </div>
+          </div>
+        </div>
+          </div> 
+
+
+          <div class="contact-card reveal reveal-delay-3">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <h3>Email</h3>
+            <p>marsalsmarttechnologies@gmail.com</p>
+            <p>contact@marsal-tech.com</p>
+          </div>
+          
+          
+      </div>
+    </section>
+
+    <!-- 3. Form Section -->
+    <section class="form-section reveal">
+      <h2 class="section-title" style="margin-bottom: 10px;">Envoyez-nous un message</h2>
+      <p class="form-subtitle">Les champs obligatoires sont marqués *</p>
+      
+      <form id="contact-form" class="contact-form">
+        <div class="form-group">
+          <label for="name">Nom et Prénom *</label>
+          <input type="text" id="name" class="form-control" required placeholder="Votre nom complet">
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" class="form-control" required placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+          <label for="message">Votre Message *</label>
+          <textarea id="message" class="form-control" rows="6" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Envoyer le message</button>
+      </form>
+      <div id="form-feedback" class="success">Merci ! Votre message a bien été envoyé. Nous vous répondrons sous 24h.</div>
+    </section>
+
   </main>
 
+  <!-- Injection Footer dynamique via main.js -->
   <footer id="site-footer" role="contentinfo"></footer>
+
   <div id="whatsapp-widget"></div>
 
   <script src="/js/main.js"></script>
   <script>
-    /* --- 1. Magnetic Button Effect --- */
-    const btnWrap = document.querySelector('.magnetic-wrap');
-    const btn = document.querySelector('#submit-btn');
-
-    btnWrap.addEventListener('mousemove', (e) => {
-      const rect = btnWrap.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-    });
-
-    btnWrap.addEventListener('mouseleave', () => {
-      btn.style.transform = `translate(0px, 0px)`;
-    });
-
-    /* --- 2. Skeleton Loading & Submission Simulation --- */
-    const form = document.getElementById('marsal-contact-form');
-    const formContainer = document.getElementById('contact-form-container');
-    const skeleton = document.getElementById('skeleton-loader');
-    const success = document.getElementById('success-message');
-
-    form.addEventListener('submit', (e) => {
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      // Hide form
-      formContainer.style.display = 'none';
-      // Show skeleton
-      skeleton.style.display = 'block';
-
-      // Simulate API call
-      setTimeout(() => {
-        skeleton.style.display = 'none';
-        success.style.display = 'block';
-      }, 1500);
+      const feedback = document.getElementById('form-feedback');
+      feedback.style.display = 'block';
+      this.reset();
+      setTimeout(() => { feedback.style.display = 'none'; }, 5000);
     });
   </script>
 </body>

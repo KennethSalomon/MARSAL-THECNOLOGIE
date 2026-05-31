@@ -7,9 +7,40 @@
   <title>Catalogue · Marsal Technologies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
   <style>
+    :root {
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --accent: #386FA8;
+      --accent-light: rgba(56, 111, 168, 0.1);
+    }
+
+    body {
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, .display-xl, .product-name {
+      font-family: var(--font-heading) !important;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* --- Navigation & Header Styles --- */
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .nav-links a.active { color: var(--accent) !important; }
+
+    .btn, .btn-primary, .btn-product {
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
     .page-hero {
       background: var(--bg-light);
       padding-top: calc(68px + clamp(2rem, 5vw, 4rem));
@@ -165,7 +196,6 @@
       margin-bottom: .35rem;
     }
     .product-name {
-      font-family: 'Sora', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       color: var(--text-main);
@@ -180,7 +210,6 @@
       margin-top: auto;
     }
     .product-price {
-      font-family: 'Sora', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       color: var(--accent);

@@ -16,21 +16,23 @@ export function AboutSection() {
 
   // Gestion interne du Reveal pour éviter le conflit avec main.js
   useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // On garde l'état à true, React s'occupera de maintenir la classe
           observer.unobserve(entry.target);
         }
       },
       { threshold: 0.15 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
-    return () => observer.disconnect();
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
   }, []);
 
   // Gestion de l'Autoplay automatique et fluide
@@ -70,7 +72,7 @@ export function AboutSection() {
               </a>
               <a href="/catalogue.html" className="btn btn-ghost">Voir le catalogue</a>
             </div>
-            <h2 className="display-md" style={{ margin: '1.5rem 0', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>Innovation, Sécurité & Expertise</h2>
+            <h2 className="display-md" style={{ margin: '1.5rem 0', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontFamily: 'var(--font-heading)' }}>Innovation, Sécurité & Expertise</h2>
             <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
               Marsal Technologies se spécialise dans les solutions modernes de sécurité et d'automatisation intelligentes pour les maisons, les bureaux et les entreprises. Nous proposons des technologies innovantes, notamment des serrures intelligentes, des systèmes de surveillance, des systèmes de contrôle d'accès, des solutions réseau, des interrupteurs intelligents et d'autres dispositifs de sécurité intelligents qui améliorent la sécurité, le confort et l'efficacité.
             </p>

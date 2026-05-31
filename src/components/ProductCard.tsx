@@ -93,7 +93,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
       <div className="product-body p-5">
         <div className="product-cat text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">{category}</div>
-        <div className="product-name text-lg font-bold text-slate-800 mb-2">{title}</div>
+        <div className="product-name text-lg font-bold text-slate-800 mb-2" style={{ fontFamily: 'var(--font-heading)' }}>{title}</div>
         <p className="product-desc text-sm text-gray-500 leading-relaxed mb-4">{description}</p>
         <div className="product-footer flex items-center justify-between">
           <a 

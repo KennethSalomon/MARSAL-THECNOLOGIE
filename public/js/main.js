@@ -8,32 +8,31 @@
 const HEADER_HTML = `
 <div class="container">
   <div class="header-inner">
-
     <!-- Logo -->
-    <a href="/index.html" class="logo-wrap" aria-label="Marsal Technologies — Accueil">
+    <a href="index.html" class="logo-wrap" aria-label="Marsal Technologies — Accueil">
       <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img">
     </a>
 
-    <!-- Navigation desktop -->
+    <!-- Navigation desktop (Hidden if React Header is active) -->
     <nav aria-label="Navigation principale">
       <ul class="nav-links">
-        <li><a href="/index.html" data-page="index">Accueil</a></li>
-        <li><a href="/solutions.html" data-page="solutions">Solutions</a></li>
-        <li><a href="/catalogue.html" data-page="catalogue">Catalogue</a></li>
-        <li><a href="/temoignages.html" data-page="temoignages">Témoignages</a></li>
-        <li><a href="/contact.html" data-page="contact">Contact</a></li>
+        <li><a href="index.html" data-page="index">Accueil</a></li>
+        <li><a href="solutions.html" data-page="solutions">Solutions</a></li>
+        <li><a href="catalogue.html" data-page="catalogue">Catalogue</a></li>
+        <li><a href="temoignages.html" data-page="temoignages">Témoignages</a></li>
+        <li><a href="contact.html" data-page="contact">Contact</a></li>
       </ul>
     </nav>
 
     <!-- CTA + Burger -->
     <div class="header-cta">
-      <a href="/contact.html" class="btn btn-primary">
+      <a href="contact.html" class="btn btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
         </svg>
         Devis gratuit
       </a>
-      <button class="burger" id="burger-btn" aria-label="Menu mobile" aria-expanded="false">
+      <button class="burger" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -41,21 +40,15 @@ const HEADER_HTML = `
   </div>
 </div>
 
-<!-- Mobile nav overlay -->
-<nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
-  <div class="mobile-nav-header">
-    <div class="logo-wrap">
-      <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img" style="height: 45px; width: auto;">
-    </div>
-  </div>
-  
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <a href="/index.html" data-page="index">Accueil</a>
-    <a href="/solutions.html" data-page="solutions">Solutions</a>
-    <a href="/catalogue.html" data-page="catalogue">Catalogue</a>
-    <a href="/temoignages.html" data-page="temoignages">Témoignages</a>
-    <a href="/contact.html" data-page="contact">Contact</a>
-    <a href="/contact.html" class="btn btn-primary" style="margin-top:1rem;justify-content:center;">Devis gratuit</a>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+  <div class="mobile-nav-content">
+    <a href="index.html" data-page="index">Accueil</a>
+    <a href="solutions.html" data-page="solutions">Solutions</a>
+    <a href="catalogue.html" data-page="catalogue">Catalogue</a>
+    <a href="temoignages.html" data-page="temoignages">Témoignages</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Obtenir un devis</a>
   </div>
 </nav>
 `;
@@ -66,7 +59,7 @@ const FOOTER_HTML = `
 
     <!-- Colonne 1 : Description + Réseaux -->
     <div class="footer-col">
-      <a href="/index.html" class="logo-wrap" style="margin-bottom:1.25rem;display:inline-flex;">
+      <a href="index.html" class="logo-wrap" style="margin-bottom:1.25rem;display:inline-flex;">
         <img src="/images/logo.png" alt="Marsal Technologies Logo" class="logo-img">
       </a>
       <p style="font-size:.875rem;color:var(--text-muted);line-height:1.7;max-width:280px;">
@@ -94,7 +87,7 @@ const FOOTER_HTML = `
         <!-- LinkedIn -->
         <a href="https://bj.linkedin.com/in/marsal-smarttech-b9119b274?trk=public_post_comment_actor-image" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2a2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
           </svg>
         </a>
         <!-- WhatsApp -->
@@ -110,11 +103,11 @@ const FOOTER_HTML = `
     <div class="footer-col">
       <h4>Navigation</h4>
       <ul>
-        <li><a href="/index.html">Accueil</a></li>
-        <li><a href="/solutions.html">Nos Solutions</a></li>
-        <li><a href="/catalogue.html">Catalogue</a></li>
-        <li><a href="/temoignages.html">Témoignages</a></li>
-        <li><a href="/contact.html">Contact & Devis</a></li>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="solutions.html">Nos Solutions</a></li>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="temoignages.html">Témoignages</a></li>
+        <li><a href="contact.html">Contact & Devis</a></li>
       </ul>
     </div>
 
@@ -187,7 +180,7 @@ function generateMarqueeItems() {
       <div class="partner-logo-box">
         <img src="${p.logo}" alt="Logo ${p.name}" loading="lazy">
       </div>
-      <span class="partner-name">${p.name}</span>
+      <span class="partner-name" style="font-family: var(--font-body); font-weight: 500;">${p.name}</span>
     </div>
   `).join('');
 }
@@ -212,11 +205,12 @@ const WHATSAPP_HTML = `
 function injectComponents() {
   // Header
   const header = document.getElementById('site-header');
-  if (header) header.innerHTML = HEADER_HTML || "";
+  // On injecte le header si l'élément existe et est vide
+  if (header && header.innerHTML.trim() === "") header.innerHTML = HEADER_HTML;
 
   // Footer
   const footer = document.getElementById('site-footer');
-  if (footer) footer.innerHTML = FOOTER_HTML || "";
+  if (footer) footer.innerHTML = FOOTER_HTML;
 
   // WhatsApp
   const waContainer = document.getElementById('whatsapp-widget');
@@ -229,7 +223,7 @@ function setActivePage() {
   const path = window.location.pathname || "/index.html";
   // Detect current page key
   let current = 'index';
-  if (path.includes('solutions')) current = 'solutions';
+  if (path.includes('solutions.html')) current = 'solutions';
   if (path.includes('catalogue')) current = 'catalogue';
   if (path.includes('temoignages')) current = 'temoignages';
   if (path.includes('contact')) current = 'contact';
@@ -246,7 +240,7 @@ function setActivePage() {
 function initHeaderScroll() {
   const header = document.getElementById('site-header');
   if (!header) return;
-  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
@@ -255,81 +249,58 @@ function initHeaderScroll() {
 
 function initBurger() {
   const btnBurger = document.getElementById('burger-btn');
-  const btnClose = document.getElementById('close-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const mobileNav = document.getElementById('mobile-nav');
+  const overlay = document.getElementById('mobile-overlay');
   
-  if (!btnBurger || !mobileMenu) return;
+  if (!btnBurger || !mobileNav) return;
 
-  const openMenu = () => {
-    mobileMenu.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
+  const toggleMenu = () => {
+    const isOpen = btnBurger.classList.toggle('is-active');
+    mobileNav.classList.toggle('is-active');
+    if (overlay) overlay.classList.toggle('is-active');
     
-    // Focus trap setup
-    const focusableContent = mobileMenu.querySelectorAll(focusableElements);
-    if (focusableContent.length > 0) {
-      setTimeout(() => focusableContent[0].focus(), 100);
-    }
-
-    const handleKeyDown = (e) => {
-      if (e.key !== 'Tab' || !mobileMenu.classList.contains('is-active')) return;
-      const first = focusableContent[0];
-      const last = focusableContent[focusableContent.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        last.focus(); e.preventDefault();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        first.focus(); e.preventDefault();
-      }
-    };
-
-    mobileMenu._keydownHandler = handleKeyDown;
-    document.addEventListener('keydown', handleKeyDown);
+    // Gestion du scroll body et accessibilité
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    btnBurger.setAttribute('aria-expanded', isOpen);
+    btnBurger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
   };
 
-  const closeMenu = () => {
-    mobileMenu.classList.remove('is-active');
-    document.body.style.overflow = '';
-    
-    if (mobileMenu._keydownHandler) {
-      document.removeEventListener('keydown', mobileMenu._keydownHandler);
-    }
-    // Restore focus to trigger
-    btnBurger.focus();
-  };
-
-  btnBurger.addEventListener('click', openMenu);
-  if (btnClose) btnClose.addEventListener('click', closeMenu);
-
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+  btnBurger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
   });
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && mobileMenu.classList.contains('is-active')) closeMenu();
+  // Fermer au clic sur l'overlay ou sur un lien
+  [overlay, mobileNav].forEach(el => {
+    if (el) {
+      el.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' || e.target === overlay) {
+          if (btnBurger.classList.contains('is-active')) toggleMenu();
+        }
+      });
+    }
   });
 }
 
 /* ── 6. SCROLL REVEAL (IntersectionObserver) ─────────────────── */
 
 function initScrollReveal() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const revealElements = document.querySelectorAll('.reveal, .animate-blur-fade-up');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealElements.forEach(el => el.classList.add('visible'));
+    return;
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry?.isIntersecting && entry.target) {
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => {
-    // Exclusion spécifique du bouton solutions de la logique de masquage
-    if (el.classList.contains('btn') && el.getAttribute('href')?.includes('solutions')) {
-      el.classList.add('visible');
-      return;
-    }
+  revealElements.forEach(el => {
     observer.observe(el);
   });
 }

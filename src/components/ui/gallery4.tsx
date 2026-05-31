@@ -80,7 +80,7 @@ const Gallery4 = ({
         {/* Étape 1 : Header Restructuré */}
         <div className="flex justify-between items-end mb-12 w-full">
           <div className="flex flex-col gap-4">
-            <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl text-[#386FA8] leading-tight">
+            <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl text-[#386FA8] leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
               {title}
             </h2>
             <p className="max-w-lg text-slate-600 font-medium text-lg">{description}</p>
@@ -121,7 +121,7 @@ const Gallery4 = ({
                       />
                     </div>
                     <div className="flex flex-col items-start p-6 text-slate-900 md:p-8">
-                      <div className="mb-2 text-xl font-bold">
+                      <div className="mb-2 text-xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
                         {item.title}
                       </div>
                       <div className="mb-6 line-clamp-2 text-sm text-slate-500 leading-relaxed">

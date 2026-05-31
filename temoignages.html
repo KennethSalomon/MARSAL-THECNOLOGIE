@@ -7,10 +7,25 @@
   <title>Témoignages · Marsal Technologies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
+    :root {
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, .display-lg, .display-md {
+      font-family: var(--font-heading) !important;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
     .page-hero {
       background: var(--bg-light);
       padding-top: calc(68px + 4rem);
@@ -500,7 +515,7 @@
         <div class="review-form-card reveal" style="margin-top: 5rem;">
           <div class="form-split-layout">
             <div class="form-visual-side">
-              <img src="/images/logo.png" alt="Logo Marsal Technologies" class="form-side-logo">
+              <img src="/images/2.png" alt="Logo Marsal Technologies" class="form-side-logo">
             </div>
             
             <div class="form-content-side">
