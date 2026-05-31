@@ -53,6 +53,54 @@ const HEADER_HTML = `
 </nav>
 `;
 
+// Fonction qui génère la grille des partenaires (remplace l'ancien marquee)
+function generatePartnersGrid() {
+  const partners = [
+    { name: "Delta Motors", logo: "https://logo.clearbit.com/delta-motors.com?size=120&format=png", fallback: "Delta Motors" },
+    { name: "Serlog Logistics", logo: "https://instagram.fcoo2-1.fna.fbcdn.net/v/t51.2885-19/349232429_1508891256305921_1660746035022741137_n.jpg?stp=dst-jpg_s320x320_tt6&_nc_ht=instagram.fcoo2-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2gFse26SK2V1jCb2TD4lNzFwNi-EVqHQNz8-WiQrvqP3p9dezKGAENMdBqW4wrSiQwI&_nc_ohc=qpM4mk3nYoAQ7kNvwHpMzUi&_nc_gid=r7CzMyCJNobSVOM89oxb9A&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Af-ui57X8huBIgnfUNlvZBhrmcGceQflqIZQ9FkSDS5yPw&oe=6A2216A0", fallback: "Serlog" },
+    { name: "3TI SARL", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEVHcEwzUp4zUp0zUp0zUp0sTZseRZhfdK7N0uPCyd5DXqP///8KO5Tb3uuwudSeqcvv8faQncR7i7pe9uZqAAAABXRSTlMAEq//slwUrCoAAAC/SURBVHgBvZPBDoQgDEQRnCLACvr/H7ulJxDAy2bfoYmZR2MmoNSmzRS9cW6WbGpfC1qZF34ugAgrAfZwHnMBNjALIX6KcNJMkAXMVKAjCIkmgufQZR5xLJDjzCYeF8YbOMoRMkcCnXJW9twYCYGJRF5W9AKlEjimiBadEEPNJz4FXKHB4iHEXM4dQincUSvgll8jAYHxrUCuqlgqT+g2ZKo7t61g4C1V98oadEVBZvfxj2uv1/n+/njVti+f/xeR5xITAMlHqwAAAABJRU5ErkJggg==", fallback: "3TI SARL" },
+    { name: "7ELITE Groupe", logo: "https://7elite-group.com/elite.png", fallback: "7ELITE" },
+    { name: "Benin Textile Corp.", logo: "https://gdiz-benin.com/wp-content/uploads/2022/07/GDIZ-LOGO.png", fallback: "GDIZ" },
+    { name: "SOBECO", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcBAMAAACAI8KnAAAALVBMVEVHcEyUwR6UwR+UwR+UwR+UwR+UwR+UwR6UwR+UwR+UwR+UwR+UwR+UwR+wVRibAAAADnRSTlMAD2WUsYNDJsp2TDj44VcH9cIAAACUSURBVHgBpcctrEFhAADQ4z7P+1G+2Uw1gSbpTTO7osD0JCo2onaDKGiamV70pMebbHw9arYbzWnHx2q9/gyAxeZwHmQAf2uYBMAY/FyASkp1zxIow5UkAx3YYgVSOI5ogwy6N+pQ2sMw5wtKJ4h3vl/9jTFIwBzT+AgaAGIeAFCJTQBIHgDgP1dQrJ2CcqqgFbztCUF3Hj0RFPTDAAAAAElFTkSuQmCC", fallback: "SOBECO" },
+    { name: "SBEE Godomey", logo: "https://sbee.bj/wp-content/uploads/2024/03/Logo-SBEE-couleur-transparent-1.svg", fallback: "SBEE" },
+    { name: "PMI Foods", logo: "https://www.pmifoods.com/wp-content/uploads/2024/07/logo.svg", fallback: "PMI Foods" },
+    { name: "IAC-BENIN", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEVHcEwzUp4zUp0zUp0zUp0sTZseRZhfdK7N0uPCyd5DXqP///8KO5Tb3uuwudSeqcvv8faQncR7i7pe9uZqAAAABXRSTlMAEq//slwUrCoAAAC/SURBVHgBvZPBDoQgDEQRnCLACvr/H7ulJxDAy2bfoYmZR2MmoNSmzRS9cW6WbGpfC1qZF34ugAgrAfZwHnMBNjALIX6KcNJMkAXMVKAjCIkmgufQZR5xLJDjzCYeF8YbOMoRMkcCnXJW9twYCYGJRF5W9AKlEjimiBadEEPNJz4FXKHB4iHEXM4dQincUSvgll8jAYHxrUCuqlgqT+g2ZKo7t61g4C1V98oadEVBZvfxj2uv1/n+/njVti+f/xeR5xITAMlHqwAAAABJRU5ErkJggg==", fallback: "IAC Bénin" },
+    { name: "SONI Bank Bénin", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAICAMAAACvWw2dAAAAYFBMVEXm9fze9PwnuetGwO1pye9bxu5cxu5ZxO5Qwu2T1vP////k8fnq+P36/f6s3vWH0vJuyvB5zvHu9vzM6/ma2PR/z/Gc0O0AtOoArei24/fZ8PvG6fm93/Oz2vHT7vq+5vhJkOV3AAAArElEQVR4AUWNBWIEIQwAs4prOCwt/P+XZWs3EDeA7QH247wW9/Pu60ezY+cCQEol9bYb67wP6y0etYgM0wvAqBw1FHNUIfZWmBeiuCOwUDu16kCrD/mpoRbjQ01JeGdtEc4JV8Hp6v5OnBR365hLp7NJvKwoWE2xFEBvC9D85ozd7M3Nn8ctjEHY7ZxyIiKNhoRNd+p9w0mdJsAq9AloJtJc3lhNetDWJy0afgEkOA5vaxhH/AAAAABJRU5ErkJggg==", fallback: "SONI Bank" },
+    { name: "Chapelle des Vainqueurs", logo: "", fallback: "Chapelle VDM" },
+    { name: "OWO Financial Services", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAQlBMVEVHcEx2RkqqChe1CBaqEx6sCha0CRexCRe0CBe2CBexCReqChe+BxirChe1CBezCRexCRe4CBfKBRjBBhjCBRjOBBlyZPaEAAAAFnRSTlMACEs3D5XKgy4fr/x32v9tXumW2//ukQq9dwAAARFJREFUeAG0kAWCBCEMBBsNGjKQ/f9X79g5d60RpLAG/46x7j3lbYiUnMuvVS41ttArc60lPXejViFmPgoNKkfxT1zgI8dbJT5La5Lsk8mDOd26aWTplYPkYT/WvWbzUVUva122tjgpujzzzAevlgzgEx3KcsZTHcSH79weI0+u19BWNXWWUJ8lsNx3MVR95VwdniFVAJBeTI2DYEOGeCtGkINF2VPbliFAInXfXYwu+k5RTD339DUIYsaUMVubY0zkhX0TXtXFArPl8HHO5U857DXntB0YsS2PslaBP1occFs61tw9ICEDydoE5CCA8ee9F0t4j8Jt5HdtqOTxLrZ3i/dJFBx+jDGAuRkQwGi8igGoWQ3JgH9pVwAAAABJRU5ErkJggg==", fallback: "OWO Financial" },
+    { name: "Benue State Judiciary", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAgCAMAAADQQiM0AAAAulBMVEVHcEwAOCwBTigDVy8ANhYAFy8ATygDcCUMeSZCk1RanW02iUpQmWMoiD4QYTZnpnmQt6WkwboHhx8AViZ5rYmEs5Z2p4oAMxsPXzZFdlglQzcCMx0ZNyswU0QCLxoAHw0AKhhPiFyduLRge3Y8YFEgTjICOSGInJ4BPiNJbmEBRiaWrK2wxsRxj4graEsmkjkcXDQvaT5do19XkXHM2eBgh3q9ztNumorI1dyHqaPF09pzOCMqY0oAOQG7vIwUAAAAPnRSTlMAJ1h3Rw+V9v///////77/////0////ziq//////////////7///////X////90f////////3////////2bUkKjQ4AAAIMSURBVHgBXNBXdoUgFAVQ37MBgoCxU+w1DTP/wQVNz/3d67bjfNft7rqu5zv/yg9CAFGECYi9P+CGhDLIMIdJQh5+9cUgzdIcI0ghZCkKiy8oozRKYVULKVSFUJqCT3IB4rTSTat1q1vZZTQL/Wt5SBJYNW0rhKqF0G2V9jg+JcAMVY0WrdDDOFlsOpqCm5UQciRtwzzPy6ImqbVEKSztg4BR22JhrZdlGvQmm4ploePcI5aPrZjXdVePyy7WedYjQnacSxCsW21b9tHKfoqkPSkcFz5da6zsnyIayoh3ibrETnu2ss5C0qfo5ngA0bGdP3qGs0e0I6V2jw/4U/TRsw7b1dJWjNvbnJdXStVkVjMZdRgzTabG+K20UgDO8XFMx3GY46qOcnJm4BoMk/emyCohohAKoEx3d8+ATag06Nv/tuSCdX7gdqnjE9MM74h5uN5e5xMIQcKq7nzeI5o9OjfTJhnmZddt7C12g+5USSmHYT13wZlyoJ2P0WurJvLjtlTU6gRvguU5Jjwerqa7NZZOg6gDmNqzYnGBk+nQ+ew4ayRL/dPDV8l3cneToVgoVGo6ELy59ZVybywJicdk2fKYsa4/mahZNuQOGlSDAFEs4Kjzz26hiuEc6qTGeVsY6wGoAght6TPGZgw1GX30HtezocXtokJVlYVm1WySaFol5pnU0H82ookQ+gJRyVR8zsQIwQAAAABJRU5ErkJggg==", fallback: "Benue Judiciary" },
+    { name: "FV Partners Group", logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEVHcEwzUp4zUp0zUp0zUp0sTZseRZhfdK7N0uPCyd5DXqP///8KO5Tb3uuwudSeqcvv8faQncR7i7pe9uZqAAAABXRSTlMAEq//slwUrCoAAAC/SURBVHgBvZPBDoQgDEQRnCLACvr/H7ulJxDAy2bfoYmZR2MmoNSmzRS9cW6WbGpfC1qZF34ugAgrAfZwHnMBNjALIX6KcNJMkAXMVKAjCIkmgufQZR5xLJDjzCYeF8YbOMoRMkcCnXJW9twYCYGJRF5W9AKlEjimiBadEEPNJz4FXKHB4iHEXM4dQincUSvgll8jAYHxrUCuqlgqT+g2ZKo7t61g4C1V98oadEVBZvfxj2uv1/n+/njVti+f/xeR5xITAMlHqwAAAABJRU5ErkJggg==", fallback: "FV Partners" }
+  ];
+
+  let cardsHtml = '';
+  for (let i = 0; i < partners.length; i++) {
+    const p = partners[i];
+    cardsHtml += `
+      <div class="partner-card">
+        <div class="partner-logo">
+          <img src="${p.logo || ''}" 
+               alt="${p.name}"
+               onerror="this.onerror=null; this.src='https://placehold.co/200x100/1a1a2e/ffffff?text=${encodeURIComponent(p.fallback)}';">
+        </div>
+        <p class="partner-name">${p.name}</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="partners-grid-wrapper">
+      <div class="partners-header">
+        <span class="partners-subtitle">Ils nous font confiance</span>
+        <h3 class="partners-title">Nos Partenaires</h3>
+        <div class="partners-separator"></div>
+      </div>
+      <div class="partners-grid">
+        ${cardsHtml}
+      </div>
+    </div>
+  `;
+}
+
 const FOOTER_HTML = `
 <div class="container">
   <div class="footer-grid">
@@ -139,12 +187,9 @@ const FOOTER_HTML = `
 
   </div>
 
-  <!-- Partners Marquee -->
-  <div class="partners-marquee-wrapper">
-    <div class="partners-marquee">
-      ${generateMarqueeItems()}
-      ${generateMarqueeItems()}
-    </div>
+  <!-- Nouvelle section partenaires (grille) - remplace l'ancien marquee -->
+  <div class="footer-partners-section">
+    ${generatePartnersGrid()}
   </div>
 
   <!-- Bottom bar -->
@@ -155,35 +200,6 @@ const FOOTER_HTML = `
 
 </div>
 `;
-
-function generateMarqueeItems() {
-  const partners = [
-    { name: "Delta Motors", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=DELTA" },
-    { name: "Serlog Logistics", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=SERLOG" },
-    { name: "3TI SARL", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=3TI" },
-    { name: "7Elite Groupe", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=7ELITE" },
-    { name: "Benin Textile Corp", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=GDIZ" },
-    { name: "Sobeco", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=SOBECO" },
-    { name: "SBEE-Godomey", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=SBEE" },
-    { name: "PMI Foods", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=PMI" },
-    { name: "Hôtel Mosaly", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=MOSALY" },
-    { name: "IAC-Benin", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=IAC" },
-    { name: "Soni Bank Bénin", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=SONI" },
-    { name: "Vainqueurs Cotonou", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=WINNERS" },
-    { name: "Owo Financial", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=OWO" },
-    { name: "Judiciary Nigeria", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=BENUE" },
-    { name: "FV Partners Group", logo: "https://placehold.co/100x60/FFFFFF/386FA8?text=FVP" }
-  ];
-
-  return partners.map(p => `
-    <div class="partner-item">
-      <div class="partner-logo-box">
-        <img src="${p.logo}" alt="Logo ${p.name}" loading="lazy">
-      </div>
-      <span class="partner-name" style="font-family: var(--font-body); font-weight: 500;">${p.name}</span>
-    </div>
-  `).join('');
-}
 
 const WHATSAPP_HTML = `
 <a href="https://wa.me/22954036641?text=Merci%20d'avoir%20contact%C3%A9%20Marsal%20Technologies.%20Veuillez%20nous%20envoyer%20vos%20demandes%20et%20nous%20vous%20r%C3%A9pondrons%20dans%20les%20plus%20brefs%20d%C3%A9lais."
@@ -205,7 +221,6 @@ const WHATSAPP_HTML = `
 function injectComponents() {
   // Header
   const header = document.getElementById('site-header');
-  // On injecte le header si l'élément existe et est vide pour éviter les doubles injections
   if (header && !header.firstChild) header.innerHTML = HEADER_HTML;
 
   // Footer
@@ -223,7 +238,6 @@ function setActivePage() {
   const path = window.location.pathname;
   const fileName = path.split('/').filter(Boolean).pop() || "index.html";
   
-  // Detect current page key
   let current = (fileName === "index.html" || fileName === "/") ? 'index' : '';
   if (fileName.includes('solutions')) current = 'solutions';
   if (fileName.includes('catalogue')) current = 'catalogue';
@@ -261,7 +275,6 @@ function initBurger() {
     mobileNav.classList.toggle('is-active');
     if (overlay) overlay.classList.toggle('is-active');
     
-    // Gestion du scroll body et accessibilité
     document.body.style.overflow = isOpen ? 'hidden' : '';
     btnBurger.setAttribute('aria-expanded', isOpen);
     btnBurger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
@@ -272,7 +285,6 @@ function initBurger() {
     toggleMenu();
   });
 
-  // Fermer au clic sur l'overlay ou sur un lien
   [overlay, mobileNav].forEach(el => {
     if (el) {
       el.addEventListener('click', (e) => {
@@ -322,7 +334,6 @@ function animateCounter(el) {
   function update(now) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
     const eased = 1 - Math.pow(1 - progress, 3);
     const value = target * eased;
     el.textContent = (Number.isInteger(target) ? Math.round(value) : value.toFixed(1)) + suffix;
@@ -354,43 +365,30 @@ function initAdvancedAtmosphereSwitcher() {
 
   if (!dayLayer || !nightLayer || !btnJour || !btnNuit) return;
 
-  // ── JOUR (DAY MODE) BUTTON ──
   btnJour.addEventListener('click', () => {
-    // Smoothly cross-fade: Day visible, Night hidden
     dayLayer.style.opacity = '1';
     dayLayer.style.zIndex = '10';
     nightLayer.style.opacity = '0';
     nightLayer.style.zIndex = '0';
-
-    // Clear filters from night layer
     nightLayer.style.filter = '';
-
-    // Toggle button states
     btnJour.classList.add('active');
     btnNuit.classList.remove('active');
     btnJour.setAttribute('aria-pressed', 'true');
     btnNuit.setAttribute('aria-pressed', 'false');
   });
 
-  // ── NUIT (NIGHT MODE) BUTTON ──
   btnNuit.addEventListener('click', () => {
-    // Smoothly cross-fade: Night visible, Day hidden
     dayLayer.style.opacity = '0';
     dayLayer.style.zIndex = '0';
     nightLayer.style.opacity = '1';
     nightLayer.style.zIndex = '10';
-
-    // Apply hardware-accelerated CSS filters for luxury vibe
     nightLayer.style.filter = 'brightness(0.75) contrast(1.25) saturate(0.75)';
-
-    // Toggle button states
     btnNuit.classList.add('active');
     btnJour.classList.remove('active');
     btnNuit.setAttribute('aria-pressed', 'true');
     btnJour.setAttribute('aria-pressed', 'false');
   });
 
-  // Set initial state: Day mode active by default
   dayLayer.style.opacity = '1';
   dayLayer.style.zIndex = '10';
   nightLayer.style.opacity = '0';
@@ -398,7 +396,132 @@ function initAdvancedAtmosphereSwitcher() {
   btnJour.classList.add('active');
 }
 
-/* ── 9. INIT ALL ────────────────────────────────────────────── */
+/* ── 9. INJECTION STYLES PARTENAIRES (Bleus) ─────────────────── */
+
+function injectPartnersStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .footer-partners-section {
+      margin: 3rem 0 2rem;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid rgba(30, 107, 158, 0.2);
+      border-bottom: 1px solid rgba(30, 107, 158, 0.2);
+      background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+    }
+    .partners-grid-wrapper {
+      text-align: center;
+    }
+    .partners-header {
+      margin-bottom: 2rem;
+    }
+    .partners-subtitle {
+      color: #1E6B9E;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .partners-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+    .partners-separator {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #1E6B9E, #4A9FD8, #1E6B9E);
+      margin: 0 auto;
+      border-radius: 3px;
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.75rem;
+      align-items: center;
+      justify-items: center;
+    }
+    .partner-card {
+      text-align: center;
+      transition: transform 0.3s ease;
+      width: 100%;
+      max-width: 170px;
+    }
+    .partner-card:hover {
+      transform: translateY(-5px);
+    }
+    .partner-logo {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 1rem;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .partner-card:hover .partner-logo {
+      border-color: rgba(30, 107, 158, 0.5);
+      box-shadow: 0 0 15px rgba(30, 107, 158, 0.2);
+    }
+    .partner-logo img {
+      max-width: 100%;
+      max-height: 65px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(0.9) contrast(1.1);
+      transition: filter 0.3s ease;
+    }
+    .partner-card:hover .partner-logo img {
+      filter: brightness(1) contrast(1.2);
+    }
+    .partner-name {
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+    .partner-card:hover .partner-name {
+      color: #1E6B9E;
+    }
+    @media (max-width: 768px) {
+      .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+      }
+      .partner-logo {
+        height: 75px;
+        padding: 0.75rem;
+      }
+      .partner-logo img {
+        max-height: 48px;
+      }
+      .partner-name {
+        font-size: 0.6rem;
+      }
+      .partners-title {
+        font-size: 1.4rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+/* ── 10. INIT ALL ───────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
   injectComponents();
@@ -408,4 +531,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCounters();
   initAdvancedAtmosphereSwitcher();
+  injectPartnersStyles();
 });
