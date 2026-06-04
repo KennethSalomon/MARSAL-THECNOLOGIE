@@ -17,7 +17,7 @@ interface ProductCardProps {
 
 // Liste des images locales disponibles pour le tirage aléatoire
 const FALLBACK_IMAGES = [
-  '/images/camera.png',
+  '/images/cam6.jpeg',
   '/images/domotique.png',
   '/images/serrure.png',
   '/images/panneau.png',
