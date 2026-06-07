@@ -3,9 +3,17 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 
 // CONFIGURATION DES IMAGES : Modifiez les URL et descriptions ici
 const ABOUT_CAROUSEL_IMAGES = [
-  { src: "/images/1.png", alt: "Intérieur connecté Marsal Technologies" },
-  { src: "/images/2.png", alt: "Système de sécurité intelligent" },
-  { src: "/images/logo.png", alt: "Innovation et Expertise" },
+  { src: "/images/lampe2.jpeg", alt: "Innovation et Expertise" },
+  { src: "/images/lampe6.jpeg", alt: "Innovation et Expertise" },
+  { src: "/images/ser16.jpeg", alt: "Innovation et Expertise" },
+  { src: "/images/ser2.png", alt: "Innovation et Expertise" },
+
+  { src: "/images/table1.png", alt: "Innovation et Expertise" },
+  { src: "/images/ecran.png", alt: "Innovation et Expertise" },
+  { src: "/images/echo3.jpeg", alt: "Innovation et Expertise" },
+  { src: "/images/cam2.png", alt: "Intérieur connecté Marsal Technologies" },
+  { src: "/images/cam3.png", alt: "Système de sécurité intelligent" },
+  
 ];
 
 export function AboutSection() {
@@ -74,7 +82,7 @@ export function AboutSection() {
             </div>
             <h2 className="display-md" style={{ margin: '1.5rem 0', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontFamily: 'var(--font-heading)' }}>Innovation, Sécurité & Expertise</h2>
             <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
-              Marsal Technologies se spécialise dans les solutions modernes de sécurité et d'automatisation intelligentes pour les maisons, les bureaux et les entreprises. Nous proposons des technologies innovantes, notamment des serrures intelligentes, des systèmes de surveillance, des systèmes de contrôle d'accès, des solutions réseau, des interrupteurs intelligents et d'autres dispositifs de sécurité intelligents qui améliorent la sécurité, le confort et l'efficacité.
+              Marsal Technologies se spécialise dans <h3>les solutions modernes de sécurité et d'automatisation électronique</h3>  pour les maisons, les bureaux et les entreprises. Nous proposons <h3>des technologies innovantes</h3>, notamment des serrures intelligentes, des systèmes de surveillance, des systèmes de contrôle d'accès, des solutions réseau, des interrupteurs électriques et d'autres dispositifs de sécurité technologiques qui améliorent <h3> la sécurité, le confort et l'efficacité.</h3>
             </p>
             <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8' }}>
               Notre objectif est de fournir des solutions fiables, modernes et conviviales qui répondent aux besoins évolutifs de nos clients grâce à une installation professionnelle, une expertise technique et un service de qualité.

@@ -3,1596 +3,351 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Marsal Technologies — Catalogue de produits domotiques et de sécurité intelligente à Cotonou, Bénin." />
-  <meta property="og:title" content="Catalogue · Marsal Technologies" />
-  <meta property="og:description" content="Marsal Technologies — Catalogue de produits domotiques et de sécurité intelligente à Cotonou, Bénin." />
-  <meta property="og:image" content="/images/og-image.png" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Catalogue · Marsal Technologies" />
-  <meta name="twitter:description" content="Marsal Technologies — Catalogue de produits domotiques et de sécurité intelligente à Cotonou, Bénin." />
-  <meta name="twitter:image" content="/images/og-image.png" />
+  <meta name="description" content="Marsal Technologies — Catalogue de produits domotiques et de sécurité intelligente." />
   <title>Catalogue · Marsal Technologies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    :root {
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Inter', sans-serif;
-      --accent: #386FA8;
-      --accent-light: rgba(56, 111, 168, 0.1);
-    }
-
-    body {
-      font-family: var(--font-body);
-    }
-
-    h1, h2, h3, .display-xl, .product-name {
-      font-family: var(--font-heading) !important;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    /* --- Navigation & Header Styles --- */
-    .nav-links a {
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: clamp(0.9rem, 2vw, 1rem);
-    }
-
-    .nav-links a.active { color: var(--accent) !important; }
-
-    .btn, .btn-primary, .btn-product {
-      font-family: var(--font-body);
-      font-weight: 600;
-    }
-
-    .page-hero {
-      background: var(--bg-light);
-      padding-top: calc(80px + clamp(3rem, 8vw, 5rem));
-      padding-bottom: clamp(2rem, 5vw, 4rem);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .container {
-      padding-inline: clamp(1rem, 5vw, 2rem);
-    }
-
-    /* Filter bar */
-    .filter-bar {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1.5rem;
+    /* Styles spécifiques à la page catalogue (préfixés cat-) */
+    .cat-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/catalogue.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 5rem 0;
       margin-bottom: 2.5rem;
+      text-align: center;
+      color: white;
     }
-    @media (min-width: 768px) {
-      .filter-bar { flex-direction: row; align-items: center; }
+    .cat-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
     }
 
-    .search-input-wrap {
-      position: relative;
-      width: 100%;
-      min-width: 0; 
-      max-width: 450px;
+    .filter-wrapper {
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
     }
-    .search-input-wrap svg {
-      position: absolute;
-      left: 14px; top: 50%;
-      transform: translateY(-50%);
-      width: 17px; height: 17px;
-      color: var(--text-light);
-      pointer-events: none;
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      padding: 0.5rem;
+    }
+    .filter-tab {
+      flex: 0 0 auto;
+      background: #f1f5f9;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: #1e2a3e;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .filter-tab i { margin-right: 0.5rem; }
+    .filter-tab.active {
+      background: var(--accent, #386FA8);
+      color: white;
+      box-shadow: 0 4px 8px rgba(56,111,168,0.2);
+    }
+    .filter-tab:hover:not(.active) {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    .search-wrap {
+      margin-bottom: 2rem;
+      text-align: center;
     }
     .search-input {
       width: 100%;
-      padding: .7rem 1rem .7rem 2.6rem;
-      border: 1.5px solid var(--border);
-      border-radius: 100px;
-      font-size: .875rem;
-      font-family: inherit;
-      background: var(--bg-white);
-      color: var(--text-main);
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
+      max-width: 400px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+      background: white;
+      transition: all 0.2s;
     }
     .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(56,111,168,.1);
+      border-color: var(--accent, #386FA8);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(56,111,168,0.2);
     }
-    .search-input::placeholder { color: var(--text-light); }
 
-    .filter-tabs {
-      width: 100%;
-      flex: 1;
-      display: flex; gap: .5rem; overflow-x: auto; 
-      padding-bottom: 0.5rem; scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-    .filter-tabs::-webkit-scrollbar { display: none; }
-    
-    .filter-tab {
-      white-space: nowrap;
-      padding: .5rem 1rem;
-      border-radius: 100px;
-      font-size: .82rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--bg-white);
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all var(--transition);
-      box-shadow: var(--shadow-sm);
-    }
-    .filter-tab:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
-    .filter-tab:active { transform: scale(0.96); }
-
-    /* Product grid */
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 2rem;
-      align-items: stretch;
+      margin: 2rem 0;
     }
-    
-    @media (max-width: 640px) {
-      .product-grid { 
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-        gap: 1.25rem;
-      }
-    }
-    @media (max-width: 450px) {
-      .product-grid { grid-template-columns: 1fr; }
-    }
-
     .product-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: white;
+      border-radius: 28px;
       overflow: hidden;
-      transition: all var(--transition);
-      cursor: default;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      border: 1px solid #edf2f7;
     }
     .product-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
-      border-color: rgba(56,111,168,.25);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
     }
-    .product-card[data-hidden="true"] { display: none; }
-
-    /* Badge "Bon Plan" */
-    .product-badge {
-      position: absolute;
-      top: 1rem; left: 1rem;
-      background: var(--accent);
-      color: #fff;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .25rem .65rem;
-      border-radius: 100px;
-      z-index: 1;
-    }
-    .product-badge.bon-plan { background: #2D9E6F; }
-
     .product-img {
       width: 100%;
-      aspect-ratio: 4/3;
-      flex-shrink: 0;
-      overflow: hidden;
-      background-color: #f8f9fa;
+      aspect-ratio: 1 / 1;
+      background: #fafcff;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      border-bottom: 1px solid rgba(0,0,0,0.03);
+      padding: 1.5rem;
+      border-bottom: 1px solid #f0f2f5;
     }
     .product-img img {
-      width: 100%;
-      height: 100%;
+      max-width: 85%;
+      max-height: 85%;
       object-fit: contain;
-      padding: 1.5rem;
-      transition: transform 0.5s ease;
+      transition: transform 0.4s;
     }
-    .product-card:hover .product-img img { transform: scale(1.08); }
-    .product-img svg { width: 80px; height: 80px; color: var(--border); }
-    .product-img-icon {
-      width: 80px; height: 80px;
-      background: var(--accent-light);
-      border-radius: 22px;
-      display: grid; place-items: center;
+    .product-card:hover .product-img img {
+      transform: scale(1.02);
     }
-    .product-img-icon svg { width: 42px; height: 42px; color: var(--accent); }
-
     .product-body {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      padding: 1.2rem 1.2rem 1.5rem;
     }
     .product-cat {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .07em;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      color: var(--text-light);
+      letter-spacing: 1px;
+      color: var(--accent, #386FA8);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
     .product-name {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: .35rem;
-    }
-    .product-desc { font-size: .8rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
-    .product-footer {
-      display: flex;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 1.25rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    .btn-product {
-      width: 100%;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .5rem 1.1rem;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 100px;
-      font-size: .78rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
       font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all var(--transition);
+      margin-bottom: 1rem;
+      color: #0f172a;
     }
-    .btn-product:hover { background: var(--accent-dark); box-shadow: 0 4px 12px rgba(56,111,168,0.3); }
-    .btn-product svg { width: 14px; height: 14px; }
-
-    /* Empty state */
+    .btn-product {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent, #386FA8);
+      color: white;
+      border-radius: 40px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-product:hover {
+      background: var(--accent-dark, #2c5582);
+      transform: translateY(-2px);
+    }
     .empty-state {
       grid-column: 1 / -1;
       text-align: center;
-      padding: 4rem 2rem;
-      color: var(--text-light);
+      padding: 4rem;
+      color: #94a3b8;
     }
-    .empty-state svg { width: 56px; height: 56px; margin-bottom: 1rem; opacity: .4; }
-    .empty-state p { font-size: .9rem; }
+    @media (max-width: 700px) {
+      .product-grid { gap: 1rem; }
+      .filter-tab { padding: 0.5rem 1rem; font-size: 0.75rem; }
+    }
   </style>
 </head>
 <body>
 
-  <header id="site-header" role="banner"></header>
+<header id="site-header" role="banner"></header>
 
-  <main>
+<main>
+  <section class="cat-hero">
+    <div class="container">
+      <h1>Notre catalogue</h1>
+      <p>Des solutions domotiques, sécurité & haut de gamme</p>
+    </div>
+  </section>
 
-    <section class="page-hero">
-      <div class="container">
-       
-        <h1 class="display-xl reveal reveal-delay-1" style="margin-top:1rem;max-width:680px;" data-i18n="catalogue.title">
-          Nos équipements<br><span class="text-accent" data-i18n="catalogue.subtitle">haut de gamme.</span>
-        </h1>
-        <p class="reveal reveal-delay-2" style="font-size:1.05rem;color:var(--text-muted);max-width:520px;margin-top:1rem;line-height:1.7;" data-i18n="catalogue.desc">
-          Sélection rigoureuse des meilleurs produits domotiques et de sécurité — certifiés, installés et garantis par nos techniciens.
-        </p>
+  <div class="container">
+    <div class="filter-wrapper">
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" data-filter="all"><i class="fas fa-th-large"></i> Tous</button>
+        <button class="filter-tab" data-filter="serrures"><i class="fas fa-lock"></i> Serrures</button>
+        <button class="filter-tab" data-filter="cameras"><i class="fas fa-video"></i> Caméras</button>
+        <button class="filter-tab" data-filter="rideaux"><i class="fas fa-curtain"></i> Rideaux</button>
+        <button class="filter-tab" data-filter="tablettes"><i class="fas fa-tablet-alt"></i> Tablettes</button>
+        <button class="filter-tab" data-filter="enceintes"><i class="fas fa-music"></i> Enceintes</button>
+        <button class="filter-tab" data-filter="telephones"><i class="fas fa-phone-alt"></i> Téléphones</button>
+        <button class="filter-tab" data-filter="energie"><i class="fas fa-solar-panel"></i> Énergie solaire</button>
+        <button class="filter-tab" data-filter="acces"><i class="fas fa-fingerprint"></i> Accès & Présence</button>
+        <button class="filter-tab" data-filter="hotel"><i class="fas fa-hotel"></i> Barrière routière </button>
+        <button class="filter-tab" data-filter="autres"><i class="fas fa-ellipsis-h"></i> Autres</button>
       </div>
-    </section>
+    </div>
 
-    <section class="section" style="background:var(--bg-white);">
-      <div class="container">
+    <div class="search-wrap">
+      <input type="text" id="search-input" class="search-input" placeholder="🔍 Rechercher un produit...">
+    </div>
 
-        <!-- Filter bar -->
-        <div class="filter-bar reveal">
-          <div class="search-input-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
-            </svg>
-            <input
-              type="search"
-              class="search-input"
-              id="product-search"
-              data-i18n="catalogue.search"
-              placeholder="Rechercher un produit..."
-              aria-label="Rechercher un produit"
-            />
-          </div>
-          <div class="filter-tabs" role="tablist" aria-label="Filtres par catégorie">
-            <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true" data-i18n="catalogue.filter.all">Tous</button>
-            <button class="filter-tab" data-filter="serrures-intelligentes" role="tab" aria-selected="false" data-i18n="catalogue.filter.locks">Serrures Intelligentes</button>
-            <button class="filter-tab" data-filter="domotique" role="tab" aria-selected="false" data-i18n="catalogue.filter.automation">Domotique</button>
-            <button class="filter-tab" data-filter="cameras" role="tab" aria-selected="false" data-i18n="catalogue.filter.cameras">Caméras</button>
-            <button class="filter-tab" data-filter="energie-solaire" role="tab" aria-selected="false" data-i18n="catalogue.filter.solar">Énergie Solaire</button>
-            <button class="filter-tab" data-filter="solutions-hotel" role="tab" aria-selected="false" data-i18n="catalogue.filter.hotel">Solutions Hôtel</button>
-            <button class="filter-tab" data-filter="securite-presence" role="tab" aria-selected="false" data-i18n="catalogue.filter.access">Accès & Présence</button>
-            <button class="filter-tab" data-filter="autres" role="tab" aria-selected="false" data-i18n="catalogue.filter.others">Autres</button>
-          </div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</main>
+
+<footer id="site-footer" role="contentinfo"></footer>
+<div id="whatsapp-widget"></div>
+
+<script src="/js/main.js"></script>
+
+<script>
+  // Liste des produits (identique à votre version originale, mais vérifiée)
+  const productsRaw = [
+    // Serrures
+    { img: "/images/ser1.png", name: "SmartLock Pro v1", cat: "serrures" },
+    { img: "/images/ser3.png", name: "RFID Elite Lock", cat: "serrures" },
+    { img: "/images/ser4.jfif", name: "SmartLock Biométrique", cat: "serrures" },
+    { img: "/images/ser5.jfif", name: "Serrure Connectée WiFi", cat: "serrures" },
+    { img: "/images/ser6.jpeg", name: "RFID Elite Lock", cat: "serrures" },
+    { img: "/images/ser7.jpeg", name: "Serrure Slim Intelligente", cat: "serrures" },
+    { img: "/images/ser8.jpeg", name: "SmartLock Biométrique", cat: "serrures" },
+    
+    { img: "/images/ser9.jpeg", name: "Serrure Connectée Elite", cat: "serrures" },
+    { img: "/images/ser10.jpeg", name: "Serrure Bluetooth App", cat: "serrures" },
+    { img: "/images/ser11.jpeg", name: "Kit Serrure Tactile", cat: "serrures" },
+    { img: "/images/ser13.jpeg", name: "Serrure Badge & Code", cat: "serrures" },
+    { img: "/images/ser15.jpeg", name: "Serrure Intelligente", cat: "serrures" },
+    { img: "/images/ser16.jpeg", name: "Serrure Connectée WiFi", cat: "serrures" },
+    { img: "/images/ser17.jpeg", name: "RFID Elite Hotel Lock", cat: "serrures" },
+    // Caméras
+    { img: "/images/cam3.png", name: "Caméra Surveillance Performance", cat: "cameras" },
+    { img: "/images/cam5.jpeg", name: "Caméra Bullet Infrarouge", cat: "cameras" },
+    { img: "/images/cam6.jpeg", name: "Caméra Dôme HD", cat: "cameras" },
+    { img: "/images/cam7.jpeg", name: "Caméra Extérieure 4K", cat: "cameras" },
+    { img: "/images/cam8.jpeg", name: "Pack Caméras Pro", cat: "cameras" },
+    { img: "/images/cam9.jpeg", name: "Caméra 360° Connectée", cat: "cameras" },
+    { img: "/images/cam10.jpeg", name: "Caméra Discrète Intérieure", cat: "cameras" },
+    { img: "/images/cam11.jpeg", name: "Système Vidéo Multi-canaux", cat: "cameras" },
+    // Rideaux
+    { img: "/images/ridau.png", name: "Rideau intelligente", cat: "rideaux" },
+    { img: "/images/rid1.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid2.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid3.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid4.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid5.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid6.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid7.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid8.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    { img: "/images/rid9.jpeg", name: "Rideaux Intelligents", cat: "rideaux" },
+    // Tablettes
+    { img: "/images/table1.png", name: "Console de Contrôle Tactile 10\"", cat: "tablettes" },
+    { img: "/images/table2.jpeg", name: "Tablette de Contrôle", cat: "tablettes" },
+    { img: "/images/table3.jpeg", name: "Tablette de Contrôle", cat: "tablettes" },
+    { img: "/images/table4.jpg", name: "Tablette de Contrôle", cat: "tablettes" },
+    { img: "/images/table4.jpg", name: "Tablette de Contrôle", cat: "tablettes" },
+    { img: "/images/table5.jpeg", name: "Tablette de Contrôle", cat: "tablettes" },
+    // Enceintes
+    { img: "/images/echo1.jpeg", name: "Enceinte Intelligente Echo Dot v4", cat: "enceintes" },
+    { img: "/images/a.png", name: "Enceinte Intelligente Echo Dot v4", cat: "enceintes" },
+    { img: "/images/echo3.jpeg", name: "Enceinte Intelligente Echo Dot v4", cat: "enceintes" },
+    { img: "/images/echo4.png", name: "Enceinte Intelligente Echo Dot v4", cat: "enceintes" },
+    // Téléphones
+    { img: "/images/tel1.jpeg", name: "Téléphone Fixe Intelligent v1", cat: "telephones" },
+    { img: "/images/tel2.jpeg", name: "Téléphone Fixe v2", cat: "telephones" },
+    { img: "/images/tel3.jpeg", name: "Téléphone Fixe IP Pro", cat: "telephones" },
+     { img: "/images/tel4.jpeg", name: "Téléphone Fixe IP Pro", cat: "telephones" },
+    // Énergie solaire
+    { img: "/images/lampe1.jpeg", name: "Lampadaire Solaire LED v1", cat: "energie" },
+    { img: "/images/lampe2.jpeg", name: "Lampadaire Solaire LED v2", cat: "energie" },
+    { img: "/images/lampe3.jpeg", name: "Projecteur Solaire Haute Puissance", cat: "energie" },
+    { img: "/images/lampe4.jpeg", name: "Lampadaire Urbain Solaire", cat: "energie" },
+    { img: "/images/lampe5.jpeg", name: "Applique Murale Solaire", cat: "energie" },
+    { img: "/images/lampe6.jpeg", name: "Lampe Solaire Jardin", cat: "energie" },
+    { img: "/images/lampe7.jpeg", name: "Kit Éclairage Solaire Complet", cat: "energie" },
+    { img: "/images/lampe8.jpeg", name: "Projecteur Solaire Industriel", cat: "energie" },
+    { img: "/images/panneau.png", name: "Premium Solar Street Light", cat: "energie" },
+    // Accès & présence
+    { img: "/images/pointage.png", name: "ZKTeco iClock Attendance", cat: "acces" },
+    { img: "/images/ecran.png", name: "Video IP Door Intercom", cat: "acces" },
+    { img: "/images/ecran.jpeg", name: "Video IP Door Intercom", cat: "acces" },
+    { img: "/images/ecrans.jpeg", name: "Video IP Door Intercom", cat: "acces" },
+    { img: "/images/ecran1.jpeg", name: "Video IP Door Intercom", cat: "acces" },
+    { img: "/images/ecran2.jpeg", name: "Video IP Door Intercom", cat: "acces" },
+    
+    // Barières de route
+    { img: "/images/onduleur.png", name: "Barrière routière", cat: "hotel" },
+    // Autres
+    { img: "/images/drap1.jpeg", name: "Drap", cat: "autres" },
+    { img: "/images/drap2.jpeg", name: "Drap", cat: "autres" },
+    { img: "/images/drap3.jpeg", name: "Drap", cat: "autres" },
+    { img: "/images/oreillet1.jpeg", name: "Oreillette Bluetooth Premium", cat: "autres" },
+    { img: "/images/oreillet2.jpeg", name: "Écouteurs Sans Fil Sport", cat: "autres" },
+    { img: "/images/oreillet3.jpeg", name: "Écouteurs Hi-Fi", cat: "autres" },
+    { img: "/images/casque1.jpeg", name: "Casque Écouteur Bluetooth Pro", cat: "autres" },
+    { img: "/images/casque2.jpeg", name: "Casque Audio Sans Fil", cat: "autres" },
+    { img: "/images/sandals.jpeg", name: "Chaussures / Sandals", cat: "autres" },
+    { img: "/images/apple1.jpeg", name: "Apple Watch / Montre Connectée", cat: "autres" },
+    { img: "/images/apple2.jpeg", name: "Apple Watch / Montre Connectée", cat: "autres" },
+    { img: "/images/apple3.jpeg", name: "Apple Watch / Montre Connectée", cat: "autres" },
+    { img: "/images/pacelle.png", name: "Nexus Hub Central v2", cat: "autres" },
+    { img: "/images/pacelle.jpeg", name: "Nexus Hub Central v2", cat: "autres" }
+  ];
+
+  const grid = document.getElementById('product-grid');
+  let currentFilter = 'all';
+  let searchTerm = '';
+
+  function renderProducts() {
+    const filtered = productsRaw.filter(p => {
+      if (currentFilter !== 'all' && p.cat !== currentFilter) return false;
+      if (searchTerm && !p.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+      return true;
+    });
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><p>Aucun produit ne correspond.</p></div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(p => `
+      <article class="product-card">
+        <div class="product-img"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+        <div class="product-body">
+          <div class="product-cat">${p.cat === 'serrures' ? 'Serrure' : p.cat === 'cameras' ? 'Caméra' : p.cat === 'rideaux' ? 'Rideau' : p.cat === 'tablettes' ? 'Tablette' : p.cat === 'enceintes' ? 'Enceinte' : p.cat === 'telephones' ? 'Téléphone' : p.cat === 'energie' ? 'Énergie solaire' : p.cat === 'acces' ? 'Contrôle accès' : p.cat === 'hotel' ? 'Hôtellerie' : 'Autre'}</div>
+          <div class="product-name">${p.name}</div>
+          <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20${encodeURIComponent(p.name)}" target="_blank" class="btn-product"><i class="fab fa-whatsapp"></i> Demander un devis</a>
         </div>
-
-        <!-- Product Grid -->
-        <div class="product-grid" id="product-grid">
-
-          <!-- SERRURES INTELLIGENTES -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="smartlock pro biométrique empreinte code">
-            <div class="product-img">
-              <img src="/images/ser1.png" alt="SmartLock Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.smartlock_v1">SmartLock Pro v1</div>
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20SmartLock%20Pro" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-                        <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser3.png" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.rfid_lock">RFID Elite Lock</div>
-                 <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser4.jfif" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">SmartLock Biométrique</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser5.jfif" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Connectée WiFi</div>
-                <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser6.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.rfid_lock">RFID Elite Lock</div>
-                <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="serrure slim intelligente">
-            <div class="product-img">
-              <img src="/images/ser7.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Slim Intelligente</div>
-                    <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="serrure biométrique pro">
-            <div class="product-img">
-              <img src="/images/ser8.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.smartlock_biometric">SmartLock Biométrique</div>
-                    <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser9.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Connectée Elite</div>
-                   <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser10.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Bluetooth App</div>
-                <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser11.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Kit Serrure Tactile</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-            
-                            <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser13.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Badge & Code</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="poignée électronique">
-            <div class="product-img">
-              <img src="/images/ser13.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Poignée Électronique</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="serrure airbnb pro">
-            <div class="product-img">
-              <img src="/images/ser13.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name">Serrure Airbnb Pro</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>     
-          
-          <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser15.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Serrures Intelligentes</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-
-                             <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser16.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.smartlock_wifi">Serrure Connectée WiFi</div>
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-                                 <!-- SERRURE -->
-          <article class="product-card reveal" data-category="serrures-intelligentes" data-name="rfid elite lock hôtel">
-            <div class="product-img">
-              <img src="/images/ser17.jpeg" alt="RFID Elite Hotel Lock" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.locks">Serrures Intelligentes</div>
-              <div class="product-name" data-i18n="product.rfid_hotel">RFID Elite Hotel Lock</div>
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20RFID%20Elite%20Lock" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-          <!-- DOMOTIQUE -->
-          <article class="product-card reveal" data-category="domotique" data-name="hub central nexus 128 appareils zigbee z-wave">
-            <div class="product-img">
-              <img src="/images/pacelle.png" alt="Nexus Hub Central v2" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Nexus Hub Central v2</div>
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Nexus%20Hub" target="_blank" rel="noopener" class="btn-product">
-                  <span data-i18n="catalogue.product.quote">Demander un devis</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- SOLUTIONS HÔTEL -->
-          <article class="product-card reveal" data-category="solutions-hotel" data-name="pack gestion hôtel complet serrures caméras">
-            <div class="product-badge bon-plan">Premium</div>
-            <div class="product-img">
-               <img src="/images/table.png" alt="Integrated Hotel Ecosystem" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.hotel">Solutions Hôtel</div>
-              <div class="product-name">Integrated Hotel Ecosystem</div>
-
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Pack%20Gestion%20Hotel" target="_blank" rel="noopener" class="btn-product">
-                  <span data-i18n="catalogue.product.quote">Demander un devis</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-            <div class="product-badge bon-plan" data-i18n="badge.popular">Populaire</div>
-            <div class="product-img">
-              <img src="/images/cam3.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name" data-i18n="product.cam_perf">Caméra Surveillance Performance</div>
-          
-                 <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-            <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-           
-            <div class="product-img">
-              <img src="/images/cam7.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra Extérieure 4K</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-       <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-            <div class="product-badge bon-plan">Populaire</div>
-            <div class="product-img">
-              <img src="/images/cam6.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra Dôme HD</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-            
-            <div class="product-img">
-              <img src="/images/cam5.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra Bullet Infrarouge</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
- 
-          
-                    <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-           
-            <div class="product-img">
-              <img src="/images/cam7.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra IP WiFi</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-           
-
-            <!-- CAMERAS -->
-            <div class="product-img">
-              <img src="/images/cam8.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Pack Caméras Pro</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-           
-
-            <!-- CAMERAS -->
-            <div class="product-img">
-              <img src="/images/cam9.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra 360° Connectée</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-           
-            <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-            <div class="product-badge bon-plan">Populaire</div>
-            <div class="product-img">
-              <img src="/images/cam10.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Caméra Discrète Intérieure</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-           <!-- CAMERAS -->
-          <article class="product-card reveal" data-category="cameras" data-name="caméra 4k extérieure krypton vision nocturne">
-            <div class="product-badge bon-plan">Populaire</div>
-            <div class="product-img">
-              <img src="/images/cam11.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.cameras">Caméras</div>
-              <div class="product-name">Système Vidéo Multi-canaux</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-
-      
-
-    <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-            <div class="product-badge bon-plan">Populaire</div>
-            <div class="product-img">
-              <img src="/images/lampe1.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Lampadaire Solaire LED v1</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-         
-            <div class="product-img">
-              <img src="/images/lampe2.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Lampadaire Solaire LED v2</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-          <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-         
-            <div class="product-img">
-              <img src="/images/lampe3.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Projecteur Solaire Haute Puissance</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-            <div class="product-badge bon-plan">Populaire</div>
-            <div class="product-img">
-              <img src="/images/lampe4.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Lampadaire Urbain Solaire</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-           
-            <div class="product-img">
-              <img src="/images/lampe5.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Applique Murale Solaire</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-            
-            <div class="product-img">
-              <img src="/images/lampe6.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Lampe Solaire Jardin</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-             <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-            
-            <div class="product-img">
-              <img src="/images/lampe7.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Kit Éclairage Solaire Complet</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-           <!-- LAMPE A ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="lampadaire solaire">
-            
-            <div class="product-img">
-              <img src="/images/lampe8.jpeg" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Projecteur Solaire Industriel</div>
- 
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Krypton%204K" target="_blank" rel="noopener" class="btn-product">
-                    Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-    <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/ridau.png" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideau intelligente</div>
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-                  <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-             
-             <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid4.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid5.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid6.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid7.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid8.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- RIDEAUX -->
-          <article class="product-card reveal" data-category="domotique" data-name="rideau motorisé smart control programmable">
-            <div class="product-img">
-              <img src="/images/rid9.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-name">Rideaux Intelligents</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- Tablettes de contrôle -->
-          <article class="product-card reveal" data-category="domotique" data-name="console tactile 10 pouces">
-            <div class="product-img">
-              <img src="/images/table1.png" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Console de Contrôle Tactile 10"</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-           
-           <!-- Tablettes de controle -->
-          <article class="product-card reveal" data-category="domotique" data-name="tablette controle tactile">
-            <div class="product-img">
-              <img src="/images/table2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Tablette de Contrôle</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Echo dot -->
-          <article class="product-card reveal" data-category="domotique" data-name="enceinte intelligente echo dot">
-            <div class="product-img">
-              <img src="/images/echo1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Enceinte Intelligente Echo Dot v4</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="oreillette bluetooth premium">
-            <div class="product-img">
-              <img src="/images/oreillet1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Oreillette Bluetooth Premium</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
- 
-              <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="écouteurs sans fil sport">
-            <div class="product-img">
-              <img src="/images/oreillet2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Écouteurs Sans Fil Sport</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-               
- <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="écouteurs hi-fi">
-            <div class="product-img">
-              <img src="/images/oreillet3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Écouteurs Hi-Fi</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="oreillette mono pro">
-            <div class="product-img">
-              <img src="/images/oreillet3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Oreillette Mono Pro</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="drap">
-            <div class="product-img">
-              <img src="/images/drap1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Drap</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-           <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="drap">
-            <div class="product-img">
-              <img src="/images/drap2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Drap</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="drap">
-            <div class="product-img">
-              <img src="/images/drap3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Drap</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-            <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="apple watch">
-            <div class="product-img">
-              <img src="/images/apple1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Apple Watch / Montre Connectée </div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-           <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="apple watch">
-            <div class="product-img">
-              <img src="/images/apple2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Apple Watch / Montre Connectée </div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="apple watch">
-            <div class="product-img">
-              <img src="/images/apple3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Apple Watch / Montre Connectée </div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          
-          <!-- Telephone fixe -->
-          <article class="product-card reveal" data-category="domotique" data-name="téléphone fixe intelligent">
-            <div class="product-img">
-              <img src="/images/tel1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Téléphone Fixe Intelligent v1</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Telephone fixe -->
-          <article class="product-card reveal" data-category="domotique" data-name="téléphone fixe intelligent">
-            <div class="product-img">
-              <img src="/images/tel1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Téléphone Fixe Intelligent v2</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Telephone fixe -->
-          <article class="product-card reveal" data-category="domotique" data-name="telephone fixe">
-            <div class="product-img">
-              <img src="/images/tel2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Telephone fixe</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-     <!-- Autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="chaussures sandals">
-            <div class="product-img">
-              <img src="/images/sandals.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Chaussures / Sandals</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Telephone fixe -->
-          <article class="product-card reveal" data-category="domotique" data-name="téléphone fixe ip pro">
-            <div class="product-img">
-              <img src="/images/tel3.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.automation">Domotique</div>
-              <div class="product-name">Téléphone Fixe IP Pro</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
- <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="casque écouteur bluetooth pro">
-            <div class="product-img">
-              <img src="/images/casque1.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Casque Écouteur Bluetooth Pro</div>
-              <p>autres</p>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- autres  -->
-          <article class="product-card reveal" data-category="autres" data-name="casque audio sans fil">
-            <div class="product-img">
-              <img src="/images/casque2.jpeg" alt="Smart Curtain Track" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Casque Audio Sans Fil</div>
-            
-               <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Rideau%20Smart" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- ENERGIE SOLAIRE -->
-          <article class="product-card reveal" data-category="energie-solaire" data-name="onduleur pure sine hybrid inverter">
-            <div class="product-badge">Nouveau</div>
-            <div class="product-img">
-              <img src="/images/onduleur.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Pure Sine Hybrid Inverter</div>
-                    <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Onduleur" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product-card reveal" data-category="energie-solaire" data-name="solar street light">
-            <div class="product-img">
-              <img src="/images/panneau.png" alt="Krypton 4K CCTV Pro" class="w-full h-40 object-contain p-4" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.solar">Énergie Solaire</div>
-              <div class="product-name">Premium Solar Street Light</div>
-                  <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Eclairage%20Solaire" target="_blank" rel="noopener" class="btn-product" data-i18n="catalogue.product.quote">
-                  Demander un devis
-                </a>
-              </div>
-            </div>
-          </article>
-          <!-- ACCES & PRESENCE -->
-          <article class="product-card reveal" data-category="securite-presence" data-name="système pointage zkteco biométrique présence">
-            <div class="product-img">
-              <img src="/images/pointage.png" alt="ZKTeco iClock Attendance" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.access">Accès & Présence</div>
-              <div class="product-name">ZKTeco iClock Attendance</div>
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20ZKTeco" target="_blank" rel="noopener" class="btn-product">
-                  <span data-i18n="catalogue.product.quote">Demander un devis</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product-card reveal" data-category="securite-presence" data-name="interphone vidéo ip visiophone sécurité">
-            <div class="product-img">
-              <img src="/images/ecran.png" alt="Video IP Door Intercom" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.access">Accès & Présence</div>
-              <div class="product-name">Video IP Door Intercom</div>
-              <p class="product-desc" style="display: none;">Visiophone connecté avec écran tactile intérieur et redirection d'appels sur smartphone.</p>
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Interphone" target="_blank" rel="noopener" class="btn-product">
-                  <span data-i18n="catalogue.product.quote">Demander un devis</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- BUREAUTIQUE -->
-          <article class="product-card reveal" data-category="autres" data-name="tableau blanc interactif tactile 55 pouces">
-            <div class="product-img">
-              <img src="/images/table.png" alt="Interactive White Board 55&quot;" />
-            </div>
-            <div class="product-body">
-              <div class="product-cat" data-i18n="catalogue.filter.others">Autres</div>
-              <div class="product-name">Interactive White Board 55"</div>
-              <p class="product-desc" style="display: none;">Écran tactile collaboratif 4K avec logiciel de présentation intégré pour salles de conférence.</p>
-              <div class="product-footer">
-                <a href="https://wa.me/22954036641?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20Tableau%20Blanc" target="_blank" rel="noopener" class="btn-product">
-                  <span data-i18n="catalogue.product.quote">Demander un devis</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Empty state (caché par défaut) -->
-          <div class="empty-state" id="empty-state" style="display:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
-            </svg>
-            <p data-i18n="catalogue.empty">Aucun produit ne correspond à votre recherche.</p>
-          </div>
-
-        </div><!-- /product-grid -->
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section-sm" style="background:var(--bg-light);">
-      <div class="container">
-        <div class="cta-banner reveal">
-          <div>
-            <h2 data-i18n="catalogue.not_found_title">Vous ne trouvez pas<br>ce que vous cherchez ?</h2>
-            <p data-i18n="catalogue.not_found_desc">Contactez-nous — nous sourcingeons les équipements sur commande.</p>
-          </div>
-          <a href="https://wa.me/22954036641?text=Bonjour%20Marsal%2C%20je%20cherche%20un%20produit%20sp%C3%A9cifique." target="_blank" rel="noopener" class="btn-white" data-i18n="catalogue.contact_us">
-            Nous contacter
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="site-footer" role="contentinfo"></footer>
-  <div id="whatsapp-widget"></div>
-  <script src="/js/translations.js"></script>
-  <script src="/js/main.js"></script>
-  <script>
-    /* ── Catalogue filtering & search ── */
-    (function() {
-      const searchInput = document.getElementById('product-search');
-      const filterTabs  = document.querySelectorAll('.filter-tab');
-      const cards       = document.querySelectorAll('.product-card[data-category]');
-      const emptyState  = document.getElementById('empty-state');
-      let activeFilter  = 'all';
-
-      function applyFilters() {
-        const query = searchInput.value.toLowerCase().trim();
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-          const cat  = card.dataset.category;
-          const name = card.dataset.name;
-          const matchesCat  = activeFilter === 'all' || cat === activeFilter;
-          const matchesQuery = !query || name.includes(query);
-          const show = matchesCat && matchesQuery;
-          card.style.display = show ? '' : 'none';
-          if (show) visibleCount++;
-        });
-
-        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-      }
-
-      filterTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected','true');
-          activeFilter = tab.dataset.filter;
-          applyFilters();
-        });
-      });
-
-      searchInput.addEventListener('input', applyFilters);
-    })();
-  </script>
+      </article>
+    `).join('');
+  }
+
+  // Filtres
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentFilter = tab.dataset.filter;
+        renderProducts();
+    });
+  });
+  document.getElementById('search-input').addEventListener('input', e => {
+    searchTerm = e.target.value;
+    renderProducts();
+  });
+  renderProducts();
+</script>
 </body>
 </html>

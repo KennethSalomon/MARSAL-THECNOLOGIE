@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/HP/Desktop/MARSAL-THECNOLOGIE/components/ui/theme-provider.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\r\nimport { type ThemeProviderProps } from \"next-themes/dist/types\";\r\n\r\nexport function ThemeProvider({ children, ...props }: ThemeProviderProps) {\r\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;\r\n}"],"names":["ThemeProvider","children","props"],"mappings":";;;;;AAGA;AAHA;;;AAMO,SAASA,cAAc,EAAEC,QAAQ,EAAE,GAAGC,OAA2B;IACtE,qBAAO,8OAAC,0KAAkB;QAAE,GAAGA,KAAK;kBAAGD;;;;;;AACzC"}}]
+}

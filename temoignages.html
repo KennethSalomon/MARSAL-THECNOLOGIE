@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
+  <meta name="description"
+    content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
   <meta property="og:title" content="Témoignages · Marsal Technologies" />
-  <meta property="og:description" content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
+  <meta property="og:description"
+    content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
   <meta property="og:image" content="/images/og-image.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Témoignages · Marsal Technologies" />
-  <meta name="twitter:description" content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
+  <meta name="twitter:description"
+    content="Découvrez les avis de nos clients sur les solutions domotiques de Marsal Technologies au Bénin." />
   <meta name="twitter:image" content="/images/og-image.png" />
   <title>Témoignages · Marsal Technologies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
+    .marquee-container,
+    .testimonials-section,
+    .avis-section {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
     :root {
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Inter', sans-serif;
@@ -26,20 +43,73 @@
 
     body {
       font-family: var(--font-body);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/temoin.jfif');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #f0f0f0;
     }
 
-    h1, h2, h3, .display-lg, .display-md {
+    h1,
+    h2,
+    h3,
+    .display-lg,
+    .display-md {
       font-family: var(--font-heading) !important;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
 
+    /* Ajustements pour la visibilité du fond */
+    .section {
+      background: transparent !important;
+      border-top: none !important;
+    }
+
+    .display-lg,
+    .display-md,
+    .pill {
+      color: #ffffff !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Cartes semi-transparentes pour laisser passer le fond tout en restant lisibles */
+    .testi-card,
+    .review-form-card {
+      background: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* On s'assure que le texte à l'intérieur des cartes reste sombre */
+    .testi-card .testi-quote,
+    .testi-card .name,
+    .review-form-card label {
+      color: #1a1a1a !important;
+    }
+
     .page-hero {
-      background: var(--bg-light);
-      padding-top: calc(68px + 4rem);
-      padding-bottom: 4rem;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/temoins.jfif');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      padding-top: calc(68px + clamp(4rem, 8vw, 6rem));
+      padding-bottom: clamp(4rem, 8vw, 6rem);
       border-bottom: 1px solid var(--border);
       text-align: center;
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .page-hero h1 {
+      color: #ffffff !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     /* Filter Tabs */
@@ -50,6 +120,7 @@
       margin-block: 3rem;
       flex-wrap: wrap;
     }
+
     .filter-btn {
       padding: 0.6rem 1.5rem;
       border-radius: 100px;
@@ -60,11 +131,12 @@
       color: var(--text-muted);
       transition: all var(--transition);
     }
+
     .filter-btn.active {
       background: var(--accent);
       color: white;
       border-color: var(--accent);
-      box-shadow: 0 4px 12px rgba(56,111,168,0.2);
+      box-shadow: 0 4px 12px rgba(56, 111, 168, 0.2);
     }
 
     /* Testimonial Cards */
@@ -74,6 +146,7 @@
       gap: 2rem;
       transition: all 0.4s ease;
     }
+
     .testi-card {
       background: var(--bg-white);
       border: 1px solid var(--border);
@@ -83,17 +156,19 @@
       opacity: 1;
       transform: scale(1);
     }
+
     .testi-card:hover {
       transform: translateY(-8px);
       border-color: var(--accent);
       box-shadow: var(--shadow-lg);
     }
+
     .testi-card.hidden {
       display: none;
       opacity: 0;
       transform: scale(0.95);
     }
-    
+
     /* New visual elements */
     .testi-top {
       display: flex;
@@ -101,6 +176,7 @@
       align-items: center;
       margin-bottom: 1rem;
     }
+
     .location-badge {
       font-size: 0.7rem;
       font-weight: 700;
@@ -110,23 +186,56 @@
       border-radius: 100px;
       text-transform: uppercase;
     }
+
     .b2b-icon {
       font-size: 0.8rem;
       color: var(--text-light);
       margin-left: 0.5rem;
     }
-    
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .star-rating { color: var(--accent); margin-bottom: 1rem; font-size: 1.1rem; }
-    .testi-quote { font-size: 1rem; line-height: 1.7; color: var(--text-main); margin-bottom: 2rem; font-style: italic; }
-    .testi-meta { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--bg-light); pt: 1.5rem; }
-    .author-circle { 
-        width: 48px; height: 48px; border-radius: 50%; background: var(--accent-light); 
-        display: grid; place-items: center; color: var(--accent); font-weight: 700;
+    .star-rating {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .testi-quote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .testi-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-top: 1px solid var(--bg-light);
+      pt: 1.5rem;
+    }
+
+    .author-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-weight: 700;
     }
 
     /* Form Styles */
@@ -145,22 +254,33 @@
       min-height: 550px;
     }
 
-    .form-visual-side {
-      background: var(--bg-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem;
-      border-right: 1px solid var(--border);
-      position: relative;
-    }
+/* Supprimer le padding et forcer l'image à couvrir tout le conteneur */
+.form-visual-side {
+  padding: 0 !important;           /* Supprime les marges intérieures */
+  display: flex;
+  align-items: stretch;            /* Étire l'image verticalement */
+  justify-content: stretch;        /* Étire horizontalement */
+  overflow: hidden;                /* Évite les débordements */
+  background: var(--bg-light);
+  border-right: 1px solid var(--border);
+}
 
-    .form-side-logo {
-      max-width: 180px;
-      height: auto;
-      filter: grayscale(1);
-      opacity: 0.6;
-    }
+.form-side-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;               /* L'image remplit tout sans déformation */
+  display: block;
+  margin: 0;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+/* Ajustement pour mobile : garder l'image visible */
+@media (max-width: 768px) {
+  .form-visual-side {
+    min-height: 200px;             /* Donne une hauteur minimale sur petit écran */
+  }
+}
 
     .form-content-side {
       padding: 3rem;
@@ -176,11 +296,28 @@
       margin-bottom: 1.5rem;
       color: var(--border);
     }
-    .star-rating-input i { cursor: pointer; transition: color 0.2s; }
-    .star-rating-input i.active { color: var(--accent); }
-    
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-main); }
+
+    .star-rating-input i {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .star-rating-input i.active {
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
     .form-control {
       width: 100%;
       padding: 0.8rem 1rem;
@@ -189,7 +326,11 @@
       font-family: inherit;
       transition: border-color 0.2s;
     }
-    .form-control:focus { outline: none; border-color: var(--accent); }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
 
     /* --- Infinite Marquee Styles --- */
     .marquee-container {
@@ -198,8 +339,6 @@
       gap: 3rem;
       padding-block: 2rem;
       overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     }
 
     .marquee-track {
@@ -226,58 +365,83 @@
 
     .testi-card {
       width: 420px;
+      width: min(420px, 90vw);
       flex-shrink: 0;
       white-space: normal;
     }
 
     @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     @keyframes scrollRight {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
     }
 
     @media (max-width: 768px) {
-      .testi-card { width: 320px; padding: 1.5rem; }
-      .marquee-container { mask-image: none; -webkit-mask-image: none; }
-      .form-split-layout { grid-template-columns: 1fr; }
-      .form-visual-side { padding: 3rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
-      .form-content-side { padding: 2rem; }
+      .testi-card {
+        width: 320px;
+        padding: 1.5rem;
+      }
+
+      .form-split-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .form-visual-side {
+        padding: 3rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .form-content-side {
+        padding: 2rem;
+      }
     }
   </style>
 </head>
+
 <body class="antialiased subpixel-antialiased">
 
   <header id="site-header" role="banner"></header>
 
   <main>
     <section class="page-hero">
+
+    </section>
+
+    <section class="section testimonials-section">
       <div class="container">
+        <br><br>
         <div class="pill reveal">Retours d'expérience</div>
         <h1 class="display-lg reveal reveal-delay-1" style="margin-top:1.5rem;">
           La Voix de nos Utilisateurs<br><span class="text-accent"> Expériences Réelles</span>
         </h1>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        
         <!-- Filter Bar -->
         <div class="section-header" style="text-align: center;">
-            <div class="filter-container reveal">
-                <button class="filter-btn active" data-filter="all">Tout</button>
-                <button class="filter-btn" data-filter="private">Résidences Privées</button>
-                <button class="filter-btn" data-filter="pro">Bureaux / Entreprises</button>
-                <button class="filter-btn" data-filter="hotel">Hôtels / Solutions Pro</button>
-            </div>
+          <div class="filter-container reveal">
+            <button class="filter-btn active" data-filter="all">Tout</button>
+            <button class="filter-btn" data-filter="private">Résidences Privées</button>
+            <button class="filter-btn" data-filter="pro">Bureaux / Entreprises</button>
+            <button class="filter-btn" data-filter="hotel">Hôtels / Solutions Pro</button>
+          </div>
         </div>
+      </div>
 
-        <!-- Infinite Scrolling Marquees -->
-        <div class="marquee-container reveal">
+      <!-- Infinite Scrolling Marquees (Full Width) -->
+      <div class="marquee-container reveal">
           <div id="testi-grid-anchor"></div>
           <!-- Row 1: Leftward Scroll -->
           <div class="marquee-track marquee-row-top">
@@ -287,7 +451,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Fidjrossè</div>
               </div>
-              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
+              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable
+                havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
               <div class="testi-meta">
                 <div class="author-circle">AK</div>
                 <div>
@@ -301,7 +466,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Cotonou</div>
               </div>
-              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
+              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber
+                notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
               <div class="testi-meta">
                 <div class="author-circle">MS</div>
                 <div>
@@ -315,7 +481,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Bénin</div>
               </div>
-              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des standards européens."</p>
+              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur
+                mesure et la qualité des équipements sont au niveau des standards européens."</p>
               <div class="testi-meta">
                 <div class="author-circle">JB</div>
                 <div>
@@ -329,7 +496,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Fidjrossè</div>
               </div>
-              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
+              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La
+                gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
               <div class="testi-meta">
                 <div class="author-circle">DD</div>
                 <div>
@@ -344,7 +512,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Fidjrossè</div>
               </div>
-              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
+              <p class="testi-quote">"Depuis l'installation par Marsal Technologies, ma maison est devenue un véritable
+                havre de paix et de technologie. Je contrôle tout depuis mon téléphone."</p>
               <div class="testi-meta">
                 <div class="author-circle">AK</div>
                 <div>
@@ -358,7 +527,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Cotonou</div>
               </div>
-              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
+              <p class="testi-quote">"L'installation dans notre showroom a été réalisée proprement et sans perturber
+                notre activité. Le système de surveillance est parfait, l'équipe est très pro."</p>
               <div class="testi-meta">
                 <div class="author-circle">MS</div>
                 <div>
@@ -372,7 +542,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Bénin</div>
               </div>
-              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur mesure et la qualité des équipements sont au niveau des standards européens."</p>
+              <p class="testi-quote">"En tant qu'architecte, je recommande Marsal à tous mes clients. Leur approche sur
+                mesure et la qualité des équipements sont au niveau des standards européens."</p>
               <div class="testi-meta">
                 <div class="author-circle">JB</div>
                 <div>
@@ -386,7 +557,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Fidjrossè</div>
               </div>
-              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
+              <p class="testi-quote">"L'automatisation complète de ma villa à Fidjrossè a dépassé mes attentes. La
+                gestion intelligente de l'énergie et de la sécurité est simplement bluffante."</p>
               <div class="testi-meta">
                 <div class="author-circle">DD</div>
                 <div>
@@ -405,7 +577,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Cocotiers</div>
               </div>
-              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes projets de luxe. Leur expertise technique est la référence au Bénin."</p>
+              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes
+                projets de luxe. Leur expertise technique est la référence au Bénin."</p>
               <div class="testi-meta">
                 <div class="author-circle">AA</div>
                 <div>
@@ -419,7 +592,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Patte d'Oie</div>
               </div>
-              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle d'accès biométrique est fluide et ultra-sécurisé."</p>
+              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle
+                d'accès biométrique est fluide et ultra-sécurisé."</p>
               <div class="testi-meta">
                 <div class="author-circle">LL</div>
                 <div>
@@ -433,7 +607,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Haie Vive</div>
               </div>
-              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal est un argument de vente majeur pour nos clients VIP."</p>
+              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal
+                est un argument de vente majeur pour nos clients VIP."</p>
               <div class="testi-meta">
                 <div class="author-circle">GG</div>
                 <div>
@@ -447,7 +622,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Ganhi</div>
               </div>
-              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé des équipements nous fait gagner un temps précieux."</p>
+              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé
+                des équipements nous fait gagner un temps précieux."</p>
               <div class="testi-meta">
                 <div class="author-circle">SS</div>
                 <div>
@@ -462,7 +638,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Cocotiers</div>
               </div>
-              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes projets de luxe. Leur expertise technique est la référence au Bénin."</p>
+              <p class="testi-quote">"En tant qu'architecte aux Cocotiers, j'intègre désormais Marsal dans tous mes
+                projets de luxe. Leur expertise technique est la référence au Bénin."</p>
               <div class="testi-meta">
                 <div class="author-circle">AA</div>
                 <div>
@@ -476,7 +653,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Patte d'Oie</div>
               </div>
-              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle d'accès biométrique est fluide et ultra-sécurisé."</p>
+              <p class="testi-quote">"La sécurité de ma clinique à la Patte d'Oie est désormais infaillible. Le contrôle
+                d'accès biométrique est fluide et ultra-sécurisé."</p>
               <div class="testi-meta">
                 <div class="author-circle">LL</div>
                 <div>
@@ -490,7 +668,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Haie Vive</div>
               </div>
-              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal est un argument de vente majeur pour nos clients VIP."</p>
+              <p class="testi-quote">"Un partenaire de confiance pour nos promotions immobilières. La domotique Marsal
+                est un argument de vente majeur pour nos clients VIP."</p>
               <div class="testi-meta">
                 <div class="author-circle">GG</div>
                 <div>
@@ -504,7 +683,8 @@
                 <div class="star-rating">★★★★★</div>
                 <div class="location-badge">Ganhi</div>
               </div>
-              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé des équipements nous fait gagner un temps précieux."</p>
+              <p class="testi-quote">"Nos bureaux à Ganhi sont désormais connectés et sécurisés. Le pilotage centralisé
+                des équipements nous fait gagner un temps précieux."</p>
               <div class="testi-meta">
                 <div class="author-circle">SS</div>
                 <div>
@@ -514,65 +694,65 @@
               </div>
             </article>
           </div>
+      </div>
 
-        </div>
+      <div class="container">
+      <!-- New Review Form: Split Layout -->
+      <div class="review-form-card reveal" style="margin-top: 5rem;">
+        <div class="form-split-layout">
+          <div class="form-visual-side">
+            <img src="/images/2.png" alt="Logo Marsal Technologies" class="form-side-logo">
+          </div>
 
-        </div>
-
-        <!-- New Review Form: Split Layout -->
-        <div class="review-form-card reveal" style="margin-top: 5rem;">
-          <div class="form-split-layout">
-            <div class="form-visual-side">
-              <img src="/images/2.png" alt="Logo Marsal Technologies" class="form-side-logo">
-            </div>
-            
-            <div class="form-content-side">
-              <h3 class="display-md" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Laissez votre avis</h3>
-              <form id="review-form">
-                <div class="grid-2">
-                  <div class="form-group">
-                    <label>Nom complet</label>
-                    <input type="text" id="rev-name" class="form-control" placeholder="Jean Koffi" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Entreprise / Ville</label>
-                    <input type="text" id="rev-org" class="form-control" placeholder="Cotonou" required>
-                  </div>
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 1rem;">
-                  <label>Note globale</label>
-                  <div class="star-rating-input" id="star-input" style="font-size: 1.25rem; margin-bottom: 0.5rem;">
-                    <i class="fa-solid fa-star" data-value="1"></i>
-                    <i class="fa-solid fa-star" data-value="2"></i>
-                    <i class="fa-solid fa-star" data-value="3"></i>
-                    <i class="fa-solid fa-star" data-value="4"></i>
-                    <i class="fa-solid fa-star" data-value="5"></i>
-                  </div>
-                </div>
-
+          <div class="form-content-side">
+            <h3 class="display-md" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Laissez votre avis</h3>
+            <form id="review-form">
+              <div class="grid-2">
                 <div class="form-group">
-                    <label>Type de projet</label>
-                    <select id="rev-cat" class="form-control">
-                      <option value="private">Résidence Privée</option>
-                      <option value="pro">Bureau / Entreprise</option>
-                      <option value="hotel">Hôtel / Solution Pro</option>
-                    </select>
+                  <label>Nom complet</label>
+                  <input type="text" id="rev-name" class="form-control" placeholder="Jean Koffi" required>
                 </div>
-
                 <div class="form-group">
-                  <label>Votre commentaire</label>
-                  <textarea id="rev-text" class="form-control" rows="3" placeholder="Partagez votre expérience..." required></textarea>
+                  <label>Entreprise / Ville</label>
+                  <input type="text" id="rev-org" class="form-control" placeholder="Cotonou" required>
                 </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Publier mon avis</button>
-              </form>
-              <div id="form-success" style="display:none; color: var(--accent); font-weight: 700; margin-top: 1rem; text-align: center;">
-                Merci ! Votre avis a été publié instantanément.
               </div>
+
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label>Note globale</label>
+                <div class="star-rating-input" id="star-input" style="font-size: 1.25rem; margin-bottom: 0.5rem;">
+                  <i class="fa-solid fa-star" data-value="1"></i>
+                  <i class="fa-solid fa-star" data-value="2"></i>
+                  <i class="fa-solid fa-star" data-value="3"></i>
+                  <i class="fa-solid fa-star" data-value="4"></i>
+                  <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Type de projet</label>
+                <select id="rev-cat" class="form-control">
+                  <option value="private">Résidence Privée</option>
+                  <option value="pro">Bureau / Entreprise</option>
+                  <option value="hotel">Hôtel / Solution Pro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Votre commentaire</label>
+                <textarea id="rev-text" class="form-control" rows="3" placeholder="Partagez votre expérience..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Publier mon avis</button>
+            </form>
+            <div id="form-success"
+              style="display:none; color: var(--accent); font-weight: 700; margin-top: 1rem; text-align: center;">
+              Merci ! Votre avis a été publié instantanément.
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -609,7 +789,7 @@
           // Apply fade out effect
           card.style.opacity = '0';
           card.style.transform = 'scale(0.95)';
-          
+
           setTimeout(() => {
             if (filter === 'all' || card.dataset.category === filter) {
               card.classList.remove('hidden');
@@ -647,7 +827,7 @@
 
     reviewForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById('rev-name').value;
       const org = document.getElementById('rev-org').value;
       const cat = document.getElementById('rev-cat').value;
@@ -660,7 +840,7 @@
       newCard.className = 'testi-card';
       newCard.style.animation = 'fadeIn 0.6s forwards';
       newCard.setAttribute('data-category', cat);
-      
+
       newCard.innerHTML = `
         <div class="testi-top">
             <div class="star-rating">${starString}</div>
@@ -692,4 +872,5 @@
     });
   </script>
 </body>
+
 </html>

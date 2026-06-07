@@ -48,7 +48,7 @@ const HEADER_HTML = `
     <a href="catalogue.html" data-page="catalogue">Catalogue</a>
     <a href="temoignages.html" data-page="temoignages">Témoignages</a>
     <a href="contact.html" data-page="contact">Contact</a>
-    <a href="contact.html" class="btn btn-primary">Obtenir un devis</a>
+    <a href="contact.html" class="btn btn-primary btn-devis">Obtenir un devis</a>
   </div>
 </nav>
 `;
@@ -229,13 +229,14 @@ function injectComponents() {
 
 function setActivePage() {
   const path = window.location.pathname;
-  const fileName = path.split('/').filter(Boolean).pop() || "index.html";
+  const fileName = path.split('/').filter(Boolean).pop() || "";
   
-  let current = (fileName === "index.html" || fileName === "/") ? 'index' : '';
+  let current = (fileName === "" || fileName === "index.html" || fileName === "index") ? 'index' : '';
+  
   if (fileName.includes('solutions')) current = 'solutions';
   if (fileName.includes('catalogue')) current = 'catalogue';
-  if (path.includes('temoignages')) current = 'temoignages';
-  if (path.includes('contact')) current = 'contact';
+  if (fileName.includes('temoignages')) current = 'temoignages';
+  if (fileName.includes('contact')) current = 'contact';
 
   document.querySelectorAll('[data-page]').forEach(link => {
     if (link instanceof HTMLElement && link.dataset.page) {
@@ -394,6 +395,39 @@ function initAdvancedAtmosphereSwitcher() {
 function injectPartnersStyles() {
   const style = document.createElement('style');
   style.textContent = `
+    /* --- CORRECTION BOUTON DEVIS MOBILE --- */
+    .mobile-nav-content {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 2rem 1.5rem;
+      gap: 0.75rem;
+    }
+
+    .mobile-nav .btn-devis {
+      display: block !important;
+      width: 100% !important;
+      text-align: center !important;
+      padding: 14px 16px !important;
+      margin: 12px 0 !important;
+      box-sizing: border-box !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      border-radius: 100px !important;
+      font-size: 1rem !important;
+      min-height: 48px; /* Optimisation zone de toucher */
+    }
+
+    @media (max-width: 480px) {
+      .mobile-nav .btn-devis {
+        padding: 12px 12px !important;
+        font-size: 0.9rem !important;
+        white-space: normal !important; /* Retour à la ligne si très petit écran */
+        line-height: 1.2 !important;
+      }
+    }
+
     /* SECTION PARTENAIRES - PLEINE LARGEUR */
     .footer-partners-section {
       width: 100vw;

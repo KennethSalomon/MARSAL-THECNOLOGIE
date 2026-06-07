@@ -122,7 +122,7 @@ const translations = {
     "solutions.page.meta.description": "Explorez nos solutions domotiques complètes : éclairage intelligent, sécurité connectée, automatisation et confort pour votre maison à Cotonou.",
     "solutions.hero.pill": "Nos solutions",
     "solutions.hero.title": "Une domotique complète & sur mesure.",
-    "solutions.hero.desc": "De l'éclairage à la sécurité, de la climatisation aux accès motorisés — chaque solution Marsal est pensée pour s'intégrer harmonieusement dans votre habitat.",
+    "solutions.hero.desc": "",
     "solutions.section.lighting.pill": "Éclairage",
     "solutions.section.lighting.title": "Éclairage Intelligent & Scènes d'Ambiance",
     "solutions.section.lighting.desc": "Transformez l'atmosphère de chaque pièce en un geste. Le système d'éclairage Marsal s'adapte à votre humeur, à l'heure de la journée et à votre activité. Économies d'énergie garanties jusqu'à 60 %.",
