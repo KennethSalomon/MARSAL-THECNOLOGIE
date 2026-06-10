@@ -81,9 +81,10 @@ export function AboutSection() {
               <a href="/catalogue.html" className="btn btn-ghost">Voir le catalogue</a>
             </div>
             <h2 className="display-md" style={{ margin: '1.5rem 0', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontFamily: 'var(--font-heading)' }}>Innovation, Sécurité & Expertise</h2>
-            <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
-              Marsal Technologies se spécialise dans <h3>les solutions modernes de sécurité et d'automatisation électronique</h3>  pour les maisons, les bureaux et les entreprises. Nous proposons <h3>des technologies innovantes</h3>, notamment des serrures intelligentes, des systèmes de surveillance, des systèmes de contrôle d'accès, des solutions réseau, des interrupteurs électriques et d'autres dispositifs de sécurité technologiques qui améliorent <h3> la sécurité, le confort et l'efficacité.</h3>
-            </p>
+            <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8', marginBottom: '2rem' }}>
+              <p>Marsal Technologies se spécialise dans <strong>les solutions modernes de sécurité et d'automatisation électronique</strong> pour les maisons, les bureaux et les entreprises.</p>
+              <p>Nous proposons des <strong>technologies innovantes</strong>, notamment des serrures intelligentes, des systèmes de surveillance et de contrôle d'accès qui améliorent <strong>la sécurité, le confort et l'efficacité.</strong></p>
+            </div>
             <p style={{ fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', color: 'var(--text-main)', lineHeight: '1.8' }}>
               Notre objectif est de fournir des solutions fiables, modernes et conviviales qui répondent aux besoins évolutifs de nos clients grâce à une installation professionnelle, une expertise technique et un service de qualité.
             </p>

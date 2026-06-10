@@ -18,12 +18,13 @@ import {
 /**
  * Animation Wrapper pour simplifier le code
  */
-const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1], delay }}
+    className={className}
   >
     {children}
   </motion.div>
@@ -61,24 +62,27 @@ export default function Page() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <section id="accueil" className="min-h-screen flex items-center relative pt-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[45%_55%] gap-12 items-center w-full relative z-10 py-12 lg:py-0">
-          <Reveal>
-            <span className="font-mono-tech text-cyan-marsal text-sm tracking-[2px] mb-4 block">SYSTÈME D'EXCELLENCE</span>
-            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-light leading-tight">
-              L' <span className="text-cyan-marsal font-bold">intelligence</span><br />
+      <section id="accueil" className="min-h-[100svh] lg:min-h-screen flex items-center relative pt-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[48%_52%] gap-8 lg:gap-16 items-center w-full relative z-10 py-12 lg:py-0">
+          <Reveal className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <span className="font-mono-tech text-cyan-marsal text-xs sm:text-sm tracking-[3px] mb-4 block uppercase font-semibold">SYSTÈME D'EXCELLENCE</span>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-[1.1] sm:leading-tight tracking-tight">
+              L' <span className="text-cyan-marsal font-bold">intelligence</span><br className="hidden sm:block" />
               à l'état <span className="text-magenta-marsal dark:text-magenta-marsal font-bold">pur</span>
             </h1>
-            <div className="flex flex-wrap gap-5 mt-10">
-              <button className="px-8 py-4 border border-cyan-marsal/40 rounded-full text-cyan-marsal hover:bg-cyan-marsal/5 dark:hover:bg-cyan-marsal/10 transition-all hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] font-mono-tech text-xs tracking-widest uppercase">
+            <p className="text-silver-marsal/80 dark:text-silver-marsal/60 text-base sm:text-lg mt-6 max-w-lg">
+              Domotique de prestige · Sécurité absolue · Économies intelligentes. Basé à Cotonou, Bénin.
+            </p>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 mt-10">
+              <button className="px-8 py-4 border border-cyan-marsal/40 rounded-full text-cyan-marsal hover:bg-cyan-marsal/5 dark:hover:bg-cyan-marsal/10 transition-all hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] font-mono-tech text-[10px] sm:text-xs tracking-widest uppercase">
                 Découvrir la collection
               </button>
             </div>
           </Reveal>
 
-          <Reveal delay={0.2} className="h-[300px] sm:h-[400px] lg:h-[650px] relative mt-8 lg:mt-0">
-            <div className="w-full h-full bg-gradient-to-b from-cyan-marsal/10 to-transparent rounded-full blur-[120px] absolute inset-0 -z-10"></div>
-            <iframe src='https://my.spline.design/kZDDjO5HuC9GJUM2/' width='100%' height='100%' className="pointer-events-auto border-0 z-10 relative opacity-90 dark:opacity-100 rounded-3xl shadow-2xl"></iframe>
+          <Reveal delay={0.2} className="h-[320px] sm:h-[480px] lg:h-[650px] relative w-full lg:mt-0">
+            <div className="w-full h-full bg-gradient-to-b from-cyan-marsal/20 to-transparent rounded-full blur-[80px] sm:blur-[140px] absolute inset-0 -z-10 scale-75 lg:scale-100"></div>
+            <iframe src='https://my.spline.design/kZDDjO5HuC9GJUM2/' width='100%' height='100%' className="pointer-events-auto border-0 z-10 relative opacity-95 dark:opacity-100 scale-90 sm:scale-100 transition-transform rounded-3xl"></iframe>
           </Reveal>
         </div>
       </section>

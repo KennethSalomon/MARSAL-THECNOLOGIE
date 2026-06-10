@@ -229,9 +229,10 @@ function injectComponents() {
 
 function setActivePage() {
   const path = window.location.pathname;
-  const fileName = path.split('/').filter(Boolean).pop() || "";
+  const fileName = path.split('/').pop() || "index.html";
   
-  let current = (fileName === "" || fileName === "index.html" || fileName === "index") ? 'index' : '';
+  let current = 'index';
+  if (fileName === "" || fileName === "index.html") current = 'index';
   
   if (fileName.includes('solutions')) current = 'solutions';
   if (fileName.includes('catalogue')) current = 'catalogue';

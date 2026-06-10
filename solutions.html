@@ -17,7 +17,160 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/css/responsive.css" />
+  <style>
+    :root {
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --accent: #386FA8;
+      --accent-light: rgba(56, 111, 168, 0.1);
+    }
+
+    body {
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, .display-xl, .display-md {
+      font-family: var(--font-heading) !important;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* --- Navigation & Header Styles --- */
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .nav-links a.active { color: var(--accent) !important; }
+
+    .btn, .btn-primary, .btn-ghost {
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
+    .page-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('/images/images.jfif');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      padding-top: calc(68px + 6rem);
+      padding-bottom: 6rem;
+      border-bottom: 1px solid var(--border);
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+    }
+    .solution-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding-block: 5rem;
+    }
+    .solution-detail:not(:last-child) { border-bottom: 1px solid var(--bg-light); }
+    .solution-detail.reverse { direction: rtl; }
+    .solution-detail.reverse > * { direction: ltr; }
+    .solution-visual {
+      aspect-ratio: 4/3;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-visual .big-icon {
+      width: 100px; height: 100px;
+      background: var(--accent-light);
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+    }
+    .solution-visual .big-icon svg { width: 52px; height: 52px; color: var(--accent); }
+    .solution-visual::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      opacity: .5;
+    }
+    .solution-text h2 { margin-bottom: 1rem; }
+    .solution-text p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.75; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .625rem;
+      font-size: .875rem;
+      color: var(--text-main);
+    }
+    .feature-list li::before {
+      content: '';
+      width: 18px; height: 18px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23386FA8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    @media (max-width: 768px) {
+      .solution-detail { grid-template-columns: 1fr; gap: 2rem; }
+      .solution-detail.reverse { direction: ltr; }
+      .fs-title { font-size: 2rem; }
+      .chat-window { height: 400px; }
+    }
+
+    /* --- Migrated from avantages.html --- */
+    .adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .adv-card {
+      background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: clamp(2rem, 3vw, 3rem); box-shadow: var(--shadow-sm); transition: all var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .adv-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: rgba(56,111,168,.3); }
+    .adv-card::after {
+      content: ''; position: absolute; bottom: -50px; right: -50px; width: 180px; height: 180px;
+      border-radius: 50%; background: var(--accent-light); opacity: 0; transition: opacity var(--transition);
+    }
+    .adv-card:hover::after { opacity: 1; }
+    .adv-icon {
+      width: 64px; height: 64px; background: var(--accent-light); border-radius: 18px;
+      display: grid; place-items: center; margin-bottom: 1.75rem;
+    }
+    .adv-icon svg { width: 32px; height: 32px; color: var(--accent); }
+    .adv-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: .875rem; line-height: 1.2; }
+    .adv-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.75; margin-bottom: 1.5rem; }
+    .adv-features { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+    .adv-features li { display: flex; align-items: center; gap: .625rem; font-size: .82rem; color: var(--text-main); font-weight: 500; }
+    .check-adv { width: 20px; height: 20px; flex-shrink: 0; background: var(--accent); border-radius: 50%; display: grid; place-items: center; }
+    .check-adv svg { width: 10px; height: 10px; color: #fff; }
+    
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .compare-col { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+    .compare-col.highlight { background: var(--accent); border-color: var(--accent-dark); }
+    .compare-col h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text-main); }
+    .compare-col.highlight h4 { color: rgba(255,255,255,.9); }
+    .compare-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .compare-list li { display: flex; align-items: center; gap: .75rem; font-size: .875rem; }
+    .compare-col:not(.highlight) .compare-list li { color: var(--text-muted); }
+    .compare-col.highlight .compare-list li { color: rgba(255,255,255,.85); }
+    .x-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(220,53,69,.15); display: grid; place-items: center; flex-shrink: 0; }
+    .x-icon svg { width: 10px; height: 10px; color: #DC3545; }
+    .check-white { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,.25); display: grid; place-items: center; flex-shrink: 0; }
+    .check-white svg { width: 10px; height: 10px; color: #fff; }
+
+    @media (max-width: 900px) { .adv-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -38,6 +191,84 @@
       </div>
       
     </section>
+
+    <style>
+      /* --- Chat Interface Specific Styles --- */
+      .chat-window {
+        max-width: 600px;
+        margin: 0 auto;
+        background: var(--bg-white);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+      .chat-header {
+        padding: 1rem 1.5rem;
+        background: var(--bg-light);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .chat-body {
+        flex: 1;
+        padding: 1.5rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        scroll-behavior: smooth;
+      }
+      .bubble {
+        max-width: 85%;
+        padding: 0.85rem 1.15rem;
+        border-radius: 18px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        animation: fadeIn-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      .bubble.expert { background: var(--accent); color: white; align-self: flex-start; border-bottom-left-radius: 4px; }
+      .bubble.client { background: var(--bg-light); color: var(--text-main); align-self: flex-end; border-bottom-right-radius: 4px; }
+      
+      .typing-indicator { display: none; align-self: flex-start; background: #f0f0f0; padding: 10px 15px; border-radius: 20px; }
+      .dot { width: 6px; height: 6px; background: #999; border-radius: 50%; display: inline-block; animation: wave 1.3s linear infinite; }
+      .dot:nth-child(2) { animation-delay: -1.1s; }
+      .dot:nth-child(3) { animation-delay: -0.9s; }
+
+      @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
+      @keyframes wave { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+
+      /* Styles pour la section conversationnelle avec image de fond */
+      .conversation-section {
+        position: relative;
+        background-image: url('/images/solution.jfif');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+
+      .conversation-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.65); /* Overlay sombre pour la lisibilité */
+        z-index: 1;
+      }
+
+      .conversation-section > * {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
 
     <!-- Solutions détaillées -->
     <div class="container">
@@ -117,6 +348,39 @@
       </div>
 
       <!-- 2.1 FEATURE SHOWCASE (RUIXEN UI ADAPTED) -->
+      <style>
+        .fs-marsal { background: var(--bg-white); border-radius: 40px; padding: 5rem 0; margin-block: 4rem; border: 1px solid var(--border); }
+        .fs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .fs-accordion { display: flex; flex-direction: column; gap: 1rem; }
+        .fs-item { background: transparent; border: 1px solid var(--border); border-radius: 24px; padding: 1.5rem; text-align: left; cursor: pointer; transition: all 0.4s ease; color: var(--text-main); width: 100%; }
+        .fs-item:hover { border-color: var(--accent-light); }
+        .fs-item.active { background: var(--bg-light); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .fs-item-header { display: flex; align-items: center; gap: 1.25rem; }
+        .fs-icon { width: 48px; height: 48px; border-radius: 16px; background: var(--bg-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: all 0.3s; }
+        .fs-item.active .fs-icon { background: var(--accent-light); color: var(--accent); box-shadow: 0 0 15px var(--accent-light); }
+        .fs-item h3 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+        .fs-content { height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease; padding-left: 4rem; }
+        .fs-item.active .fs-content { height: auto; opacity: 1; margin-top: 1rem; }
+        .fs-visual { position: relative; aspect-ratio: 4/3; border-radius: 32px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .fs-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease, transform 1s ease; transform: scale(1.1); }
+        .fs-img.active { opacity: 1; transform: scale(1); }
+        .fs-badge { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); padding: 1rem; border-radius: 16px; border: 1px solid var(--border); display: flex; align-items: center; gap: 0.75rem; }
+        .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: fs-pulse 2s infinite; } /* Keep for accent color */
+        @keyframes fs-pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        @media (max-width: 992px) { .fs-grid { grid-template-columns: 1fr; } .fs-visual { order: -1; } }
+
+        /* New/Adjusted classes for harmony */
+        .fs-section-header { margin-bottom: 2rem; }
+        .fs-tag { color: var(--accent); font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-main); }
+        .fs-title { color: var(--text-main); margin-top: 0.5rem; font-size: 2.5rem; font-family: var(--font-heading); }
+        .fs-title .text-accent { color: var(--accent); }
+        .fs-chevron { font-size: 0.8rem; opacity: 0.3; }
+        .fs-description { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .fs-stat-label { color: var(--accent); font-size: 0.7rem; font-weight: 800; margin-top: 1rem; letter-spacing: 1px; }
+        .fs-badge-title { color: var(--text-main); font-size: 0.8rem; font-weight: 700; }
+        .fs-badge-status { color: var(--text-muted); font-size: 0.6rem; text-transform: uppercase; }
+      </style>
+
       <div class="fs-marsal reveal">
         <div class="container">
           <div class="fs-grid">

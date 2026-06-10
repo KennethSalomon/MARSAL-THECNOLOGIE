@@ -128,6 +128,7 @@
     .process-sticky {
       position: sticky;
       top: 100px;
+      z-index: 10;
     }
 
     @media (max-width: 768px) {
@@ -317,6 +318,11 @@
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
+    
+    @media (max-width: 480px) {
+      .display-xl { font-size: 2.2rem !important; }
+      .hero-subtitle { font-size: 0.95rem !important; }
+    }
 
     @media (max-width: 1024px) {
 
@@ -333,8 +339,10 @@
     @media (max-width: 768px) {
       .hero-content-wrapper {
         padding-bottom: 6rem;
-        /* Overlay de protection pour la lisibilité sur mobile */
         background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+      }
+      .hero-bg-image {
+        object-position: 80% center; /* Ajuste le focus de l'image de fond sur mobile */
       }
 
       .stats-strip {
@@ -346,6 +354,10 @@
       .section,
       .section-sm {
         padding-block: 3.5rem;
+      }
+
+      .display-xl {
+        font-size: 3rem;
       }
     }
 
@@ -366,8 +378,16 @@
     /* ── FIX : Visibilité permanente du bouton Solutions ── */
     .hero-actions,
     a[href*="solutions"].btn {
-      display: inline-flex !important;
-      /* Force le display indépendamment des scripts */
+      display: flex !important;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+       .hero-actions .btn {
+         width: 100%;
+         justify-content: center;
+       }
     }
 
     /* Force l'affichage des sections React dans #root pour éviter le conflit reveal/main.js */
@@ -634,17 +654,24 @@
     <section class="hero" aria-label="Section hero cinématique">
 
       <!-- LAYER 1: DAY MODE BACKGROUND (Z-INDEX 10) -->
-      <div class="hero-background-layer hero-layer-day" role="img" aria-label="Ambiance jour - villa moderne luxueuse"
-        id="hero-layer-day">
+      <div class="hero-background-layer hero-layer-day" role="img" aria-label="Ambiance jour - villa moderne luxueuse" id="hero-layer-day">
         <img src="/images/hero.jfif" alt="Vue de jour de la résidence intelligente" class="hero-bg-image"
           loading="eager" fetchpriority="high" decoding="async">
       </div>
 
-      </div><!-- /hero-content -->
+      <div class="hero-content-wrapper relative z-20 w-full">
+        <div class="container">
+          <div class="hero-content reveal flex flex-col items-center lg:items-start">
+            <span class="pill mb-4" style="color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent); padding: 4px 16px; border-radius: 100px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; letter-spacing: 2px;">Intelligence & Sécurité</span>
+            <h1 class="display-xl hero-title-main">Vivez en toute <br><span class="hero-title-brand" style="color: var(--accent);">sécurité.</span></h1>
+            <p class="hero-subtitle mt-6 max-w-lg" style="font-size: clamp(1rem, 2vw, 1.1rem); color: var(--text-main); line-height: 1.6; opacity: 0.9;">L'innovation au service de votre tranquillité à Cotonou et partout au Bénin.</p>
+            <div class="hero-actions mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+              <a href="solutions.html" class="btn btn-primary">Explorer nos solutions</a>
+              <a href="catalogue.html" class="btn btn-ghost" style="border: 1px solid var(--border);">Voir le catalogue</a>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-
-
 
     </section><!-- /hero -->
 
@@ -685,7 +712,7 @@
         <div class="product-grid">
           <a href="catalogue.html" class="product-card">
             <div class="product-image">
-              <img src="images/pacelle.jpeg" alt="Caméra de surveillance">
+              <img src="images/pacelle.jpeg" alt="Gestion de parcelle intelligente">
             </div>
             <h3>pacelle </h3>
             <span class="product-btn">Détails techniques →</span>
