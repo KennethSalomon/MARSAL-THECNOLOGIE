@@ -339,7 +339,7 @@
     @media (max-width: 768px) {
       .hero-content-wrapper {
         padding-bottom: 6rem;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+        background: transparent !important;
       }
       .hero-bg-image {
         object-position: 80% center; /* Ajuste le focus de l'image de fond sur mobile */
@@ -446,12 +446,43 @@
     margin: 0 auto;
   }
 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+/* Mobile : deux colonnes avec des cartes plus petites */
+@media (max-width: 640px) {
   .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-    gap: 32px;
-    margin-bottom: 48px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
   }
+  .product-image {
+    height: 180px;  /* hauteur réduite pour mieux s’adapter à l’écran */
+  }
+  .product-card h3 {
+    font-size: 1rem;
+    margin: 12px 12px 6px;
+  }
+  .product-btn {
+    margin: 0 12px 16px;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Très petits écrans (moins de 400px) : toujours deux colonnes mais plus compact */
+@media (max-width: 400px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+  .product-image {
+    height: 150px;
+  }
+}
 
   /* Animation d'apparition RENFORCÉE */
   .product-card {

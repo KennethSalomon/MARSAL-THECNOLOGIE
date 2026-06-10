@@ -391,6 +391,15 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        background-attachment: scroll; /* Améliore la fluidité et évite les bugs d'affichage sur mobile */
+      }
+
+      .page-hero {
+        min-height: 280px;
+        padding-top: calc(68px + 3rem);
+      }
+
       .testi-card {
         width: 320px;
         padding: 1.5rem;
@@ -408,6 +417,15 @@
 
       .form-content-side {
         padding: 2rem;
+      }
+
+      .display-lg {
+        font-size: 2.2rem !important; /* Taille de titre plus adaptée aux mobiles */
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr; /* Empile les champs du formulaire verticalement */
+        gap: 0;
       }
     }
   </style>

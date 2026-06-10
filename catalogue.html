@@ -88,12 +88,44 @@
       box-shadow: 0 0 0 3px rgba(56,111,168,0.2);
     }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+/* Téléphone : 2 colonnes avec des cartes plus petites */
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .product-body {
+    padding: 0.8rem 0.8rem 1.2rem;
+  }
+  .product-name {
+    font-size: 1rem;
+  }
+  .btn-product {
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Très petits écrans (moins de 400px) : toujours 2 colonnes mais avec un min plus petit */
+@media (max-width: 400px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.8rem;
+  }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+}
     .product-card {
       background: white;
       border-radius: 28px;

@@ -276,12 +276,33 @@
 
   <script src="/js/main.js"></script>
   <script>
+    // Function to handle form submission and redirect to WhatsApp
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const whatsappNumber = "22954036641"; // Numéro WhatsApp sans le '+'
+      const prefilledText = `Bonjour Marsal Technologies,
+Je m'appelle ${name} et mon email est ${email}.
+Mon message est le suivant :
+${message}`;
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(prefilledText)}`;
+
+      window.open(whatsappUrl, '_blank'); // Ouvre WhatsApp dans un nouvel onglet
+
+      // Affiche un message de feedback à l'utilisateur
       const feedback = document.getElementById('form-feedback');
+      feedback.textContent = "Votre message est prêt à être envoyé sur WhatsApp !";
       feedback.style.display = 'block';
-      this.reset();
-      setTimeout(() => { feedback.style.display = 'none'; }, 5000);
+      feedback.classList.remove('success'); // Supprime la classe 'success' car ce n'est pas une soumission directe
+      feedback.style.backgroundColor = 'rgba(56, 111, 168, 0.2)'; // Fond neutre
+      feedback.style.color = '#386FA8'; // Couleur d'accentuation pour le texte
+      this.reset(); // Réinitialise le formulaire
+      setTimeout(() => { feedback.style.display = 'none'; }, 7000); // Cache le feedback après 7 secondes
     });
   </script>
 </body>
