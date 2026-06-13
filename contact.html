@@ -64,6 +64,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 0 20px; /* Add horizontal padding for small screens */
     }
 
     .page-hero-content h1 {
@@ -103,6 +104,7 @@
       padding: 50px 30px;
       border-radius: 4px;
       text-align: center;
+      box-sizing: border-box; /* Ensure padding is included in width */
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       border-bottom: 3px solid transparent;
     }
@@ -119,10 +121,19 @@
       margin-bottom: 20px;
     }
 
-    .contact-card h3 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 700; }
-    .contact-card p { margin: 5px 0; line-height: 1.6; color: #555; }
+    .contact-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    .contact-card p {
+      margin: 5px 0;
+      line-height: 1.6;
+      color: #555;
+    }
+    .contact-card p a { color: #555; text-decoration: none; transition: color 0.3s; }
+    .contact-card p a:hover { color: var(--accent-blue); }
 
-    /* --- Form Section --- */
     .form-section { padding-bottom: 100px; max-width: 800px; margin: 0 auto; padding-inline: 20px; }
     .form-subtitle { color: var(--text-gray); font-size: 0.9rem; text-align: center; margin-bottom: 30px; }
     
@@ -166,7 +177,136 @@
 
     /* --- Map Section --- */
     .map-section { line-height: 0; }
-    .map-section iframe { filter: grayscale(0.5) contrast(1.2) invert(0.9) hue-rotate(180deg); }
+    .map-section iframe {
+      filter: grayscale(0.5) contrast(1.2) invert(0.9) hue-rotate(180deg);
+      width: 100%; /* Ensure map iframe is full width */
+      height: 400px; /* Default height for map */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .page-hero {
+        height: 350px; /* Reduce hero height */
+      }
+      .page-hero-content h1 {
+        font-size: clamp(2rem, 8vw, 3rem); /* Adjust h1 size */
+      }
+      .breadcrumbs {
+        font-size: 0.8rem; /* Adjust breadcrumbs size */
+      }
+
+      .contact-info-section {
+        padding: 60px 0; /* Reduce section padding */
+      }
+      .section-title {
+        font-size: clamp(1.8rem, 6vw, 2.2rem); /* Adjust section title size */
+        margin-bottom: 30px;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+        gap: 20px;
+      }
+      .contact-card {
+        padding: 30px 20px; /* Reduce card padding */
+      }
+      .contact-card i {
+        font-size: 2rem; /* Adjust icon size */
+      }
+      .contact-card h3 {
+        font-size: 1.1rem; /* Adjust card title size */
+      }
+      .contact-card p {
+        font-size: 0.9rem; /* Adjust card text size */
+      }
+
+      /* Specific adjustments for the map card within the grid */
+      .contact-card .footer-col { /* Target the embedded footer-col */
+        padding: 0; /* Remove padding from embedded footer-col */
+      }
+      .contact-card .footer-col h4 {
+        display: none; /* Hide the "Localisation" title if it's redundant in the card context */
+      }
+      .contact-card .footer-col a {
+        margin-bottom: 0; /* Adjust margin */
+      }
+      .contact-card .footer-col p {
+        font-size: 0.85rem; /* Adjust text size within map card */
+      }
+      .contact-card .footer-col .footer-map-card { /* This is the div with position:relative */
+        height: 150px; /* Adjust map height */
+        border-radius: 12px; /* Smaller border-radius */
+      }
+      .contact-card .footer-col .google-maps-badge {
+        padding: 8px 16px; /* Adjust badge padding */
+      }
+      .contact-card .footer-col .badge-main-text {
+        font-size: 11px; /* Adjust badge text size */
+      }
+      .contact-card .footer-col .badge-tagline {
+        font-size: 9px; /* Adjust badge tagline size */
+      }
+
+      .form-section {
+        padding-bottom: 60px; /* Reduce section padding */
+      }
+      .form-subtitle {
+        font-size: 0.85rem; /* Adjust subtitle size */
+      }
+      .form-group label {
+        font-size: 0.85rem; /* Adjust label size */
+      }
+      .form-control {
+        padding: 12px; /* Adjust input padding */
+        font-size: 0.9rem;
+      }
+      .btn-submit {
+        padding: 15px 30px; /* Adjust button padding */
+        font-size: 0.9rem;
+      }
+      .map-section iframe {
+        height: 300px; /* Adjust map iframe height */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero { height: 300px; }
+      .page-hero-content h1 { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+      .breadcrumbs { font-size: 0.7rem; }
+      .contact-info-section { padding: 40px 0; }
+      .section-title { font-size: clamp(1.5rem, 8vw, 2rem); margin-bottom: 20px; }
+      .contact-card { padding: 25px 15px; }
+      .contact-card i { font-size: 1.8rem; }
+      .contact-card h3 { font-size: 1rem; }
+      .contact-card p { font-size: 0.85rem; }
+      .contact-card .footer-col .footer-map-card { height: 120px; }
+      .contact-card .footer-col .google-maps-badge { padding: 6px 12px; }
+      .contact-card .footer-col .badge-main-text { font-size: 10px; }
+      .contact-card .footer-col .badge-tagline { font-size: 8px; }
+      .form-section { padding-bottom: 40px; }
+      .form-control { padding: 10px; font-size: 0.85rem; }
+      .btn-submit { padding: 12px 20px; font-size: 0.85rem; }
+      .map-section iframe { height: 250px; }
+    }
+
+    @media (max-width: 320px) {
+      .page-hero { height: 250px; }
+      .page-hero-content h1 { font-size: 1.5rem; }
+      .breadcrumbs { font-size: 0.65rem; }
+      .contact-info-section { padding: 30px 0; }
+      .section-title { font-size: 1.4rem; margin-bottom: 15px; }
+      .contact-card { padding: 20px 10px; }
+      .contact-card i { font-size: 1.5rem; }
+      .contact-card h3 { font-size: 0.9rem; }
+      .contact-card p { font-size: 0.8rem; }
+      .contact-card .footer-col .footer-map-card { height: 100px; }
+      .contact-card .footer-col .google-maps-badge { padding: 4px 8px; }
+      .contact-card .footer-col .badge-main-text { font-size: 9px; }
+      .contact-card .footer-col .badge-tagline { font-size: 7px; }
+      .form-section { padding-bottom: 30px; }
+      .form-control { padding: 8px; font-size: 0.8rem; }
+      .btn-submit { padding: 10px 15px; font-size: 0.8rem; }
+      .map-section iframe { height: 200px; }
+    }
   </style>
 </head>
 <body>
@@ -197,11 +337,11 @@
           <div class="contact-card reveal reveal-delay-1">
             <i class="fa-solid fa-phone-volume"></i>
             <h3>Téléphones</h3>
-            <p>+229 01 54 03 66 41</p>
+            <p><a href="tel:+2290154036641">+229 01 54 03 66 41</a></p>
          
              <i class="fa-solid fa-envelope-open-text"></i>
             <h3>Email</h3>
-            <p>marsalsmarttechnologies@gmail.com</p>
+            <p><a href="mailto:marsalsmarttechnologies@gmail.com">marsalsmarttechnologies@gmail.com</a></p>
             
           </div>
 
@@ -214,11 +354,7 @@
 
           <div class="contact-card reveal reveal-delay-2">
             <div class="footer-col">
-      <h4>Localisation</h4>
       <a href="https://www.google.com/maps/dir//Marsal+Technologies,+Derriere+la+SOBEBRA,+4006+Quatier+Jak,+Cotonou/@6.3488468,2.430755,15z/" target="_blank" rel="noopener" style="display:block; transition: opacity var(--transition);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-        <p style="font-size:.875rem;color:var(--text-main);font-weight:600;margin-bottom:.25rem;">
-          Marsal Technologies
-        </p>
         <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.4;">
           Derrière la SOBEBRA, 4006 Quartier Jak, Cotonou
         </p>
@@ -232,9 +368,6 @@
           </div>
         </div>
       </a>
-      <p style="font-size:.8rem;color:var(--text-muted);margin-top:1rem;">
-       
-      </p>
     </div>
           </div> 
 
