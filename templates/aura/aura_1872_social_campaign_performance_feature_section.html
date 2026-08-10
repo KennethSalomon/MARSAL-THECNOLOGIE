@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Campaign Performance Feature Section</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  
+  <style>body { margin: 0; padding: 20px; } .component-container { max-width: 1200px; margin: 0 auto; } </style>
+</head>
+<body>
+<div class="component-container">
+<section class="sm:px-6 lg:px-8 lg:py-10 max-w-6xl mt-24 mr-auto mb-24 ml-auto pt-2 pr-4 pb-10 pl-4">
+  <style id="border-gradient-shared-style">
+    [style*="--border-gradient"]::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: var(--border-radius-before, inherit);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      background: var(--border-gradient);
+      pointer-events: none;
+    }
+  </style>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <!-- Left: phone-style preview -->
+    <div class="flex justify-center lg:justify-start">
+      <div
+        class="overflow-hidden shadow-black/40 sm:max-w-sm bg-gradient-to-br from-white/10 to-white/0 w-full max-w-xs rounded-[2.5rem] relative shadow-2xl gap-x-3 gap-y-3"
+        style="position: relative; --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 2.5rem">
+        <!-- Status bar -->
+        <div class="flex items-center justify-between px-4 pt-3 pb-2 text-[13px] text-slate-200">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl font-semibold tracking-tight">Lumina</span>
+            <i class="lucide lucide-chevron-down w-3 h-3 text-slate-400"></i>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="">9:41</span>
+            <span class="w-4 h-1.5 rounded-full bg-slate-600 overflow-hidden">
+              <span class="block h-full w-3/4 bg-slate-100"></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Story row -->
+        <div class="flex gap-3 overflow-x-auto no-scrollbar pr-3 pb-3 pl-3 gap-x-3 gap-y-3 items-center">
+          <div class="flex flex-col items-center gap-1">
+            <div
+              class="relative w-11 h-11 rounded-full bg-slate-900 flex items-center justify-center border border-cyan-400/70">
+              <span class="text-[11px] font-semibold tracking-tight text-cyan-100">
+                NK
+              </span>
+              <span class="absolute -right-0.5 -bottom-0.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-cyan-500 text-xs text-slate-950 font-medium">
+                +
+              </span>
+            </div>
+            <span class="text-xs text-slate-400">You</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-11 h-11 rounded-full border border-fuchsia-400/80 p-[2px]">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/419fb450-fb0d-4f9e-9852-133d18177ec0_320w.webp" alt="3D render capsule" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-xs text-slate-400">Luma</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-11 h-11 rounded-full border border-amber-400/80 p-[2px]">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/feadc71c-fe96-42c7-912b-466bd1d637b6_320w.webp" alt="Minimal product" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-xs text-slate-400">Radius</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-11 h-11 rounded-full border border-emerald-400/80 p-[2px]">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/eb7d05f7-a48c-46ee-89a0-43060e107242_320w.webp" alt="Soft light render" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-xs text-slate-400">Halo</span>
+          </div>
+        </div>
+
+        <!-- Main post -->
+        <div class="border-t border-slate-800/80 pt-2 pb-3">
+          <div class="flex items-center justify-between px-3 pb-2">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full overflow-hidden border border-slate-700">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=200&amp;q=80" alt="Profile avatar" class="w-full h-full object-cover">
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-medium text-slate-100 tracking-tight">Nova Studio</span>
+                <span class="text-xs text-slate-500">Sponsored · Berlin</span>
+              </div>
+            </div>
+            <button class="text-slate-500">
+              <i class="lucide lucide-more-horizontal w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="aspect-[4/5] bg-slate-900/90">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b813d408-b6f5-47e6-8569-1a52804aba18_800w.webp" alt="Soft-lit product render on neutral background" class="w-full h-full object-cover">
+          </div>
+
+          <!-- CTA -->
+          <div class="px-3 pt-2">
+            <button class="w-full rounded-xl bg-cyan-500 text-slate-950 text-xs font-medium py-1.5 flex items-center justify-between px-3 hover:bg-cyan-400 transition">
+              <span class="">Launch your visual campaign</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" style="color: rgb(2, 6, 23); width: 14px; height: 14px" class="lucide lucide-arrow-right w-3.5 h-3.5 w-[14px] h-[14px]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" data-solar="rocket-bold-duotone" data-icon-set="solar" data-icon-replaced="true" stroke-width="2"><path fill="#020617" fill-rule="evenodd" d="m14.447 16.377l5.847-5.83c.842-.839 1.263-1.259 1.484-1.792S22 7.627 22 6.44v-.567c0-1.826 0-2.739-.569-3.306S19.947 2 18.116 2h-.57c-1.19 0-1.785 0-2.32.221c-.536.221-.957.641-1.8 1.48L7.58 9.531c-.984.98-1.594 1.589-1.83 2.176a1.5 1.5 0 0 0-.112.562c0 .802.647 1.448 1.942 2.739l.174.173l2.038-2.069a.75.75 0 1 1 1.069 1.053L8.816 16.24l.137.137c1.295 1.29 1.943 1.936 2.747 1.936c.178 0 .348-.031.519-.094c.603-.222 1.219-.836 2.228-1.842m2.747-6.846a1.946 1.946 0 0 1-2.747 0a1.93 1.93 0 0 1 0-2.738a1.946 1.946 0 0 1 2.747 0a1.93 1.93 0 0 1 0 2.738" clip-rule="evenodd" class=""></path><path fill="#020617" d="M9.034 5.963L6.491 8.5c-.467.466-.896.893-1.235 1.28a6 6 0 0 0-.619.82l-.024-.025l-.095-.094a4.9 4.9 0 0 0-1.532-1.004l-.123-.05l-.379-.15a.764.764 0 0 1-.259-1.252C3.345 6.907 4.69 5.566 5.34 5.297a3.4 3.4 0 0 1 1.788-.229c.546.081 1.063.362 1.907.895m4.342 13.35c.205.208.34.355.464.512q.243.311.434.658c.142.26.253.537.474 1.092a.69.69 0 0 0 1.126.224l.084-.083c1.12-1.117 2.465-2.458 2.735-3.105a3.35 3.35 0 0 0 .229-1.782c-.081-.545-.362-1.06-.897-1.902l-2.552 2.544c-.478.477-.916.914-1.313 1.256c-.237.206-.497.41-.784.586" opacity=".5" class=""></path></svg>
+            </button>
+          </div>
+
+          <!-- Meta -->
+          <div class="flex text-xs text-slate-400 pt-2 pr-3 pb-2 pl-3 items-center justify-between">
+            <span class="">312 likes · 8 comments</span>
+            <span class="">View insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: performance metrics -->
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-2">
+        <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+          Campaign performance
+        </p>
+        <h2 class="text-4xl sm:text-5xl lg:text-[40px] font-semibold tracking-tight text-slate-50">
+          Social stories that turn quiet scrolls into booked projects.
+        </h2>
+        <p class="text-base text-slate-400 max-w-md">
+          Every launch blends narrative, motion, and light calibration to keep your work in-frame and in-mind—across the
+          feeds your clients live in.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Stat 1 -->
+        <div class="flex items-start gap-4 border-t border-slate-800/80 pt-4">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900/80 border border-slate-800/90">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4.5 h-4.5" stroke-width="1.7">
+              <path fill="#0ea5e9"
+                d="M4 7.75C4 6.784 4.784 6 5.75 6h12.5c.966 0 1.75.784 1.75 1.75v7.5A2.75 2.75 0 0 1 17.25 18H6.75A2.75 2.75 0 0 1 4 15.25z"
+                opacity=".5" class=""></path>
+              <path fill="#e0f2fe"
+                d="M7 9.75A.75.75 0 0 1 7.75 9h3.5a.75.75 0 0 1 0 1.5h-3.5A.75.75 0 0 1 7 9.75m0 3A.75.75 0 0 1 7.75 12h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 7 12.75"
+                class=""></path>
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-baseline gap-3">
+              <span class="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-50">
+                14+
+              </span>
+              <span class="text-xs font-medium text-slate-400 uppercase tracking-[0.16em]">
+                Sectors documented
+              </span>
+            </div>
+            <p class="text-sm text-slate-400">
+              From architecture to wellness brands building long-form visual diaries.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="flex items-start gap-4 border-t border-slate-800/80 pt-4">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900/80 border border-slate-800/90">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4.5 h-4.5" stroke-width="1.7">
+              <path fill="#22c55e"
+                d="M4 6.75A1.75 1.75 0 0 1 5.75 5h12.5A1.75 1.75 0 0 1 20 6.75v10.5A1.75 1.75 0 0 1 18.25 19H5.75A1.75 1.75 0 0 1 4 17.25z"
+                opacity=".5" class=""></path>
+              <path fill="#dcfce7"
+                d="M8.53 11.47a.75.75 0 0 1 1.06 0L11 12.88l3.47-3.47a.75.75 0 0 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 0 1 0-1.06"
+                class=""></path>
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-baseline gap-3">
+              <span class="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-50">
+                320M
+              </span>
+              <span class="text-xs font-medium text-slate-400 uppercase tracking-[0.16em]">
+                Verified impressions
+              </span>
+            </div>
+            <p class="text-sm text-slate-400">
+              Long-tail reach measured across reels, carousels and short-form story arcs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="flex items-start gap-4 border-t border-b border-slate-800/80 py-4">
+          <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900/80 border border-slate-800/90">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4.5 h-4.5" stroke-width="1.7">
+              <path fill="#eab308"
+                d="M5 5.75A1.75 1.75 0 0 1 6.75 4h10.5A1.75 1.75 0 0 1 19 5.75v12.5A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25z"
+                opacity=".5" class=""></path>
+              <path fill="#fef9c3"
+                d="M9.75 8a.75.75 0 0 1 .75.75v4.19l1.72-1.72a.75.75 0 0 1 1.06 1.06l-3 3A.75.75 0 0 1 9 15.75v-7A.75.75 0 0 1 9.75 8"
+                class=""></path>
+            </svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-baseline gap-3">
+              <span class="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-50">
+                1,460%
+              </span>
+              <span class="text-xs font-medium text-slate-400 uppercase tracking-[0.16em]">
+                Median launch uplift
+              </span>
+            </div>
+            <p class="text-sm text-slate-400">
+              Average increase in qualified project inquiries within the first 60 days.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button class="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-white/80 to-white/40 text-sm font-medium text-slate-950 px-3 py-2 hover:bg-slate-200 transition">
+          <span class="">Download full campaign report</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="color: rgb(2, 6, 23); width: 16px; height: 16px" class="lucide lucide-download w-[16px] h-[16px]" data-solar="arrow-down-outline" data-icon-set="solar" data-icon-replaced="true" stroke-width="2"><path fill="#020617" fill-rule="evenodd" d="M12 3.25a.75.75 0 0 1 .75.75v14.19l4.72-4.72a.75.75 0 1 1 1.06 1.06l-6 6a.75.75 0 0 1-1.06 0l-6-6a.75.75 0 1 1 1.06-1.06l4.72 4.72V4a.75.75 0 0 1 .75-.75" clip-rule="evenodd" class=""></path></svg>
+        </button>
+        <span class="text-xs text-slate-400">
+          Benchmarked across 27 independent client launches.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+</html>

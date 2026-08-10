@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Marquee Testimonials Carousel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  
+  <style>body { margin: 0; padding: 20px; } .component-container { max-width: 1200px; margin: 0 auto; } </style>
+</head>
+<body>
+<div class="component-container">
+<section class="max-w-7xl sm:px-6 lg:px-8 sm:py-10 md:py-12 mr-auto ml-auto pt-8 pr-4 pb-8 pl-4">
+  <div class="flex items-center justify-between">
+    <div class="space-y-1">
+      <p class="text-xs sm:text-sm text-zinc-400">What people say</p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl tracking-tight font-semibold text-zinc-100">Testimonials</h2>
+    </div>
+    <div class="hidden sm:flex items-center gap-2 text-zinc-400">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="quote"
+        class="lucide lucide-quote w-4 h-4">
+        <path
+          d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+          class=""></path>
+        <path
+          d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+          class=""></path>
+      </svg>
+      <span class="text-sm">Real feedback from teams</span>
+    </div>
+  </div>
+
+  <div class="relative mt-6 sm:mt-8 overflow-hidden rounded-2xl sm:rounded-3xl border border-zinc-900 bg-zinc-950">
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-zinc-950 to-transparent z-10">
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-zinc-950 to-transparent z-10">
+    </div>
+
+    <!-- Row 1 — left to right -->
+    <div class="relative py-6 sm:py-8">
+      <div class="flex gap-4 sm:gap-5 will-change-transform animate-[marquee-ltr_45s_linear_infinite]">
+        <!-- Group A -->
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" class="size-9 object-cover rounded-full">
+            <div class="">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Ava Thompson</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@ava_builds</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Smart Connect took minutes to wire into our stack and saved days of setup. The DX is top‑tier.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" class="size-9 object-cover rounded-full">
+            <div class="">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Noah Patel</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@noah_ops</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            We shipped our analytics revamp 3× faster. The defaults are sensible and secure out of the box.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/86a541ae-1b5d-4597-8538-e55c0858f4ff_320w.jpg" alt="Avatar" class="size-9 object-cover rounded-full">
+            <div class="">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Maya Kim</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@mayak</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            The platform feels invisible—just fast, reliable pipelines and clean reporting.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&amp;w=120&amp;h=120&amp;fit=crop&amp;crop=faces" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Ethan Garcia</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@egarcia</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Observability baked in. We finally trust our metrics for decision‑making.
+          </p>
+        </article>
+
+        <!-- Group B (duplicate for seamless loop) -->
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=120&amp;h=120&amp;fit=crop&amp;crop=faces" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Ava Thompson</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@ava_builds</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Smart Connect took minutes to wire into our stack and saved days of setup. The DX is top‑tier.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&amp;w=120&amp;h=120&amp;fit=crop&amp;crop=faces" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Noah Patel</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@noah_ops</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            We shipped our analytics revamp 3× faster. The defaults are sensible and secure out of the box.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&amp;q=80" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Maya Kim</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@mayak</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            The platform feels invisible—just fast, reliable pipelines and clean reporting.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&amp;w=120&amp;h=120&amp;fit=crop&amp;crop=faces" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Ethan Garcia</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@egarcia</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Observability baked in. We finally trust our metrics for decision‑making.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <div class="border-t border-zinc-900/80"></div>
+
+    <!-- Row 2 — right to left -->
+    <div class="relative py-6 sm:py-8">
+      <div class="flex gap-4 sm:gap-5 will-change-transform animate-[marquee-rtl_45s_linear_infinite]">
+        <!-- Group A -->
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] bg-zinc-900/40 border-zinc-900 border rounded-2xl pt-5 pr-5 pb-5 pl-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/358aaa92-ba50-4778-b2a2-7c8f7310e44c_320w.jpg" alt="Avatar" class="size-9 object-cover rounded-full">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Priya Singh</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@priya_dev</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            The automation suite trimmed our runbooks by half. The UI stays out of the way and just works.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] bg-zinc-900/40 border-zinc-900 border rounded-2xl pt-5 pr-5 pb-5 pl-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/b6d79211-32f1-430e-96b3-9b4d857c1482_320w.jpg" alt="Avatar" class="size-9 object-cover rounded-full">
+            <div class="">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Leo Martin</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@leom</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Enterprise SSO, audit logs, and usage analytics—without extra integration work. Huge win.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] bg-zinc-900/40 border-zinc-900 border rounded-2xl pt-5 pr-5 pb-5 pl-5">
+          <div class="flex items-center gap-3">
+            <img alt="Avatar" class="size-9 object-cover rounded-full" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/ec17a2e2-e4f4-4164-b631-f074e640a0c1_320w.jpg">
+            <div class="">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Sofia Alvarez</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@sofialabs</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            From local dev to prod parity with one connection. Best onboarding we’ve had in years.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c0aab170-b3d3-4816-9435-0ac1e1d853a3_320w.jpg" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Jackson Lee</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@jacksonlee</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Clean API, helpful docs, and thoughtful error messages. It’s the small things.
+          </p>
+        </article>
+
+        <!-- Group B (duplicate for seamless loop) -->
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/480fa0bd-ee9a-4aa1-8f7a-5307cc4541f5_320w.jpg" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Priya Singh</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@priya_dev</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            The automation suite trimmed our runbooks by half. The UI stays out of the way and just works.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/e0bbf4a4-5f58-4644-bea6-85d2fef73d4a_320w.jpg" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Leo Martin</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@leom</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Enterprise SSO, audit logs, and usage analytics—without extra integration work. Huge win.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/27a2c31e-38f3-479f-a831-858e91b9bd84_320w.jpg" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Sofia Alvarez</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@sofialabs</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            From local dev to prod parity with one connection. Best onboarding we’ve had in years.
+          </p>
+        </article>
+
+        <article
+          class="shrink-0 w-[280px] sm:w-[360px] md:w-[420px] rounded-2xl border border-zinc-900 bg-zinc-900/40 p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/b6d79211-32f1-430e-96b3-9b4d857c1482_320w.jpg" alt="Avatar" class="size-9 rounded-full object-cover">
+            <div>
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-medium text-zinc-100">Jackson Lee</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="check-circle-2" class="lucide lucide-check-circle-2 w-3.5 h-3.5 text-blue-400">
+                  <circle cx="12" cy="12" r="10" class=""></circle>
+                  <path d="m9 12 2 2 4-4" class=""></path>
+                </svg>
+              </div>
+              <p class="text-xs text-zinc-400">@jacksonlee</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-zinc-300">
+            Clean API, helpful docs, and thoughtful error messages. It’s the small things.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes marquee-rtl {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marquee-ltr {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .animate-\[marquee-rtl_45s_linear_infinite\],
+      .animate-\[marquee-ltr_45s_linear_infinite\] {
+        animation: none !important;
+      }
+    }
+  </style>
+</section>
+</div>
+</body>
+</html>

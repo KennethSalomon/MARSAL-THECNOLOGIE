@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Hero Section with Scrolling Photo Marquee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  
+  <style>body { margin: 0; padding: 20px; } .component-container { max-width: 1200px; margin: 0 auto; } </style>
+</head>
+<body>
+<div class="component-container">
+<section class="sm:px-6 lg:px-8 sm:pb-20 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4">
+  <div class="mx-auto max-w-4xl text-center">
+    <span class="inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/15 px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-medium text-violet-300 font-geist">Global Network</span>
+    <h2 class="mt-4 sm:mt-6 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl tracking-tighter font-geist">Join 50,000+
+      cognitive pioneers from 180+ countries</h2>
+    <p class="mt-3 sm:mt-4 text-sm sm:text-base font-medium text-slate-300/90 font-geist">Connect with neuroscience
+      researchers, peak performers, and cognitive enhancement enthusiasts pushing the boundaries of human potential.</p>
+    <div class="mt-4 sm:mt-6">
+      <a href="#"
+        class="inline-flex items-center gap-2 rounded-full bg-violet-500 px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/25 hover:bg-violet-400 transition-colors font-geist">
+        Join Neural Network
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-arrow-right">
+          <path d="M5 12h14" class=""></path>
+          <path d="m12 5 7 7-7 7" class=""></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="relative mt-8 sm:mt-12">
+    <style>
+      @keyframes marquee-left {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+    <div class="mx-auto max-w-6xl overflow-hidden"
+      style="mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent), linear-gradient(to top, transparent, black 15%); -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent), linear-gradient(to top, transparent, black 15%); mask-composite: intersect; -webkit-mask-composite: destination-in;">
+      <div class="flex w-max" style="animation: marquee-left 80s linear infinite; will-change: transform;">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-4 flex-shrink-0 pr-2 sm:pr-4">
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/2f563338-39fa-47ea-9761-658d4f3f84db_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/de692cd3-6ed5-40da-b589-663e89889a1c_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/42dfe760-aef6-44a2-bff9-70aa005c5961_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c18d9fac-84d4-4727-95df-38b04c62ac05_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c3e3fffd-33c5-442f-924a-7bc1032b2c0f_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/31996fe3-f9da-42d7-bf65-2cc5d5417271_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/5989c16d-4aa3-4351-bfdb-fac959736459_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/6c39c735-18f1-4b74-aa61-180fbb2b4770_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/cf90a7bf-fee3-4a9d-887b-c46bfea61ba8_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/6209234e-73ff-4176-bf91-c05fa95cc596_800w.jpg" alt="Community member" style="outline: rgb(245, 158, 11) solid 2px; outline-offset: 2px; transition: outline 0.1s ease-in-out;">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/3f4ec54c-12b4-4eb2-a0c3-1d78cb6c9e02_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/8cfa0961-8c53-4d57-b87c-3b8eaffcd08b_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/42f0787e-2f7f-4ae7-9c64-3f1d597bf1b8_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c8701b7a-a3f2-4ad0-95be-f2f027c8e390_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/83ca20c0-64e5-412d-9c79-224a4ae90b74_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c920d31f-46c8-4f39-957b-9a8d8e511a1a_800w.jpg" alt="Community member">
+          </div>
+        </div>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-4 flex-shrink-0 pr-2 sm:pr-4">
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/2f563338-39fa-47ea-9761-658d4f3f84db_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/de692cd3-6ed5-40da-b589-663e89889a1c_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/42dfe760-aef6-44a2-bff9-70aa005c5961_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c18d9fac-84d4-4727-95df-38b04c62ac05_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c3e3fffd-33c5-442f-924a-7bc1032b2c0f_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/9a421cf7-e975-430b-88c5-f554775493e1_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/0c82a12e-5af1-47d3-963d-65c3987dd2be_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/e63aa468-ae44-4756-84db-fcacd6cec9e2_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/cf90a7bf-fee3-4a9d-887b-c46bfea61ba8_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/6209234e-73ff-4176-bf91-c05fa95cc596_800w.jpg" alt="Community member" style="outline: rgb(245, 158, 11) solid 2px; outline-offset: 2px; transition: outline 0.1s ease-in-out;">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/3f4ec54c-12b4-4eb2-a0c3-1d78cb6c9e02_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/8cfa0961-8c53-4d57-b87c-3b8eaffcd08b_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="sm:h-28 lg:h-36 w-full h-20 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/42f0787e-2f7f-4ae7-9c64-3f1d597bf1b8_800w.jpg" alt="Community member">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/a160135e-dfe8-4d26-b2e5-2915ebe6f3a2_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/9a3ff98a-df58-478d-a4ae-f3c6d3f3ba61_800w.jpg" alt="Community member" style="">
+          </div>
+          <div class="rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5"><img class="w-full h-20 sm:h-28 lg:h-36 object-cover" src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/7063bc06-62fe-4811-b5fa-4b1e09b26a81_800w.jpg" alt="Community member">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+</html>

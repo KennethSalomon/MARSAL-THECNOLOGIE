@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Hero Section with Nav and Preview UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  
+  <style>body { margin: 0; padding: 20px; } .component-container { max-width: 1200px; margin: 0 auto; } </style>
+</head>
+<body>
+<div class="component-container">
+<div class="flex-1 flex flex-col w-full max-w-7xl mr-auto ml-auto relative">
+  <!-- Navbar -->
+  <nav
+    class="flex justify-between items-center py-8 px-6 md:px-10 animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.1s_both] animate">
+    <div class="flex items-center gap-3 group cursor-pointer">
+      <div class="flex bg-gradient-to-tr from-orange-500 to-amber-500 w-8 h-8 rounded-full items-center justify-center"
+        style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); --border-radius-before: 9999px;">
+        <div class="w-2.5 h-2.5 bg-black rounded-full"
+          style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); --border-radius-before: 9999px">
+        </div>
+      </div>
+      <span class="text-lg font-semibold tracking-tight text-white">
+            Lumina
+          </span>
+    </div>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#"
+        class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400"
+        style="">
+        Workflow
+      </a>
+      <a href="#"
+        class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400"
+        style="">
+        Resources
+      </a>
+      <a href="#"
+        class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400"
+        style="">
+        Pricing
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <a href="#" class="text-sm font-medium hover:text-white transition-colors text-neutral-400" style="">
+        Log In
+      </a>
+      <button type="button" class="button-custom scale-95">
+            <div class="points_wrapper">
+              <i class="point"></i>
+              <i class="point"></i>
+              <i class="point"></i>
+              <i class="point"></i>
+            </div>
+            <span class="inner">Get Access</span>
+          </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 pt-24 pb-10 gap-x-4 gap-y-4 items-center" style="">
+    <!-- Left: Title & Description -->
+    <div class="col-span-1 lg:col-span-6 pl-6 md:pl-10 pt-10 lg:pt-0 flex flex-col justify-center">
+      <div
+        class="inline-flex items-center gap-2 text-orange-500 mb-8 animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.1s_both] animate">
+        <span class="flex h-2 w-2 rounded-full bg-orange-500"></span>
+        <span class="text-xs font-bold tracking-widest uppercase text-orange-500/80">
+              Creative Suite 2.0
+            </span>
+      </div>
+
+      <h1
+        class="text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter text-white font-medium mb-6 animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.2s_both] animate">
+        Craft Visual
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500" style="">
+              Stories.
+            </span>
+      </h1>
+
+      <p
+        class="leading-relaxed text-lg font-medium text-white/60 max-w-lg animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.35s_both] animate">
+        Transforms raw footage into cinematic masterpieces instantly.
+        Lumina's AI adapts to your unique style, automating the tedious so
+        you can focus on the story.
+      </p>
+
+      <div
+        class="mt-10 flex flex-wrap gap-6 items-center animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.5s_both] animate">
+        <a href="#"
+          class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(249,115,22,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(249,115,22,0.3),0_8px_40px_rgba(249,115,22,0.15)]">
+          <!-- Rotating Border Beam (The Aura) -->
+          <div class="absolute inset-0 overflow-hidden rounded-full">
+            <div
+              class="absolute inset-[-100%] w-[300%] h-[300%] left-[-100%] top-[-100%] animate-[spin_3s_linear_infinite]"
+              style="background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, rgba(253,186,116,0.8) 180deg, transparent 280deg, transparent 360deg);">
+            </div>
+          </div>
+
+          <!-- Background Mask -->
+          <div class="absolute inset-[1px] rounded-full backdrop-blur-xl z-0 bg-neutral-950/90" style=""></div>
+
+          <!-- Content Container -->
+          <div
+            class="z-10 flex gap-3 sm:w-auto overflow-hidden text-sm font-medium text-white w-full rounded-full pt-3 pr-5 pb-3 pl-4 relative items-center">
+            <!-- Icon Circle -->
+            <div
+              class="relative z-20 w-7 h-7 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                style="color: rgb(255, 255, 255); width: 14px; height: 14px"
+                class="lucide lucide-sparkles w-3.5 h-3.5 text-white fill-white" fill="none" stroke="currentColor"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path fill="#ffffff"
+                  d="M3.845 3.845a2.883 2.883 0 0 0 0 4.077L5.432 9.51c.012-.014.555.503.568.49l4-4c.013-.013-.504-.556-.49-.568L7.922 3.845a2.883 2.883 0 0 0-4.077 0m1.288 11.462a.483.483 0 0 1 .9 0l.157.4a.48.48 0 0 0 .272.273l.398.157a.486.486 0 0 1 0 .903l-.398.158a.48.48 0 0 0-.272.273l-.157.4a.483.483 0 0 1-.9 0l-.157-.4a.48.48 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.903l.398-.157a.48.48 0 0 0 .272-.274z"
+                  opacity=".5" class=""></path>
+                <path fill="#ffffff"
+                  d="M19.967 9.13a.483.483 0 0 1 .9 0l.156.399c.05.125.148.224.273.273l.398.158a.486.486 0 0 1 0 .902l-.398.158a.5.5 0 0 0-.273.273l-.156.4a.483.483 0 0 1-.9 0l-.157-.4a.5.5 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.902l.398-.158a.5.5 0 0 0 .272-.273z"
+                  opacity=".2" class=""></path>
+                <path fill="#ffffff"
+                  d="M16.1 2.307a.483.483 0 0 1 .9 0l.43 1.095a.48.48 0 0 0 .272.274l1.091.432a.486.486 0 0 1 0 .903l-1.09.432a.5.5 0 0 0-.273.273L17 6.81a.483.483 0 0 1-.9 0l-.43-1.095a.5.5 0 0 0-.273-.273l-1.09-.432a.486.486 0 0 1 0-.903l1.09-.432a.5.5 0 0 0 .273-.274z"
+                  opacity=".7" class=""></path>
+                <path fill="#ffffff"
+                  d="M10.568 6.49c-.012.014-.555-.503-.568-.49l-4 4c-.013.013.504.556.49.568l9.588 9.587a2.883 2.883 0 1 0 4.078-4.077z"
+                  class=""></path>
+              </svg>
+            </div>
+
+            <!-- Text -->
+            <span class="whitespace-nowrap relative z-10 font-medium tracking-tight text-base text-white/95 group-hover:text-white transition-colors">
+                  Start Creating
+                </span>
+
+            <!-- Arrow Icon -->
+            <span class="inline-flex items-center justify-center z-10 bg-white/10 w-6 h-6 rounded-full ml-1 relative group-hover:translate-x-0.5 transition-transform text-white/80 group-hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3 h-3">
+                    <path d="M5 12h14" class=""></path>
+                    <path d="m12 5 7 7-7 7" class=""></path>
+                  </svg>
+                </span>
+          </div>
+        </a>
+        <div class="flex items-center gap-2 text-xs font-medium text-neutral-500" style="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="check"
+            class="lucide lucide-check w-3.5 h-3.5 text-orange-500">
+            <path d="M20 6 9 17l-5-5" class=""></path>
+          </svg>
+          <span>No credit card required</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Preview & Steps -->
+    <div class="col-span-1 lg:col-span-6 md:pr-10 flex flex-col lg:pt-20 h-full pt-10 pr-6 items-end justify-center"
+      style="">
+      <!-- Stacked Cards Preview -->
+      <div
+        class="relative mb-12 mr-4 w-64 md:w-72 aspect-video group perspective-1000 animate-on-scroll [animation:fadeSlideIn_1.2s_cubic-bezier(0.2,0.8,0.2,1)_0.4s_both] animate">
+        <!-- Decorative blurry glow behind -->
+        <div
+          class="absolute -inset-8 bg-orange-500/20 blur-3xl -z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-700">
+        </div>
+
+        <!-- Card Stack Container -->
+        <div class="relative w-full h-full">
+          <!-- Card 3 (Bottom) -->
+          <div id="card-3"
+            class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900"
+            style="transform: translateY(24px) scale(0.9); z-index: 10; opacity: 0.4;">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c3337c33-82ae-4ad6-9c83-f9f1a5bdc53c_800w.webp" class="w-full h-full object-cover opacity-60" alt="Export">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div
+              class="absolute top-3 right-3 px-2 py-1 bg-orange-500 text-black text-[10px] font-bold rounded uppercase">
+              4K Ready
+            </div>
+          </div>
+
+          <!-- Card 2 (Middle) -->
+          <div id="card-2"
+            class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900"
+            style="transform: translateY(12px) scale(0.95); z-index: 20; opacity: 0.6;">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6e8af32c-e155-4b33-9e0a-eb91a91debbe_800w.webp" class="w-full h-full object-cover opacity-70" alt="AI Processing">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute bottom-3 left-3 flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style=""></div>
+              <span class="text-[10px] font-mono text-white/80">
+                    Scanning...
+                  </span>
+            </div>
+          </div>
+
+          <!-- Card 1 (Top - Active) -->
+          <div id="card-1"
+            class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900"
+            style="transform: translateY(0px) scale(1); z-index: 30; opacity: 1;">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2b5079f4-4ddd-433b-a936-fc8f7dea9df0_800w.webp" class="w-full h-full object-cover opacity-90" alt="Import">
+            <div class="flex absolute top-0 right-0 bottom-0 left-0 items-center justify-center">
+              <div
+                class="flex transition-transform hover:scale-110 bg-gradient-to-br from-white/10 via-white/0 to-white/10 w-12 h-12 rounded-full shadow-2xl backdrop-blur-md items-center justify-center border border-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                  data-lucide="play" class="lucide lucide-play w-4 h-4 fill-white text-white ml-1">
+                  <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" class="">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Steps -->
+      <div class="flex flex-col gap-3 w-full max-w-xs mr-0 lg:mr-8">
+        <!-- Step 1 -->
+        <div onclick="activateStep(1)"
+          class="step-item flex cursor-pointer transition-all duration-300 bg-white/5 rounded-lg pt-2 pr-2 pb-2 pl-2 shadow-xl backdrop-blur-md translate-x-[-10px] gap-x-4 gap-y-4 items-center animate-on-scroll [animation:fadeSlideIn_0.8s_cubic-bezier(0.2,0.8,0.2,1)_0.6s_both] animate"
+          id="step-1"
+          style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 8px">
+          <div id="badge-1"
+            class="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-[10px] font-bold text-black shadow-lg shadow-orange-500/20 transition-colors duration-300">
+            01
+          </div>
+          <span id="text-1" class="text-sm font-medium text-white transition-colors duration-300">
+                Import Footage
+              </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="video"
+            id="icon-1"
+            class="lucide lucide-video w-3 h-3 ml-auto transition-all duration-300 text-orange-500 opacity-100">
+            <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" class=""></path>
+            <rect x="2" y="6" width="14" height="12" rx="2" class=""></rect>
+          </svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div onclick="activateStep(2)"
+          class="step-item flex gap-4 hover:bg-white/5 transition-all duration-300 cursor-pointer group rounded-lg pt-2 pr-2 pb-2 pl-2 gap-x-4 gap-y-4 items-center animate-on-scroll [animation:fadeSlideIn_0.8s_cubic-bezier(0.2,0.8,0.2,1)_0.7s_both] animate"
+          id="step-2"
+          style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 8px">
+          <div id="badge-2"
+            class="w-6 h-6 rounded-full bg-transparent flex items-center justify-center text-[10px] font-bold group-hover:text-orange-400 transition-colors duration-300 text-neutral-500"
+            style="">
+            02
+          </div>
+          <span id="text-2" class="text-sm font-medium group-hover:text-white transition-colors duration-300 text-neutral-400" style="">
+                AI Scene Detect
+              </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="scan-line" id="icon-2"
+            class="lucide lucide-scan-line w-3 h-3 ml-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:text-white text-neutral-600"
+            style="">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2" class=""></path>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2" class=""></path>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2" class=""></path>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2" class=""></path>
+            <path d="M7 12h10" class=""></path>
+          </svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="step-3" onclick="activateStep(3)"
+          class="step-item flex hover:bg-white/5 transition-all duration-300 cursor-pointer group rounded-lg pt-2 pr-2 pb-2 pl-2 gap-x-4 gap-y-4 items-center animate-on-scroll [animation:fadeSlideIn_0.8s_cubic-bezier(0.2,0.8,0.2,1)_0.8s_both] animate"
+          style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 8px">
+          <div id="badge-3"
+            class="w-6 h-6 rounded-full bg-transparent flex items-center justify-center text-[10px] font-bold group-hover:text-orange-400 transition-colors duration-300 text-neutral-500"
+            style="">
+            03
+          </div>
+          <span id="text-3" class="text-sm font-medium group-hover:text-white transition-colors duration-300 text-neutral-400" style="">
+                Export 4K
+              </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="download" id="icon-3"
+            class="lucide lucide-download w-3 h-3 ml-auto transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:text-white text-neutral-600"
+            style="">
+            <path d="M12 15V3" class=""></path>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" class=""></path>
+            <path d="m7 10 5 5 5-5" class=""></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Area with Orange Card -->
+  <div class="md:px-10 mt-32 pt-4 pb-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+      <!-- Restored Orange Card -->
+      <div
+        class="col-span-1 lg:col-span-4 relative group animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.2s_both] animate">
+        <div
+          class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"
+          style=""></div>
+        <div
+          class="flex flex-col min-h-[180px] transition-transform hover:-translate-y-1 duration-300 text-black bg-gradient-to-b from-orange-400 to-orange-600 rounded-xl pt-8 pr-8 pb-8 pl-8 relative shadow-2xl justify-between"
+          style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)); --border-radius-before: 12px">
+          <div class="flex justify-between items-start mb-4">
+            <div class="flex -space-x-2">
+              <img class="w-8 h-8 rounded-full border-2 border-orange-400" src="https://i.pravatar.cc/100?img=12" alt="User">
+              <img class="w-8 h-8 rounded-full border-2 border-orange-400" src="https://i.pravatar.cc/100?img=32" alt="User">
+              <div
+                class="w-8 h-8 rounded-full border-2 border-orange-400 bg-black text-white flex items-center justify-center text-[10px] font-bold">
+                +2k
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              data-lucide="quote" class="lucide lucide-quote w-5 h-5 text-black/40 fill-black/20">
+              <path
+                d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                class=""></path>
+              <path
+                d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                class=""></path>
+            </svg>
+          </div>
+          <div class="">
+            <p class="text-lg font-semibold leading-snug tracking-tight max-w-[80%]">
+              "Lumina changed my entire workflow."
+            </p>
+            <div
+              class="mt-4 pt-4 border-t border-black/10 flex items-center gap-2 text-xs font-medium uppercase tracking-wide opacity-70">
+              <span>Verified Creator</span>
+              <span class="w-1 h-1 bg-black rounded-full"></span>
+              <span>5.0 Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden lg:block col-span-2"></div>
+
+      <!-- Bottom Right Text -->
+      <div class="col-span-1 lg:col-span-6 flex flex-col justify-end text-right lg:text-left">
+        <div
+          class="flex items-center gap-2 lg:justify-start justify-end mb-3 text-orange-400 text-xs font-medium uppercase tracking-wider animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.2s_both] animate">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="sparkles" class="lucide lucide-sparkles w-3 h-3">
+            <path
+              d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+              class=""></path>
+            <path d="M20 2v4" class=""></path>
+            <path d="M22 4h-4" class=""></path>
+            <circle cx="4" cy="20" r="2" class=""></circle>
+          </svg>
+          <span>Version 2.0 Available</span>
+        </div>
+        <h2
+          class="text-4xl lg:text-5xl font-normal tracking-tighter text-white animate-on-scroll [animation:fadeSlideIn_1s_cubic-bezier(0.2,0.8,0.2,1)_0.2s_both] animate">
+          Next generation
+          <span class="text-white/60">creative suite.</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
